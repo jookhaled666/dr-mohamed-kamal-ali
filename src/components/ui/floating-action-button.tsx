@@ -165,7 +165,7 @@ export function AnimatedSocialIcons({
             pointerEvents: active ? "auto" : "none",
           }}
         >
-          {icons.map(({ Icon, href, onClick, className: iconClassName, label }, index) => {
+          {icons.map(({ Icon, href, onClick, className: iconClassName, label, badge }, index) => {
             const content = (
               <>
                 <AnimatedLucideIcon 
@@ -174,6 +174,11 @@ export function AnimatedSocialIcons({
                   strokeWidth={2}
                   className="text-white transition-all group-hover:scale-110 drop-shadow-sm" 
                 />
+                {badge && (
+                  <span className="absolute -top-1 -right-1 px-1.5 py-0.5 min-w-[18px] text-center rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 border border-white/80 text-white text-[8.5px] font-black tracking-tight leading-none shadow-[0_2px_8px_rgba(0,0,0,0.5)] pointer-events-none">
+                    {badge}
+                  </span>
+                )}
                 {label && (
                   <span className="sr-only">{label}</span>
                 )}
@@ -199,7 +204,7 @@ export function AnimatedSocialIcons({
               >
                 {/* Floating Tooltip for mobile & desktop */}
                 {label && active && (
-                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md bg-[#060b13]/90 backdrop-blur-md border border-white/20 text-[9px] font-semibold text-white whitespace-nowrap opacity-0 group-hover:opacity-100 sm:group-hover:opacity-100 transition-opacity pointer-events-none shadow-md">
+                  <span className="absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-[#060b13]/95 backdrop-blur-md border border-white/20 text-[10px] font-bold text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg z-30">
                     {label}
                   </span>
                 )}
@@ -214,7 +219,7 @@ export function AnimatedSocialIcons({
                     }}
                     className={cn(
                       buttonSize,
-                      "rounded-full flex items-center justify-center shrink-0 cursor-pointer",
+                      "rounded-full relative flex items-center justify-center shrink-0 cursor-pointer",
                       "bg-white/20 hover:bg-white/35 active:scale-95",
                       "backdrop-blur-xl border border-white/35 shadow-[0_8px_25px_rgba(0,0,0,0.3)] transition-all",
                       iconClassName
@@ -229,7 +234,7 @@ export function AnimatedSocialIcons({
                     onClick={() => handleActionClick(onClick)}
                     className={cn(
                       buttonSize,
-                      "rounded-full flex items-center justify-center shrink-0 cursor-pointer",
+                      "rounded-full relative flex items-center justify-center shrink-0 cursor-pointer",
                       "bg-white/20 hover:bg-white/35 active:scale-95",
                       "backdrop-blur-xl border border-white/35 shadow-[0_8px_25px_rgba(0,0,0,0.3)] transition-all",
                       iconClassName

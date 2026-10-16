@@ -26,7 +26,8 @@ import {
   Building2,
   Quote,
   CheckCircle,
-  ExternalLink
+  ExternalLink,
+  Globe
 } from 'lucide-react';
 import Image from 'next/image';
 import { AnimatedSocialIcons, ActionIcon } from '@/components/ui/floating-action-button';
@@ -434,6 +435,13 @@ export default function Home() {
 
   // Floating Action Menu Buttons tailored to Clinic Experience
   const floatingActions: ActionIcon[] = [
+    {
+      Icon: Globe,
+      onClick: () => setLang(prev => (prev === 'ar' ? 'en' : 'ar')),
+      label: lang === 'ar' ? 'English (EN)' : 'العربية (AR)',
+      badge: lang === 'ar' ? 'EN' : 'عربي',
+      className: 'hover:border-sky-400 text-sky-300 hover:bg-sky-500/20 bg-sky-500/15 ring-1 ring-sky-400/40',
+    },
     {
       Icon: Stethoscope,
       onClick: () => setIsDoctorBioOpen(true),
