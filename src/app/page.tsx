@@ -600,7 +600,7 @@ export default function Home() {
       <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
         <video
           ref={videoRef}
-          src="/videos/full_clinic_tour.mp4"
+          src="/videos/dr.mohamed kamal ali video.mp4"
           muted
           playsInline
           autoPlay
