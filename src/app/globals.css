@@ -202,4 +202,19 @@ body {
   will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Mobile Smooth Scrolling & Performance */
+html, body {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Optimization: offload below-the-fold content while scrubbing hero video */
+#before-after-cases {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1200px;
 }

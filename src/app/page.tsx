@@ -49,7 +49,8 @@ export default function Home() {
   const [isDoctorBioOpen, setIsDoctorBioOpen] = useState(false);
   const [isProofOpen, setIsProofOpen] = useState(false);
   const [doctorActivePhoto, setDoctorActivePhoto] = useState<'coat' | 'suit' | 'clinic'>('coat');
-  const [showScrollHint, setShowScrollHint] = useState(true);
+  const [preloaderDone, setPreloaderDone] = useState(false);
+  const [showScrollHint, setShowScrollHint] = useState(false);
   
   // Booking Form State (matching Developer Brief exactly)
   const [selectedBranch, setSelectedBranch] = useState<'sharjah' | 'ajman'>('sharjah');
@@ -485,18 +486,41 @@ export default function Home() {
     },
   ];
 
-  // Auto-hide scroll hint after 4s or on first scroll
+  // Show scroll hint once preloader finishes; auto-dismiss on scroll, touch, or after 5.5s
   useEffect(() => {
-    const timer = setTimeout(() => setShowScrollHint(false), 4000);
-    const hideOnScroll = () => { setShowScrollHint(false); };
-    window.addEventListener('scroll', hideOnScroll, { passive: true, once: true });
-    window.addEventListener('touchmove', hideOnScroll, { passive: true, once: true });
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', hideOnScroll);
-      window.removeEventListener('touchmove', hideOnScroll);
+    if (!preloaderDone) return;
+
+    const showTimer = setTimeout(() => {
+      setShowScrollHint(true);
+    }, 300);
+
+    const hideTimer = setTimeout(() => {
+      setShowScrollHint(false);
+    }, 5500);
+
+    const dismissHint = () => {
+      setShowScrollHint(false);
     };
-  }, []);
+
+    window.addEventListener('scroll', dismissHint, { passive: true, once: true });
+    window.addEventListener('touchmove', dismissHint, { passive: true, once: true });
+    window.addEventListener('wheel', dismissHint, { passive: true, once: true });
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+      window.removeEventListener('scroll', dismissHint);
+      window.removeEventListener('touchmove', dismissHint);
+      window.removeEventListener('wheel', dismissHint);
+    };
+  }, [preloaderDone]);
+
+  // Ensure scroll hint is hidden as soon as user advances past chapter 0
+  useEffect(() => {
+    if (currentChapter > 0 && showScrollHint) {
+      setShowScrollHint(false);
+    }
+  }, [currentChapter, showScrollHint]);
 
   // GSAP ScrollTrigger and Single Video Scrubbing
   useEffect(() => {
@@ -525,17 +549,21 @@ export default function Home() {
     window.addEventListener('scroll', unlockVideo, { passive: true });
 
     const ctx = gsap.context(() => {
-      const duration = (video.duration && !isNaN(video.duration) && video.duration > 0) ? video.duration : 27;
+      const isMobile = window.innerWidth < 768;
+      const scrollDistance = isMobile ? 3200 : 4800;
+      const scrubSpeed = isMobile ? 0.7 : 1.1;
 
       const tl = gsap.timeline({
         id: "main-experience",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=5000",
+          end: `+=${scrollDistance}`,
           pin: true,
-          scrub: 1.2, // Smooth interpolation prevents stutter
+          scrub: scrubSpeed, // Responsive scrub: snappy on mobile, cinematic on desktop
           anticipatePin: 1,
+          fastScrollEnd: true,
+          preventOverlaps: true,
           onUpdate: (self) => {
             const idx = Math.min(Math.floor(self.progress * 6), 5);
             setCurrentChapter(idx);
@@ -609,7 +637,11 @@ export default function Home() {
       dir={isRtl ? 'rtl' : 'ltr'}
     >
       {/* 0. LUXURY PRELOADER (AWAITING VIDEO & CRITICAL ASSETS) */}
-      <Preloader videoRef={videoRef} lang={lang} />
+      <Preloader 
+        videoRef={videoRef} 
+        lang={lang} 
+        onComplete={() => setPreloaderDone(true)} 
+      />
 
       {/* 1. FIXED BACKGROUND VIDEO (SINGLE HIGH-PERFORMANCE PLAYER) */}
       <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none will-change-transform">
@@ -620,8 +652,15 @@ export default function Home() {
           playsInline
           autoPlay
           preload="auto"
-          className="w-full h-full object-cover select-none"
-          style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          className="w-full h-full object-cover select-none pointer-events-none"
+          style={{ 
+            willChange: 'transform', 
+            transform: 'translate3d(0, 0, 0)',
+            backfaceVisibility: 'hidden'
+          }}
         />
         {/* Subtle, Restrained Gradient - Keeps Top 70% of Screen Crystal Clear for Video */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#060b13]/90 via-[#060b13]/25 to-black/35" />
@@ -833,21 +872,35 @@ export default function Home() {
         </div>
       </main>
 
-      {/* SCROLL HINT — elegant, auto-dismissing indicator */}
-      {showScrollHint && (
-        <div 
-          className="fixed bottom-[88px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-1 pointer-events-none animate-scroll-hint select-none"
-          aria-hidden="true"
-        >
-          <span className="text-[9px] text-white/50 font-medium tracking-widest uppercase">
-            {lang === 'ar' ? 'اسحب لأسفل' : 'Scroll down'}
+      {/* SCROLL HINT — Luxury minimal floating indicator */}
+      <div 
+        onClick={() => {
+          scrollToChapter(1);
+          setShowScrollHint(false);
+        }}
+        className={`fixed top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 transition-all duration-700 select-none cursor-pointer group ${
+          showScrollHint && currentChapter === 0
+            ? 'opacity-100 scale-100 pointer-events-auto' 
+            : 'opacity-0 scale-95 pointer-events-none'
+        }`}
+        aria-label={lang === 'ar' ? 'مرّر لأسفل لبدء الجولة واستعراض الخدمات' : 'Scroll down to explore clinic tour'}
+      >
+        <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#070e1c]/85 hover:bg-[#070e1c]/95 backdrop-blur-xl border border-[#8ab4f8]/35 text-white shadow-[0_8px_32px_rgba(0,0,0,0.6),0_0_20px_rgba(138,180,248,0.25)] transition-all transform group-hover:scale-105 active:scale-95">
+          {/* Animated pulsing medical beacon */}
+          <span className="relative flex h-2 w-2 shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8ab4f8] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8ab4f8]" />
           </span>
-          <div className="flex flex-col items-center animate-bounce-slow">
-            <ChevronDown className="w-4 h-4 text-white/40" />
-            <ChevronDown className="w-4 h-4 text-white/25 -mt-2.5" />
+
+          <span className="text-[11px] sm:text-xs font-semibold text-gray-100 group-hover:text-white tracking-wide whitespace-nowrap">
+            {lang === 'ar' ? 'مرّر لأسفل لبدء الجولة واستعراض الخدمات' : 'Scroll down to begin clinic tour'}
+          </span>
+
+          <div className="flex flex-col items-center animate-bounce-slow shrink-0">
+            <ChevronDown className="w-3.5 h-3.5 text-[#8ab4f8]" />
           </div>
         </div>
-      )}
+      </div>
 
       {/* 5. BEFORE & AFTER + CONTACT FORM SECTION (below the pinned scroll) */}
       <BeforeAfterSection lang={lang} />

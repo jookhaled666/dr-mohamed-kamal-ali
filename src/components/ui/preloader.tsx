@@ -22,7 +22,7 @@ export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps)
     document.body.style.overflow = 'hidden';
     startTimeRef.current = Date.now();
 
-    const minDuration = 2200; // Fast but smooth preloader for mobile-first experience
+    const minDuration = 1800; // Fast, lightweight, and ultra-smooth for mobile-first experience
     let isVideoReady = false;
 
     const checkVideo = () => {
@@ -43,13 +43,13 @@ export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps)
       const elapsed = Date.now() - startTimeRef.current;
       checkVideo();
 
-      // Smooth organic cubic easing for continuous, silky-smooth progress across 3 seconds
+      // Smooth organic cubic easing for continuous, silky-smooth progress
       const t = Math.min(1, elapsed / minDuration);
       const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       let calculatedProgress = Math.min(100, Math.round(eased * 100));
 
-      // If video is still pending when reaching 94%, gently pause until ready or 4.5s max
-      if (!isVideoReady && calculatedProgress > 94 && elapsed < 4500) {
+      // If video is still pending when reaching 94%, gently pause until ready or 3.5s max
+      if (!isVideoReady && calculatedProgress > 94 && elapsed < 3500) {
         calculatedProgress = 94;
       }
 
@@ -59,11 +59,11 @@ export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps)
         setTimeout(() => {
           setIsFinished(true);
           document.body.style.overflow = '';
+          if (onComplete) onComplete();
           setTimeout(() => {
             setIsVisible(false);
-            if (onComplete) onComplete();
-          }, 500);
-        }, 200);
+          }, 400);
+        }, 120);
       } else {
         animationFrameRef.current = requestAnimationFrame(frame);
       }
