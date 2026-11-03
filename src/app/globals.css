@@ -175,3 +175,31 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #0c4186;
 }
+
+/* Scroll Hint Animations */
+@keyframes scroll-hint {
+  0% { opacity: 0; transform: translate(-50%, 8px); }
+  15% { opacity: 1; transform: translate(-50%, 0); }
+  80% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -4px); }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.animate-scroll-hint {
+  animation: scroll-hint 4s ease-in-out forwards;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 1.5s ease-in-out infinite;
+}
+
+/* GPU acceleration for smooth scrolling */
+.will-change-transform {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}

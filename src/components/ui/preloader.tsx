@@ -22,7 +22,7 @@ export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps)
     document.body.style.overflow = 'hidden';
     startTimeRef.current = Date.now();
 
-    const minDuration = 3000; // 3 seconds duration requested for a smooth, relaxed luxury experience
+    const minDuration = 2200; // Fast but smooth preloader for mobile-first experience
     let isVideoReady = false;
 
     const checkVideo = () => {
@@ -62,8 +62,8 @@ export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps)
           setTimeout(() => {
             setIsVisible(false);
             if (onComplete) onComplete();
-          }, 800);
-        }, 350);
+          }, 500);
+        }, 200);
       } else {
         animationFrameRef.current = requestAnimationFrame(frame);
       }

@@ -27,7 +27,8 @@ import {
   Quote,
   CheckCircle,
   ExternalLink,
-  Globe
+  Globe,
+  ChevronDown
 } from 'lucide-react';
 import Image from 'next/image';
 import { AnimatedSocialIcons, ActionIcon } from '@/components/ui/floating-action-button';
@@ -48,6 +49,7 @@ export default function Home() {
   const [isDoctorBioOpen, setIsDoctorBioOpen] = useState(false);
   const [isProofOpen, setIsProofOpen] = useState(false);
   const [doctorActivePhoto, setDoctorActivePhoto] = useState<'coat' | 'suit' | 'clinic'>('coat');
+  const [showScrollHint, setShowScrollHint] = useState(true);
   
   // Booking Form State (matching Developer Brief exactly)
   const [selectedBranch, setSelectedBranch] = useState<'sharjah' | 'ajman'>('sharjah');
@@ -483,6 +485,19 @@ export default function Home() {
     },
   ];
 
+  // Auto-hide scroll hint after 4s or on first scroll
+  useEffect(() => {
+    const timer = setTimeout(() => setShowScrollHint(false), 4000);
+    const hideOnScroll = () => { setShowScrollHint(false); };
+    window.addEventListener('scroll', hideOnScroll, { passive: true, once: true });
+    window.addEventListener('touchmove', hideOnScroll, { passive: true, once: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', hideOnScroll);
+      window.removeEventListener('touchmove', hideOnScroll);
+    };
+  }, []);
+
   // GSAP ScrollTrigger and Single Video Scrubbing
   useEffect(() => {
     if (!containerRef.current || !videoRef.current) return;
@@ -597,7 +612,7 @@ export default function Home() {
       <Preloader videoRef={videoRef} lang={lang} />
 
       {/* 1. FIXED BACKGROUND VIDEO (SINGLE HIGH-PERFORMANCE PLAYER) */}
-      <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+      <div className="fixed inset-0 w-full h-full z-0 overflow-hidden pointer-events-none will-change-transform">
         <video
           ref={videoRef}
           src="/videos/dr.mohamed kamal ali video.mp4"
@@ -606,6 +621,7 @@ export default function Home() {
           autoPlay
           preload="auto"
           className="w-full h-full object-cover select-none"
+          style={{ willChange: 'transform', transform: 'translateZ(0)' }}
         />
         {/* Subtle, Restrained Gradient - Keeps Top 70% of Screen Crystal Clear for Video */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#060b13]/90 via-[#060b13]/25 to-black/35" />
@@ -671,7 +687,7 @@ export default function Home() {
             <div
               key={idx}
               ref={el => { if (slidesRef.current) slidesRef.current[idx] = el; }}
-              className={`absolute bottom-20 md:bottom-12 start-3 sm:start-6 md:start-12 w-[calc(100%-1.5rem)] sm:w-auto sm:max-w-md md:max-w-lg p-4 md:p-5 rounded-2xl backdrop-blur-2xl bg-[#131314]/80 border border-white/15 shadow-2xl transition-all ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute bottom-20 md:bottom-12 start-3 sm:start-6 md:start-12 w-[calc(100%-1.5rem)] sm:w-auto sm:max-w-md md:max-w-lg p-4 md:p-5 rounded-2xl backdrop-blur-2xl bg-[#131314]/80 border border-white/15 shadow-2xl will-change-transform ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
               style={{
                 pointerEvents: currentChapter === idx ? 'auto' : 'none'
               }}
@@ -816,6 +832,22 @@ export default function Home() {
           ))}
         </div>
       </main>
+
+      {/* SCROLL HINT — elegant, auto-dismissing indicator */}
+      {showScrollHint && (
+        <div 
+          className="fixed bottom-[88px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-1 pointer-events-none animate-scroll-hint select-none"
+          aria-hidden="true"
+        >
+          <span className="text-[9px] text-white/50 font-medium tracking-widest uppercase">
+            {lang === 'ar' ? 'اسحب لأسفل' : 'Scroll down'}
+          </span>
+          <div className="flex flex-col items-center animate-bounce-slow">
+            <ChevronDown className="w-4 h-4 text-white/40" />
+            <ChevronDown className="w-4 h-4 text-white/25 -mt-2.5" />
+          </div>
+        </div>
+      )}
 
       {/* 5. BEFORE & AFTER + CONTACT FORM SECTION (below the pinned scroll) */}
       <BeforeAfterSection lang={lang} />
