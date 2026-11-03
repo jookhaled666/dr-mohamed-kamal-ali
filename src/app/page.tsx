@@ -36,6 +36,9 @@ import { Preloader } from '@/components/ui/preloader';
 import { BeforeAfterSection } from '@/components/ui/before-after-section';
 
 gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== 'undefined') {
+  ScrollTrigger.config({ ignoreMobileResize: true });
+}
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -534,24 +537,65 @@ export default function Home() {
     video.playsInline = true;
     video.currentTime = 0.001; // Force display of frame 1 immediately
 
-    // Crucial for Mobile iOS & Android: Unlock video decoding on first touch or scroll
+    // Crucial for Mobile iOS & Android: Safely warm video decoder once without interrupting playback
     let isUnlocked = false;
     const unlockVideo = () => {
       if (isUnlocked) return;
       isUnlocked = true;
-      video.play().then(() => {
-        video.pause();
-      }).catch(() => {});
+      try {
+        const p = video.play();
+        if (p !== undefined) {
+          p.then(() => video.pause()).catch(() => {});
+        }
+      } catch {}
     };
 
-    window.addEventListener('touchstart', unlockVideo, { passive: true });
-    window.addEventListener('click', unlockVideo, { passive: true });
-    window.addEventListener('scroll', unlockVideo, { passive: true });
+    window.addEventListener('touchstart', unlockVideo, { passive: true, once: true });
+    window.addEventListener('click', unlockVideo, { passive: true, once: true });
 
     const ctx = gsap.context(() => {
       const isMobile = window.innerWidth < 768;
-      const scrollDistance = isMobile ? 3200 : 4800;
-      const scrubSpeed = isMobile ? 0.7 : 1.1;
+      const scrollDistance = isMobile ? 3000 : 4500;
+      const scrubSpeed = isMobile ? 0.6 : 0.9;
+
+      // Ultra-smooth non-blocking video seek manager
+      // Prevents mobile browser from stalling the main thread during rapid touch scrolls
+      let targetTime = 0;
+      let isSeeking = false;
+      let seekTimeout: ReturnType<typeof setTimeout> | null = null;
+
+      const performSeek = () => {
+        if (!video) return;
+        isSeeking = true;
+        
+        // Safety fallback so isSeeking never stays true indefinitely
+        if (seekTimeout) clearTimeout(seekTimeout);
+        seekTimeout = setTimeout(() => {
+          isSeeking = false;
+        }, 120);
+
+        try {
+          // If browser supports fastSeek (Safari iOS), use it for zero-lag hardware seeking
+          if ('fastSeek' in video && typeof (video as any).fastSeek === 'function') {
+            (video as any).fastSeek(targetTime);
+          } else {
+            video.currentTime = targetTime;
+          }
+        } catch {
+          isSeeking = false;
+        }
+      };
+
+      const handleSeeked = () => {
+        isSeeking = false;
+        if (seekTimeout) clearTimeout(seekTimeout);
+        // If the user continued scrolling while the previous frame decoded, catch up immediately
+        if (Math.abs(video.currentTime - targetTime) > 0.04) {
+          performSeek();
+        }
+      };
+
+      video.addEventListener('seeked', handleSeeked);
 
       const tl = gsap.timeline({
         id: "main-experience",
@@ -560,30 +604,21 @@ export default function Home() {
           start: "top top",
           end: `+=${scrollDistance}`,
           pin: true,
-          scrub: scrubSpeed, // Responsive scrub: snappy on mobile, cinematic on desktop
+          scrub: scrubSpeed, // Perfectly tuned: never lags or locks
           anticipatePin: 1,
-          fastScrollEnd: true,
-          preventOverlaps: true,
           onUpdate: (self) => {
+            const vidDuration = (video.duration && !isNaN(video.duration) && video.duration > 0) ? video.duration : 26;
+            targetTime = self.progress * vidDuration;
+            if (!isSeeking) {
+              performSeek();
+            }
             const idx = Math.min(Math.floor(self.progress * 6), 5);
             setCurrentChapter(idx);
           }
         }
       });
 
-      // 1. Scrub single video from start to finish with dynamic duration evaluation
-      tl.fromTo(
-        video, 
-        { currentTime: 0 }, 
-        { 
-          currentTime: () => (video.duration && !isNaN(video.duration) && video.duration > 0 ? video.duration : 26), 
-          ease: "none", 
-          duration: 12 
-        }, 
-        0
-      );
-
-      // 2. Animate the 6 slides over the video (smooth bottom-side float)
+      // Animate the 6 slides over the 12-second virtual timeline
       slidesRef.current.forEach((slide, i) => {
         if (!slide) return;
         const startTime = i * 2;
@@ -626,7 +661,6 @@ export default function Home() {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
       window.removeEventListener('touchstart', unlockVideo);
       window.removeEventListener('click', unlockVideo);
-      window.removeEventListener('scroll', unlockVideo);
     };
   }, [lang]);
 
@@ -719,16 +753,17 @@ export default function Home() {
       </aside>
 
       {/* 4. PINNED MAIN SCROLL EXPERIENCE - DOCKED AT BOTTOM-SIDE TO NEVER BLOCK THE VIDEO */}
-      <main ref={containerRef} className="relative w-full h-screen overflow-hidden">
+      <main ref={containerRef} className="relative w-full h-[100dvh] overflow-hidden touch-pan-y">
         {/* DOCKED AT BOTTOM-START: Leaves 75% of Upper Screen Free to View the Video Subject! */}
         <div className="absolute inset-0 pointer-events-none flex flex-col justify-end p-3 sm:p-6 md:p-10 pb-20 md:pb-14 items-start">
           {current.chapters.map((ch, idx) => (
             <div
               key={idx}
               ref={el => { if (slidesRef.current) slidesRef.current[idx] = el; }}
-              className={`absolute bottom-20 md:bottom-12 start-3 sm:start-6 md:start-12 w-[calc(100%-1.5rem)] sm:w-auto sm:max-w-md md:max-w-lg p-4 md:p-5 rounded-2xl backdrop-blur-2xl bg-[#131314]/80 border border-white/15 shadow-2xl will-change-transform ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute bottom-20 md:bottom-12 start-3 sm:start-6 md:start-12 w-[calc(100%-1.5rem)] sm:w-auto sm:max-w-md md:max-w-lg p-4 md:p-5 rounded-2xl backdrop-blur-xl sm:backdrop-blur-2xl bg-[#131314]/80 border border-white/15 shadow-2xl will-change-transform ${idx === 0 ? 'opacity-100' : 'opacity-0'}`}
               style={{
-                pointerEvents: currentChapter === idx ? 'auto' : 'none'
+                pointerEvents: currentChapter === idx ? 'auto' : 'none',
+                touchAction: 'pan-y'
               }}
             >
               {/* Micro Step Badge */}
@@ -755,7 +790,7 @@ export default function Home() {
                     <HeartPulse className="w-3.5 h-3.5 text-[#8ab4f8]" />
                     <span>{ch.prompt}</span>
                   </p>
-                  <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto pr-1">
+                  <div className="flex flex-wrap gap-1.5 touch-pan-y">
                     {current.conditions.map((cond) => {
                       const isSelected = selectedCondition === cond.id;
                       return (
@@ -878,6 +913,7 @@ export default function Home() {
           scrollToChapter(1);
           setShowScrollHint(false);
         }}
+        style={{ touchAction: 'pan-y' }}
         className={`fixed top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 transition-all duration-700 select-none cursor-pointer group ${
           showScrollHint && currentChapter === 0
             ? 'opacity-100 scale-100 pointer-events-auto' 
