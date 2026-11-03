@@ -55,6 +55,18 @@ export default function Home() {
   const [preloaderDone, setPreloaderDone] = useState(false);
   const [showScrollHint, setShowScrollHint] = useState(false);
   
+  // Interactive Glassy Navigation Arrows (Glow with scroll direction)
+  const [activeDirection, setActiveDirection] = useState<'down' | 'up' | null>(null);
+  const directionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const setScrollDir = (dir: 'down' | 'up') => {
+    setActiveDirection(dir);
+    if (directionTimerRef.current) clearTimeout(directionTimerRef.current);
+    directionTimerRef.current = setTimeout(() => {
+      setActiveDirection(null);
+    }, 650);
+  };
+  
   // Booking Form State (matching Developer Brief exactly)
   const [selectedBranch, setSelectedBranch] = useState<'sharjah' | 'ajman'>('sharjah');
   const [selectedCondition, setSelectedCondition] = useState('knee_osteoarthritis');
@@ -413,12 +425,19 @@ export default function Home() {
 
   const current = t[lang];
 
-  // Scroll to chapter in timeline
+  // Scroll to chapter in timeline with direction trigger
   const scrollToChapter = (chapterIndex: number) => {
     const st = ScrollTrigger.getById("main-experience");
     if (st) {
       const progress = chapterIndex / 5;
       const targetY = st.start + (st.end - st.start) * progress;
+      if (typeof window !== 'undefined') {
+        if (targetY > window.scrollY) {
+          setScrollDir('down');
+        } else {
+          setScrollDir('up');
+        }
+      }
       window.scrollTo({ top: targetY, behavior: 'smooth' });
     }
   };
@@ -525,6 +544,28 @@ export default function Home() {
     }
   }, [currentChapter, showScrollHint]);
 
+  // Track native window scroll direction to illuminate left/right glassy arrows
+  useEffect(() => {
+    let lastY = typeof window !== 'undefined' ? window.scrollY : 0;
+    const handleNativeScroll = () => {
+      const currentY = window.scrollY;
+      const diff = currentY - lastY;
+      if (Math.abs(diff) > 4) {
+        if (diff > 0) {
+          setScrollDir('down');
+        } else {
+          setScrollDir('up');
+        }
+        lastY = currentY;
+      }
+    };
+    window.addEventListener('scroll', handleNativeScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleNativeScroll);
+      if (directionTimerRef.current) clearTimeout(directionTimerRef.current);
+    };
+  }, []);
+
   // GSAP ScrollTrigger and Single Video Scrubbing
   useEffect(() => {
     if (!containerRef.current || !videoRef.current) return;
@@ -614,6 +655,13 @@ export default function Home() {
             }
             const idx = Math.min(Math.floor(self.progress * 6), 5);
             setCurrentChapter(idx);
+
+            // Light up left arrow on scroll down, right arrow on scroll up
+            if (self.direction === 1) {
+              setScrollDir('down');
+            } else if (self.direction === -1) {
+              setScrollDir('up');
+            }
           }
         }
       });
@@ -737,7 +785,7 @@ export default function Home() {
       </header>
 
       {/* 3. MINIMALIST SIDE CHAPTER INDICATOR (DESKTOP) */}
-      <aside className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-2.5 pointer-events-auto">
+      <aside className="fixed right-6 top-[30%] -translate-y-1/2 z-40 hidden lg:flex flex-col gap-2.5 pointer-events-auto">
         {current.chapters.map((ch, idx) => (
           <button
             key={idx}
@@ -907,7 +955,53 @@ export default function Home() {
         </div>
       </main>
 
-      {/* SCROLL HINT — Luxury minimal floating indicator */}
+      {/* 4.5. GLASSY SIDE NAVIGATION ARROWS (Interactive & Glow with Scroll Direction) */}
+      {/* Left Glassy Arrow: Lights up on scroll DOWN, clicks to advance to next chapter */}
+      <button
+        type="button"
+        onClick={() => {
+          if (currentChapter < 5) {
+            scrollToChapter(currentChapter + 1);
+          } else {
+            const el = document.getElementById('before-after-cases');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
+        aria-label={lang === 'ar' ? 'التالي (مرر لأسفل)' : 'Next (Scroll Down)'}
+        title={lang === 'ar' ? 'التالي (مرر لأسفل)' : 'Next (Scroll Down)'}
+        className={`fixed left-2.5 sm:left-6 top-1/2 -translate-y-1/2 z-40 w-9 h-9 sm:w-11 sm:h-11 rounded-full backdrop-blur-xl border flex items-center justify-center transition-all duration-300 cursor-pointer select-none active:scale-95 ${
+          activeDirection === 'down'
+            ? 'bg-[#1a73e8]/35 border-[#8ab4f8] text-white shadow-[0_0_24px_rgba(138,180,248,0.7)] scale-110 ring-2 ring-[#8ab4f8]/50'
+            : 'bg-black/25 hover:bg-black/45 border-white/15 text-white/60 hover:text-white shadow-[0_4px_16px_rgba(0,0,0,0.3)] hover:border-white/30'
+        }`}
+        style={{ touchAction: 'manipulation' }}
+      >
+        <ChevronLeft className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 ${activeDirection === 'down' ? 'scale-115 text-[#8ab4f8]' : ''}`} />
+      </button>
+
+      {/* Right Glassy Arrow: Lights up on scroll UP, clicks to go back */}
+      <button
+        type="button"
+        onClick={() => {
+          if (currentChapter > 0) {
+            scrollToChapter(currentChapter - 1);
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }}
+        aria-label={lang === 'ar' ? 'السابق (مرر لأعلى)' : 'Previous (Scroll Up)'}
+        title={lang === 'ar' ? 'السابق (مرر لأعلى)' : 'Previous (Scroll Up)'}
+        className={`fixed right-2.5 sm:right-6 top-1/2 -translate-y-1/2 z-40 w-9 h-9 sm:w-11 sm:h-11 rounded-full backdrop-blur-xl border flex items-center justify-center transition-all duration-300 cursor-pointer select-none active:scale-95 ${
+          activeDirection === 'up'
+            ? 'bg-[#1a73e8]/35 border-[#8ab4f8] text-white shadow-[0_0_24px_rgba(138,180,248,0.7)] scale-110 ring-2 ring-[#8ab4f8]/50'
+            : 'bg-black/25 hover:bg-black/45 border-white/15 text-white/60 hover:text-white shadow-[0_4px_16px_rgba(0,0,0,0.3)] hover:border-white/30'
+        }`}
+        style={{ touchAction: 'manipulation' }}
+      >
+        <ChevronRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 ${activeDirection === 'up' ? 'scale-115 text-[#8ab4f8]' : ''}`} />
+      </button>
+
+      {/* SCROLL HINT — Minimalist, chic floating indicator with two downward arrows */}
       <div 
         onClick={() => {
           scrollToChapter(1);
@@ -919,21 +1013,17 @@ export default function Home() {
             ? 'opacity-100 scale-100 pointer-events-auto' 
             : 'opacity-0 scale-95 pointer-events-none'
         }`}
-        aria-label={lang === 'ar' ? 'مرّر لأسفل لبدء الجولة واستعراض الخدمات' : 'Scroll down to explore clinic tour'}
+        aria-label={lang === 'ar' ? 'مرر للأسفل للتعرف علي الخدمات الطبيه' : 'Scroll down to explore medical services'}
       >
-        <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#070e1c]/85 hover:bg-[#070e1c]/95 backdrop-blur-xl border border-[#8ab4f8]/35 text-white shadow-[0_8px_32px_rgba(0,0,0,0.6),0_0_20px_rgba(138,180,248,0.25)] transition-all transform group-hover:scale-105 active:scale-95">
-          {/* Animated pulsing medical beacon */}
-          <span className="relative flex h-2 w-2 shrink-0">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8ab4f8] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#8ab4f8]" />
-          </span>
-
+        <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#070e1c]/75 hover:bg-[#070e1c]/90 backdrop-blur-xl border border-white/15 hover:border-[#8ab4f8]/50 text-white shadow-[0_8px_32px_rgba(0,0,0,0.55)] transition-all transform group-hover:scale-105 active:scale-95">
           <span className="text-[11px] sm:text-xs font-semibold text-gray-100 group-hover:text-white tracking-wide whitespace-nowrap">
-            {lang === 'ar' ? 'مرّر لأسفل لبدء الجولة واستعراض الخدمات' : 'Scroll down to begin clinic tour'}
+            {lang === 'ar' ? 'مرر للأسفل للتعرف علي الخدمات الطبيه' : 'Scroll down to explore medical services'}
           </span>
 
-          <div className="flex flex-col items-center animate-bounce-slow shrink-0">
-            <ChevronDown className="w-3.5 h-3.5 text-[#8ab4f8]" />
+          {/* Two elegant downward arrows */}
+          <div className="flex flex-col items-center justify-center -space-y-2 shrink-0">
+            <ChevronDown className="w-3.5 h-3.5 text-[#8ab4f8] animate-bounce" />
+            <ChevronDown className="w-3.5 h-3.5 text-[#8ab4f8]/60 animate-bounce [animation-delay:150ms]" />
           </div>
         </div>
       </div>
