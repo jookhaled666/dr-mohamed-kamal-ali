@@ -23,25 +23,37 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://dr-mohamed-kamal-ali.vercel.app"),
   title: {
-    default: "د. محمد كمال علي | Dr. Mohamed Kamal Ali — استشاري جراحة العظام والمناظير",
+    default: "د. محمد كمال علي | Dr. Mohamed Kamal Ali — استشاري جراحة العظام والمفاصل وإصابات الملاعب",
     template: "%s | د. محمد كمال علي"
   },
-  description: "د. محمد كمال علي: استشاري جراحة العظام والمناظير وإصابات الملاعب وتصحيح تقوس وتشوهات الأطراف. احجز استشارتك في الشارقة (مستشفى دار الكمال) وعجمان (مركز العلاج الطبي). | Dr. Mohamed Kamal Ali: Consultant Orthopedic, Arthroscopy & Joint Care Surgeon in Sharjah & Ajman.",
+  description: "د. محمد كمال علي: استشاري جراحة العظام والمفاصل وإصابات الملاعب، حاصل على زمالة البورد الأوروبي EBOT وزمالة جامعة دوسلدورف بألمانيا. خبرة تمتد لأكثر من 25 عاماً في تطويل العظام وإعادة بناء الأطراف وتصحيح التشوهات واستبدال المفاصل ومناظير الركبة. احجز استشارتك في الشارقة أو عجمان. | Dr. Mohamed Kamal Ali: EBOT Fellow, 25+ years in bone lengthening, limb reconstruction & joint replacement in Sharjah & Ajman, UAE.",
   keywords: [
     "دكتور محمد كمال علي",
     "استشاري جراحة عظام",
+    "جراحة العظام والمفاصل",
+    "تطويل العظام",
+    "إعادة بناء الأطراف",
+    "تصحيح تقوس الساقين",
+    "تقوس وتشوهات الأطراف",
+    "البورد الأوروبي EBOT",
+    "استبدال مفصل الركبة",
+    "استبدال مفصل الورك",
     "مناظير الركبة",
     "إصابات الملاعب",
     "الرباط الصليبي",
-    "تصحيح تقوس الساقين",
-    "تطويل الأطراف",
+    "جامعة عين شمس",
     "مستشفى دار الكمال الشارقة",
     "مركز العلاج الطبي عجمان",
     "Dr Mohamed Kamal Ali",
     "Orthopedic Consultant UAE",
-    "Knee Arthroscopy Sharjah",
+    "EBOT Fellowship",
+    "Bone Lengthening UAE",
+    "Limb Reconstruction",
     "Limb Deformity Correction",
-    "Joint Preservation"
+    "Knee Replacement Sharjah",
+    "Hip Replacement UAE",
+    "Knee Arthroscopy Sharjah",
+    "Sports Injuries Ajman"
   ],
   authors: [{ name: "Dr. Mohamed Kamal Ali" }],
   creator: "Dr. Mohamed Kamal Ali",
@@ -63,21 +75,21 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     url: "https://dr-mohamed-kamal-ali.vercel.app",
     siteName: "Dr. Mohamed Kamal Ali Clinic | عيادة د. محمد كمال علي",
-    title: "د. محمد كمال علي | Dr. Mohamed Kamal Ali — استشاري جراحة العظام والمناظير",
-    description: "استشاري جراحة العظام والمفاصل والطب الرياضي ومناظير الركبة وتقويم تشوهات الأطراف في الشارقة وعجمان. احجز استشارتك الآن عبر واتساب. | Consultant Orthopedic Surgeon, Arthroscopy & Joint Care in Sharjah & Ajman.",
+    title: "د. محمد كمال علي | Dr. Mohamed Kamal Ali — استشاري جراحة العظام والمفاصل",
+    description: "استشاري جراحة العظام والمفاصل وإصابات الملاعب، حاصل على زمالة البورد الأوروبي EBOT. خبرة 25+ عاماً في تطويل العظام وإعادة بناء الأطراف واستبدال المفاصل — الشارقة وعجمان. | EBOT Fellow, 25+ years — Bone Lengthening, Limb Reconstruction & Joint Replacement in Sharjah & Ajman.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "د. محمد كمال علي - استشاري جراحة العظام والمفاصل والمناظير",
+        alt: "د. محمد كمال علي - استشاري جراحة العظام والمفاصل وإصابات الملاعب",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "د. محمد كمال علي | Dr. Mohamed Kamal Ali",
-    description: "استشاري جراحة العظام والمناظير وإصابات الملاعب — مستشفى دار الكمال (الشارقة) ومركز العلاج الطبي (عجمان).",
+    description: "استشاري جراحة العظام والمفاصل وإصابات الملاعب — زمالة البورد الأوروبي EBOT — مستشفى دار الكمال (الشارقة) ومركز العلاج الطبي (عجمان).",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -98,17 +110,38 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Physician",
     "name": "Dr. Mohamed Kamal Ali | د. محمد كمال علي",
-    "jobTitle": "Consultant Orthopedic Surgeon | استشاري جراحة العظام والمناظير",
+    "jobTitle": "Consultant Orthopedic & Joint Surgeon | استشاري جراحة العظام والمفاصل وإصابات الملاعب",
     "image": "https://dr-mohamed-kamal-ali.vercel.app/og-image.jpg",
     "medicalSpecialty": [
       "OrthopedicSurgery",
       "SportsMedicine",
       "Arthroscopy",
-      "JointPreservation"
+      "LimbReconstruction",
+      "JointReplacement"
     ],
-    "description": "استشاري جراحة العظام والمفاصل والطب الرياضي ومناظير الركبة وتقويم تشوهات الأطراف في الشارقة وعجمان.",
+    "description": "استشاري جراحة العظام والمفاصل وإصابات الملاعب، حاصل على زمالة البورد الأوروبي EBOT. خبرة 25+ عاماً في تطويل العظام وإعادة بناء الأطراف واستبدال المفاصل — الشارقة وعجمان.",
     "telephone": "+971501234567",
     "url": "https://dr-mohamed-kamal-ali.vercel.app",
+    "alumniOf": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Ain Shams University",
+        "address": { "@type": "PostalAddress", "addressLocality": "Cairo", "addressCountry": "EG" }
+      },
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "University of Düsseldorf",
+        "address": { "@type": "PostalAddress", "addressLocality": "Düsseldorf", "addressCountry": "DE" }
+      }
+    ],
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "credentialCategory": "Board Certification",
+        "name": "European Board of Orthopaedics and Traumatology (EBOT)",
+        "dateCreated": "2012"
+      }
+    ],
     "address": [
       {
         "@type": "PostalAddress",

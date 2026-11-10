@@ -33,8 +33,8 @@ const CASES = [
     labelEn: 'Bow Legs Realignment (Genu Varum)',
     badgeAr: 'استقامة المحور الحركي',
     badgeEn: 'Mechanical Axis Realignment',
-    descAr: 'مريض يعاني من تقوس ملحوظ في الساقين مع تباعد الركبتين وتوزيع حمل غير متوازن. تم إجراء تصحيح محوري دقيق لإعادة استقامة محور الساق الميكانيكي واستعادة المشية الطبيعية وحماية مفصل الركبة من الاحتكاك المبكر.',
-    descEn: 'Patient presenting with pronounced bow legs (Genu Varum) and uneven load distribution. Precision axial realignment was performed to restore the mechanical axis, normalize gait, and protect joints from premature wear.',
+    descAr: 'مريض يعاني من تقوس الساقين (Genu Varum) مع تباعد الركبتين وتوزيع حمل غير متوازن على المفصل. تم إجراء تصحيح محوري دقيق باستخدام تقنيات التقويم العظمي والتثبيت الداخلي لإعادة استقامة المحور الميكانيكي للساق واستعادة المشية الطبيعية وحماية مفصل الركبة من التآكل المبكر.',
+    descEn: 'Patient presenting with bow legs (Genu Varum) causing uneven joint load distribution. Precision axial correction was performed using osteotomy and internal fixation techniques to restore the mechanical axis, normalize gait, and protect the knee joint from premature degeneration.',
     before: '/before-after/before-1.jpg',
     after: '/before-after/after-1.jpg',
     stats: [
@@ -49,8 +49,8 @@ const CASES = [
     labelEn: 'Severe Limb Deformity Correction',
     badgeAr: 'توازن التحميل الميكانيكي',
     badgeEn: 'Load Balance Restored',
-    descAr: 'حالة انحراف محوري متقدم في الطرفين السفليين أثرت على توازن التحميل واستقامة القامة. بفضل خطة جراحية دقيقة وتقنيات تقويم الزوايا الحديثة، تم تصحيح المحور بالكامل واستعادة التناسق الوظيفي والجمالي للساقين.',
-    descEn: 'Severe lower limb axial deviation compromising biomechanical weight-bearing and posture. Through a tailored corrective plan, full anatomical symmetry and leg alignment were successfully achieved.',
+    descAr: 'حالة انحراف محوري شديد في الطرفين السفليين أثرت على توازن التحميل الميكانيكي واستقامة القامة. بفضل خطة جراحية مخصصة باستخدام تقنيات تصحيح الزوايا الحديثة والمثبتات الداخلية، تم تصحيح المحور بالكامل واستعادة التناسق الوظيفي والجمالي للساقين مع حماية المفاصل من الخشونة المبكرة.',
+    descEn: 'Severe lower limb axial deviation compromising biomechanical weight-bearing and posture. Through a customized surgical plan using modern angular correction techniques and internal fixators, full anatomical symmetry was achieved with joint protection from early degeneration.',
     before: '/before-after/before-2.jpg',
     after: '/before-after/after-2.jpg',
     stats: [
@@ -65,8 +65,8 @@ const CASES = [
     labelEn: 'Knock Knees Correction (Genu Valgum)',
     badgeAr: 'تناسق مفصلي وحركي متكامل',
     badgeEn: 'Full Articular Symmetry',
-    descAr: 'مريض يعاني من تقارب الركبتين وتباعد الكاحلين مع إجهاد وصعوبة أثناء المشي والوقوف الطويل. تم تصحيح زوايا التحميل بدقة متناهية وإعادة استقامة الساقين مع نتائج وظيفية وجمالية رفيعة المستوى.',
-    descEn: 'Patient presenting with inward knee alignment (knock knees / Genu Valgum) causing strain during ambulation. Load-bearing angles were meticulously corrected, achieving remarkable functional and aesthetic symmetry.',
+    descAr: 'مريض يعاني من تقارب الركبتين وتباعد الكاحلين (Genu Valgum) مع إجهاد وصعوبة أثناء المشي والوقوف الطويل. تم تصحيح زوايا التحميل بدقة متناهية باستخدام تقنيات التقويم العظمي، وإعادة استقامة الساقين مع نتائج وظيفية وجمالية رفيعة المستوى.',
+    descEn: 'Patient presenting with inward knee alignment (Genu Valgum / knock knees) causing strain during ambulation and prolonged standing. Load-bearing angles were meticulously corrected using osteotomy techniques, achieving remarkable functional and aesthetic symmetry.',
     before: '/before-after/before-3.jpg',
     after: '/before-after/after-3.jpg',
     stats: [
@@ -79,11 +79,12 @@ const CASES = [
 
 const CONDITIONS = [
   { id: 'limb_deformity', ar: 'تقوس وتشوهات الأطراف', en: 'Limb Deformity Correction' },
-  { id: 'knee_osteoarthritis', ar: 'خشونة الركبة وتجديد المفصل', en: 'Knee Osteoarthritis & Biologics' },
-  { id: 'sports_injuries', ar: 'إصابات الملاعب والرباط الصليبي', en: 'Sports Injuries & ACL' },
+  { id: 'limb_lengthening', ar: 'تطويل العظام واختلاف طول الأطراف', en: 'Bone Lengthening & Limb Length Discrepancy' },
+  { id: 'knee_osteoarthritis', ar: 'خشونة الركبة واستبدال المفاصل', en: 'Knee Osteoarthritis & Joint Replacement' },
+  { id: 'sports_injuries', ar: 'إصابات الملاعب والأربطة', en: 'Sports Injuries & Ligaments' },
   { id: 'arthroscopy', ar: 'مناظير الركبة والكاحل', en: 'Knee & Ankle Arthroscopy' },
-  { id: 'limb_lengthening', ar: 'تطويل الأطراف', en: 'Limb Lengthening' },
-  { id: 'general_consultation', ar: 'استشارة عامة وجراحة مفاصل', en: 'General Orthopedic Consultation' },
+  { id: 'fractures', ar: 'الكسور وإعادة بناء العظام', en: 'Fractures & Bone Reconstruction' },
+  { id: 'general_consultation', ar: 'استشارة عامة في جراحة العظام', en: 'General Orthopedic Consultation' },
 ];
 
 const CLINIC_LOCATIONS = [

@@ -74,6 +74,7 @@ export default function Home() {
   const [consentChecked, setConsentChecked] = useState(true);
   const [patientName, setPatientName] = useState('');
   const [patientPhone, setPatientPhone] = useState('');
+  const [patientNotes, setPatientNotes] = useState('');
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const [utmParams, setUtmParams] = useState({ source: '', medium: '', campaign: '' });
 
@@ -95,7 +96,7 @@ export default function Home() {
   const t = {
     ar: {
       drName: "د. محمد كمال علي",
-      drTitle: "استشاري جراحة العظام والمناظير وإصابات الملاعب",
+      drTitle: "استشاري جراحة العظام والمفاصل وإصابات الملاعب",
       bookConsultation: "احجز استشارتك",
       navHome: "الرئيسية",
       navDoctor: "الدكتور",
@@ -112,8 +113,8 @@ export default function Home() {
           step: "01 / 06",
           badge: "الاستقبال والترحيب",
           title: "الحركة هي الحياة",
-          subtitle: "استشاري جراحة العظام ورعاية المفاصل المتقدمة",
-          desc: "أهلاً بك في العيادة الرقمية للدكتور محمد كمال علي. تجربة سريرية تضع المريض أولاً لإعادة الحركة واستعادة جودة الحياة.",
+          subtitle: "استشاري جراحة العظام والمفاصل وإصابات الملاعب",
+          desc: "أهلاً بك في عيادتي الرقمية. أنا الدكتور محمد كمال علي، يسعدني أن أصطحبك في جولة تتعرّف خلالها على خبرتي الطبية ومجالات تخصصي، وكيف نصل إلى التشخيص الدقيق ونختار العلاج الأنسب لكل حالة.",
           primaryAction: "ابدأ الجولة الطبية",
           secondaryAction: "حجز موعد سريع",
           type: "standard"
@@ -122,9 +123,9 @@ export default function Home() {
           // Chapter 2: Doctor Office
           step: "02 / 06",
           badge: "السيرة والنهج الطبي",
-          title: "خبرة طبية تبدأ بفهم حالتك",
-          subtitle: "أنا د. محمد كمال علي، استشاري جراحة العظام والمفاصل",
-          desc: "هدفي أن تفهم حالتك وخيارات العلاج بوضوح قبل اتخاذ أي خطوة.",
+          title: "خبرة علمية وجراحية تمتد لأكثر من 25 عاماً",
+          subtitle: "حاصل على زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT)",
+          desc: "امتدت مسيرتي المهنية عبر مصر والسعودية وسلطنة عُمان والإمارات، وتولّيت خلالها مسؤوليات طبية وجراحية وقيادية متعددة. هدفي أن يفهم كل مريض حالته والخيارات المتاحة له.",
           primaryAction: "تعرّف على الدكتور",
           type: "doctor_intro"
         },
@@ -132,19 +133,19 @@ export default function Home() {
           // Chapter 3: From Office to Clinical Care
           step: "03 / 06",
           badge: "التشخيص واختيار المسار",
-          title: "كل حالة لها طريق مختلف",
-          subtitle: "التشخيص الدقيق هو البداية لاختيار العلاج المناسب",
+          title: "كل حالة لها طبيعتها… ولكل علاج معاييره",
+          subtitle: "تختلف أمراض وإصابات العظام والمفاصل في أسبابها ودرجة تعقيدها، ولذلك لا توجد خطة علاجية واحدة تناسب جميع المرضى",
           prompt: "ما الذي تعاني منه؟",
           type: "condition_selector"
         },
         {
           // Chapter 4: Diagnostic Facilities
           step: "04 / 06",
-          badge: "مرافق الفحص والتشخيص",
-          title: "التشخيص الصحيح يحدد الخطوة المناسبة",
-          subtitle: "نبدأ بفهم الأعراض والفحص السريري، ثم الأشعة المناسبة للحالة عند الحاجة",
-          desc: "رؤية شاملة لسلامة الغضاريف والأربطة لضمان اختيار بروتوكول العلاج الصحيح بدقة ومن دون تخمين.",
-          tags: ["الرنين المغناطيسي MRI", "الأشعة السينية X-Ray"],
+          badge: "الفحص والتشخيص الدقيق",
+          title: "التشخيص الدقيق هو أساس القرار العلاجي",
+          subtitle: "لا يعتمد اختيار العلاج على نتائج الأشعة وحدها، بل على الفحص السريري وطبيعة الأعراض ودرجة الإصابة",
+          desc: "نبدأ بالتقييم السريري الشامل، ثم الفحوصات التكميلية عند الحاجة. الهدف هو الوصول لتشخيص دقيق يحدد المسار العلاجي الصحيح لكل حالة.",
+          tags: ["الرنين المغناطيسي MRI", "الأشعة السينية X-Ray", "التقييم السريري"],
           primaryAction: "متابعة الجولة",
           type: "diagnostics"
         },
@@ -152,9 +153,9 @@ export default function Home() {
           // Chapter 5: Expertise and Proof
           step: "05 / 06",
           badge: "الخبرة والنتائج",
-          title: "حالات حقيقية وخطوات مدروسة",
-          subtitle: "الحفاظ على المفصل أولوية قبل أي تدخل جراحي",
-          desc: "خطط علاجية مخصصة تشمل الحقن التجديدي والعلاج التداخلي، وصولاً إلى أدق جراحات المناظير فقط عند الضرورة.",
+          title: "خبرة جراحية في التعامل مع الحالات المعقدة",
+          subtitle: "أكثر من 500 عملية في مجال إعادة بناء الأطراف وتصحيح التشوهات",
+          desc: "تتركز خبرتي في تطويل العظام وإعادة بناء الأطراف وتصحيح التشوهات، إلى جانب استبدال مفاصل الركبة والورك، ومناظير الركبة والكاحل، وعلاج الإصابات الرياضية والكسور المعقدة.",
           primaryAction: "شاهد معايير التعافي والخبرة",
           type: "proof"
         },
@@ -162,9 +163,9 @@ export default function Home() {
           // Chapter 6: Return to Reception and Booking Close
           step: "06 / 06",
           badge: "الاستقبال وحجز الموعد",
-          title: "وصلنا للاستقبال... والخطوة الجاية موعدك",
-          subtitle: "اختر العيادة المناسبة (الشارقة أو عجمان) واترك بياناتك",
-          desc: "سيتواصل معك فريق المواعيد لمساعدتك في اختيار الوقت الأنسب وبدء رحلة التعافي.",
+          title: "وصلنا إلى نهاية جولتنا… وقد تكون هذه بداية رحلتك العلاجية",
+          subtitle: "إذا كنت تعاني من مشكلة في العظام أو المفاصل، أو ترغب في رأي طبي متخصص",
+          desc: "يمكنك حجز استشارة في أحد فروعنا بالشارقة أو عجمان. يسعدني تقييم حالتك ومساعدتك في اتخاذ القرار العلاجي المناسب.",
           primaryAction: "احجز موعدك الآن",
           secondaryAction: "واتساب مباشر",
           type: "booking_close"
@@ -172,20 +173,24 @@ export default function Home() {
       ],
       conditions: [
         { id: 'limb_deformity', label: 'تقوس وتشوهات الأطراف' },
-        { id: 'limb_lengthening', label: 'تطويل الأطراف' },
-        { id: 'knee_osteoarthritis', label: 'خشونة الركبة وتغيير المفصل' },
+        { id: 'limb_lengthening', label: 'تطويل العظام واختلاف طول الأطراف' },
+        { id: 'knee_osteoarthritis', label: 'خشونة الركبة واستبدال المفاصل' },
         { id: 'sports_injuries', label: 'إصابات الملاعب والأربطة' },
         { id: 'arthroscopy', label: 'مناظير الركبة والكاحل' },
+        { id: 'fractures', label: 'الكسور وإعادة بناء العظام' },
+        { id: 'general_consultation', label: 'استشارة عامة في جراحة العظام' },
       ],
       modal: {
         title: "طلب حجز استشارة طبية",
-        subtitle: "مع د. محمد كمال علي - استشاري جراحة العظام والمناظير",
+        subtitle: "مع د. محمد كمال علي - استشاري جراحة العظام والمفاصل",
         nameLabel: "الاسم الكامل",
         namePlaceholder: "أدخل اسمك الكريم",
         phoneLabel: "رقم الهاتف / الواتساب",
         phonePlaceholder: "مثال: 0501234567",
         branchLabel: "اختر مكان الموعد",
         conditionLabel: "ما هي الحالة التي ترغب في استشارة الدكتور بشأنها؟",
+        notesLabel: "ملاحظات إضافية أو وقت مفضل (اختياري)",
+        notesPlaceholder: "مثال: أفضل المواعيد المسائية",
         preferredContactLabel: "طريقة التواصل المفضلة",
         contactWhatsapp: "رسالة واتساب",
         contactCall: "اتصال هاتفي",
@@ -199,31 +204,32 @@ export default function Home() {
       doctorModal: {
         title: "الملف المهني والاعتمادات السريرية",
         subtitle: "د. محمد كمال علي",
-        role: "استشاري جراحة العظام والمناظير وإصابات الملاعب",
-        experienceBadge: "أكثر من 20 عاماً من الخبرة الجراحية والسريرية المتقدمة",
-        philosophy: "الحفاظ على المفصل الطبيعي هو غايتنا الأولى - التدخل الجراحي لا يتم إلا بعد استنفاد كافة بروتوكولات العلاج التحفظي والتجديدي المتطور.",
+        role: "استشاري جراحة العظام والمفاصل وإصابات الملاعب",
+        experienceBadge: "أكثر من 25 عاماً من الخبرة الجراحية والعلمية",
+        philosophy: "لا يعتمد اختيار العلاج على نتائج الأشعة وحدها، بل على الفحص السريري، وطبيعة الأعراض، ودرجة الإصابة، وتأثيرها على وظيفة المفصل والحركة. هدفي أن يفهم كل مريض حالته والخيارات المتاحة له، وأن يكون القرار العلاجي مبنياً على أسس طبية واضحة.",
         credentials: [
-          "استشاري معتمد لدى وزارة الصحة ووقاية المجتمع (MOHAP - الإمارات)",
-          "عضو فاعل بالجمعية الدولية لجراحة الركبة والمناظير والطب الرياضي (ISAKOS)",
-          "زمالة الجراحات المتقدمة لمناظير المفاصل وتقويم تشوهات الأطراف",
-          "أكثر من 5,000 حالة وجراحة مفصلية ناجحة في كبرى المستشفيات"
+          "زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT) — 2012",
+          "زمالة جراحة العظام — جامعة دوسلدورف، ألمانيا",
+          "دراسات الدكتوراه في جراحة العظام — جامعة عين شمس، مصر",
+          "الماجستير في جراحة العظام — جامعة عين شمس، مصر",
+          "بكالوريوس الطب والجراحة — جامعة عين شمس، مصر"
         ],
         subspecialties: [
           {
-            title: "مناظير الركبة والكتف المتقدمة",
-            desc: "إصلاح قطع الرباط الصليبي (ACL)، خياطة وترميم الغضاريف الهلالية، وتثبيت أوتار الكتف الدقيقة بالمنظار."
+            title: "تطويل العظام وإعادة بناء الأطراف",
+            desc: "جراحات تطويل العظام لعلاج اختلاف طول الأطراف وحالات قصر العظام، وإعادة البناء بعد الإصابات وعدم التئام الكسور وفقدان أجزاء من العظام."
           },
           {
-            title: "علاج الخشونة بالحقن التجديدي",
-            desc: "بروتوكولات حقن البلازما (PRP) وحمض الهيالورونيك المركّز لحماية الغضاريف وتسكين الآلام المفصلية."
+            title: "تقوس وتشوهات الأطراف",
+            desc: "تقوس الساقين وانحراف المحور الميكانيكي للأطراف والتشوهات الخلقية أو المكتسبة، باستخدام تقنية إليزاروف والمثبتات الدائرية متعددة المحاور."
           },
           {
-            title: "تصحيح تقوس وتشوهات الأطراف",
-            desc: "تقويم انحراف الساقين وإعادة موازنة محور التحميل الميكانيكي على الركبة لحمايتها من التآكل المبكر."
+            title: "خشونة الركبة واستبدال المفاصل",
+            desc: "تقييم حالات خشونة الركبة وتآكل الغضروف المفصلي، والعلاجات غير الجراحية والحقن داخل المفصل، وجراحات استبدال مفصل الركبة والورك."
           },
           {
-            title: "إصابات الملاعب والتأهيل الرياضي",
-            desc: "برامج علاجية واستشفاء مكثف لتمكين الرياضيين من العودة السريعة والآمنة للملاعب والمنافسة."
+            title: "إصابات الملاعب والمناظير الجراحية",
+            desc: "علاج إصابات الرباط الصليبي وتمزقات الغضروف الهلالي وعدم ثبات المفاصل، بالإضافة إلى مناظير الركبة والكاحل عبر فتحات جراحية صغيرة."
           }
         ],
         hospitals: [
@@ -231,13 +237,13 @@ export default function Home() {
             name: "مستشفى دار الكمال",
             city: "الشارقة",
             badge: "عمليات واستشارات",
-            desc: "أجنحة جراحية رقمية مجهزة بأعلى معايير التعقيم العالمية ومراكز أشعة متقدمة."
+            desc: "أجنحة جراحية مجهزة بأعلى معايير التعقيم ومراكز أشعة متقدمة لإجراء العمليات والاستشارات."
           },
           {
             name: "مركز العلاج الطبي",
             city: "عجمان",
             badge: "عيادات واستشارات",
-            desc: "فحص سريري متقدم، تخطيط علاجي مخصص، ووحدات حقن المفاصل التجديدي الموجه."
+            desc: "فحص سريري متقدم، تخطيط علاجي مخصص، ووحدات حقن المفاصل الموجه."
           }
         ],
         photos: [
@@ -250,19 +256,19 @@ export default function Home() {
         ctaCall: "اتصال هاتفي"
       },
       proofModal: {
-        title: "حالات حقيقية وخطوات مدروسة",
-        subtitle: "معايير التعافي والبروتوكولات الطبية المعتمدة",
+        title: "خبرة جراحية في التعامل مع الحالات المعقدة",
+        subtitle: "نتائج حقيقية مبنية على خبرة طبية متراكمة",
         stats: [
-          { num: "98%", title: "نسبة رضا المرضى", desc: "عن خطط العلاج التحفظي وتسكين الآلام" },
-          { num: "+20", title: "عاماً من الخبرة", desc: "في تشخيص وعلاج أدق إصابات المفاصل" },
-          { num: "100%", title: "فحص مخصص", desc: "بروتوكول علاجي مفصل لكل مريض على حدة" },
+          { num: "500+", title: "عملية إعادة بناء", desc: "في مجال تطويل العظام وتصحيح التشوهات" },
+          { num: "+25", title: "عاماً من الخبرة", desc: "في جراحة العظام والمفاصل والإصابات الرياضية" },
+          { num: "100%", title: "تقييم مخصص", desc: "خطة علاجية مفصلة لكل مريض على حدة" },
         ],
         cta: "ابدأ استشارتك اليوم"
       }
     },
     en: {
       drName: "Dr. Mohamed Kamal Ali",
-      drTitle: "Consultant Orthopedic & Arthroscopic Surgeon",
+      drTitle: "Consultant Orthopedic & Joint Surgeon — Sports Injuries",
       bookConsultation: "Book Appointment",
       navHome: "HOME",
       navDoctor: "DOCTOR",
@@ -278,54 +284,54 @@ export default function Home() {
           step: "01 / 06",
           badge: "WELCOME TO THE CLINIC",
           title: "Movement Is Life",
-          subtitle: "Consultant Orthopedic & Joint Preservation Care",
-          desc: "Welcome to the digital clinic experience of Dr. Mohamed Kamal Ali. Personalized orthopedic care designed to eliminate pain and restore your active mobility.",
+          subtitle: "Consultant Orthopedic & Joint Surgeon — Sports Injuries",
+          desc: "Welcome to my digital clinic. I'm Dr. Mohamed Kamal Ali. Join me on a tour to learn about my medical expertise, specializations, and how we reach accurate diagnosis to choose the most appropriate treatment for each case.",
           primaryAction: "Begin Clinic Tour",
           secondaryAction: "Quick Booking",
           type: "standard"
         },
         {
           step: "02 / 06",
-          badge: "CLINICAL APPROACH",
-          title: "Medical Care Starts with Understanding",
-          subtitle: "I am Dr. Mohamed Kamal Ali, Consultant Orthopedic Surgeon",
-          desc: "My goal is that you fully understand your condition and therapy options clearly before taking any step.",
+          badge: "CLINICAL BACKGROUND",
+          title: "Over 25 Years of Scientific & Surgical Excellence",
+          subtitle: "European Board of Orthopaedics & Traumatology (EBOT) Fellow",
+          desc: "My career spans Egypt, Saudi Arabia, Oman, and the UAE, holding leadership and surgical roles including Medical Director of Amina Hospital, Ajman, and visiting professor at Gulf Medical College.",
           primaryAction: "Meet the Doctor",
           type: "doctor_intro"
         },
         {
           step: "03 / 06",
           badge: "DIAGNOSIS & PATHWAYS",
-          title: "Every Condition Has a Distinct Path",
-          subtitle: "Accurate diagnosis is the foundation of appropriate treatment",
+          title: "Every Condition Has Its Nature… Every Treatment Has Its Criteria",
+          subtitle: "Bone and joint conditions vary in causes and complexity — there is no one-size-fits-all treatment plan",
           prompt: "What are you experiencing?",
           type: "condition_selector"
         },
         {
           step: "04 / 06",
-          badge: "DIAGNOSTIC FACILITIES",
-          title: "Accurate Diagnosis Guides the Right Step",
-          subtitle: "We begin with symptoms & clinical exam, ordering targeted imaging only when indicated",
-          desc: "High-resolution evaluation of cartilage and ligament integrity ensuring precision decision-making without guesswork.",
-          tags: ["High-Resolution MRI", "Digital X-Ray"],
+          badge: "EXAMINATION & DIAGNOSIS",
+          title: "Accurate Diagnosis Is the Foundation of Treatment Decisions",
+          subtitle: "Treatment isn't based on imaging alone — it requires clinical exam, symptom analysis, and functional assessment",
+          desc: "We begin with comprehensive clinical evaluation, followed by complementary investigations when needed. The goal is precise diagnosis that determines the right treatment pathway for each case.",
+          tags: ["MRI Imaging", "Digital X-Ray", "Clinical Assessment"],
           primaryAction: "Continue Journey",
           type: "diagnostics"
         },
         {
           step: "05 / 06",
-          badge: "EXPERTISE & PROOF",
-          title: "Real Cases & Deliberate Steps",
-          subtitle: "Joint preservation is our priority before considering surgical intervention",
-          desc: "Custom pathways combining regenerative biologics, targeted injections, and minimally invasive arthroscopy only when strictly indicated.",
+          badge: "EXPERTISE & RESULTS",
+          title: "Surgical Expertise in Complex Cases",
+          subtitle: "Over 500 procedures in limb reconstruction & deformity correction",
+          desc: "My expertise centers on bone lengthening, limb reconstruction, and deformity correction, alongside knee and hip replacement, knee and ankle arthroscopy, sports injury treatment, and complex fracture management.",
           primaryAction: "View Credentials & Proof",
           type: "proof"
         },
         {
           step: "06 / 06",
           badge: "RECEPTION & BOOKING",
-          title: "Back to Reception... Next Step is Booking",
-          subtitle: "Select your preferred clinic (Sharjah or Ajman) and leave your details",
-          desc: "Our appointment coordination team will reach out to schedule your preferred consultation time.",
+          title: "Our Tour Ends Here… Your Treatment Journey May Begin",
+          subtitle: "If you have a bone or joint condition, or seek an expert medical opinion",
+          desc: "Book a consultation at our Sharjah or Ajman clinic. I look forward to evaluating your condition and helping you make the right treatment decision.",
           primaryAction: "Book Consultation Now",
           secondaryAction: "Direct WhatsApp",
           type: "booking_close"
@@ -333,20 +339,24 @@ export default function Home() {
       ],
       conditions: [
         { id: 'limb_deformity', label: 'Limb Deformity & Alignment' },
-        { id: 'limb_lengthening', label: 'Limb Lengthening' },
+        { id: 'limb_lengthening', label: 'Bone Lengthening & Limb Length Discrepancy' },
         { id: 'knee_osteoarthritis', label: 'Knee Osteoarthritis & Joint Replacement' },
-        { id: 'sports_injuries', label: 'Sports Injuries & ACL Trauma' },
+        { id: 'sports_injuries', label: 'Sports Injuries & Ligaments' },
         { id: 'arthroscopy', label: 'Knee & Ankle Arthroscopy' },
+        { id: 'fractures', label: 'Fractures & Bone Reconstruction' },
+        { id: 'general_consultation', label: 'General Orthopedic Consultation' },
       ],
       modal: {
         title: "Request a Consultation",
-        subtitle: "Directly with Dr. Mohamed Kamal Ali - Orthopedic Consultant",
+        subtitle: "With Dr. Mohamed Kamal Ali — Consultant Orthopedic & Joint Surgeon",
         nameLabel: "Full Name",
         namePlaceholder: "Enter your full name",
         phoneLabel: "Phone / WhatsApp Number",
         phonePlaceholder: "e.g. +971 50 123 4567",
         branchLabel: "Select Appointment Location",
         conditionLabel: "What condition do you wish to consult about?",
+        notesLabel: "Additional notes or preferred time (optional)",
+        notesPlaceholder: "e.g. I prefer evening appointments",
         preferredContactLabel: "Preferred Contact Method",
         contactWhatsapp: "WhatsApp Message",
         contactCall: "Phone Call",
@@ -360,45 +370,46 @@ export default function Home() {
       doctorModal: {
         title: "Professional Profile & Clinical Credentials",
         subtitle: "Dr. Mohamed Kamal Ali",
-        role: "Consultant Orthopedic, Arthroscopy & Sports Medicine Surgeon",
-        experienceBadge: "Over 20 Years of Advanced Clinical & Surgical Excellence",
-        philosophy: "Joint preservation is our foremost mission. Surgical intervention is strictly the final, deliberate resort after exhausting evidence-based conservative and regenerative therapies.",
+        role: "Consultant Orthopedic & Joint Surgeon — Sports Injuries",
+        experienceBadge: "Over 25 Years of Scientific & Surgical Excellence",
+        philosophy: "Treatment decisions are not based on imaging alone, but on clinical examination, symptom nature, injury severity, and impact on joint function and mobility. My goal is that every patient understands their condition and available options, with treatment decisions built on clear medical foundations.",
         credentials: [
-          "Licensed Consultant by UAE Ministry of Health & Prevention (MOHAP)",
-          "Active Member, International Society of Arthroscopy & Knee Surgery (ISAKOS)",
-          "Fellowship in Advanced Arthroscopy & Limb Deformity Correction",
-          "Proven track record of over 5,000 successful orthopedic and joint procedures"
+          "European Board of Orthopaedics & Traumatology (EBOT) — 2012",
+          "Orthopedic Surgery Fellowship — University of Düsseldorf, Germany",
+          "Doctoral Studies in Orthopedic Surgery — Ain Shams University, Egypt",
+          "Master's in Orthopedic Surgery — Ain Shams University, Egypt",
+          "MBBCh (Bachelor of Medicine & Surgery) — Ain Shams University, Egypt"
         ],
         subspecialties: [
           {
-            title: "Advanced Knee & Shoulder Arthroscopy",
-            desc: "Minimally invasive ACL reconstruction, meniscus repair, and precision rotator cuff restoration."
+            title: "Bone Lengthening & Limb Reconstruction",
+            desc: "Bone lengthening surgery for limb length discrepancy and short stature, post-trauma reconstruction, nonunion fractures, and bone loss using gradual distraction techniques."
           },
           {
-            title: "Joint Preservation & Biologics",
-            desc: "Targeted Platelet-Rich Plasma (PRP) and high-density hyaluronic acid injections to preserve joint cartilage."
+            title: "Limb Deformity & Alignment Correction",
+            desc: "Bow legs, mechanical axis deviation, and congenital or acquired deformities using Ilizarov technique and multiaxial circular fixators."
           },
           {
-            title: "Limb Deformity Correction & Alignment",
-            desc: "Corrective osteotomy and realigning load-bearing biomechanics to prevent premature wear."
+            title: "Knee Osteoarthritis & Joint Replacement",
+            desc: "Assessment of knee osteoarthritis and cartilage degeneration, non-surgical treatments and intra-articular injections, and knee and hip replacement surgery."
           },
           {
-            title: "Sports Medicine & Fast-Track Recovery",
-            desc: "Rapid-recovery sports medicine programs enabling athletes to safely return to peak competition."
+            title: "Sports Injuries & Surgical Arthroscopy",
+            desc: "ACL injuries, meniscal tears, joint instability, and knee and ankle arthroscopy through minimally invasive approaches."
           }
         ],
         hospitals: [
           {
             name: "Dar Al Kamal Hospital",
             city: "Sharjah",
-            badge: "Surgery & Clinic",
-            desc: "Equipped with digital ultra-clean laminar flow operating suites and advanced imaging."
+            badge: "Surgery & Consultations",
+            desc: "Fully equipped surgical suites with advanced sterilization standards and imaging centers for surgeries and consultations."
           },
           {
             name: "Medical Treatment Center",
             city: "Ajman",
-            badge: "Consultation & Therapy",
-            desc: "Specialized clinical diagnosis, joint preservation planning, and guided injections."
+            badge: "Clinics & Consultations",
+            desc: "Advanced clinical examination, customized treatment planning, and guided joint injection units."
           }
         ],
         photos: [
@@ -411,14 +422,14 @@ export default function Home() {
         ctaCall: "Call Practice"
       },
       proofModal: {
-        title: "Proven Outcomes & Standards",
-        subtitle: "Evidence-Based Protocols & Joint Preservation",
+        title: "Surgical Expertise in Complex Cases",
+        subtitle: "Real Results Built on Accumulated Medical Experience",
         stats: [
-          { num: "98%", title: "Patient Satisfaction", desc: "With conservative pain relief pathways" },
-          { num: "+20", title: "Years Experience", desc: "Specializing in complex joint care" },
-          { num: "100%", title: "Tailored Care", desc: "Individualized protocol for each patient" },
+          { num: "500+", title: "Reconstruction Surgeries", desc: "In bone lengthening & deformity correction" },
+          { num: "+25", title: "Years Experience", desc: "In orthopedic surgery, joints & sports injuries" },
+          { num: "100%", title: "Tailored Assessment", desc: "Individualized treatment plan for each patient" },
         ],
-        cta: "Start Your Healing Journey"
+        cta: "Start Your Consultation Today"
       }
     }
   };
@@ -1295,8 +1306,8 @@ export default function Home() {
 
             <p className="text-[11px] text-gray-300 leading-relaxed mb-4 p-3 rounded-xl bg-white/5 border border-white/5">
               {lang === 'ar' 
-                ? 'نؤمن في عيادتنا بأن الجراحة هي الخيار الأخير. نبدأ دائماً بالحلول التحفظية والتقنيات التجديدية المعتمدة للحفاظ على مفاصلك الطبيعية.' 
-                : 'In our practice, surgery is considered the final resort. We always prioritize conservative and regenerative therapies to preserve your natural joints.'}
+                ? 'تتركز خبرتي في تطويل العظام وإعادة بناء الأطراف وتصحيح التشوهات، باستخدام تقنيات إليزاروف والمثبتات الدائرية متعددة المحاور. القرار العلاجي يكون مبنياً على الفحص السريري والتقييم الدقيق لكل حالة.' 
+                : 'My expertise centers on bone lengthening, limb reconstruction, and deformity correction using Ilizarov technique and multiaxial circular fixators. Treatment decisions are built on clinical examination and thorough assessment of each case.'}
             </p>
 
             <button
@@ -1449,6 +1460,20 @@ export default function Home() {
                       onChange={(e) => setPatientPhone(e.target.value)}
                       placeholder={current.modal.phonePlaceholder}
                       className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#8ab4f8] transition-colors"
+                    />
+                  </div>
+
+                  {/* Additional Notes (Optional) */}
+                  <div>
+                    <label className="block text-[11px] font-semibold text-gray-300 mb-1">
+                      {current.modal.notesLabel}
+                    </label>
+                    <textarea 
+                      value={patientNotes}
+                      onChange={(e) => setPatientNotes(e.target.value)}
+                      placeholder={current.modal.notesPlaceholder}
+                      rows={2}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#8ab4f8] transition-colors resize-none"
                     />
                   </div>
 
