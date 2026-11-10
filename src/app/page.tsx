@@ -104,8 +104,8 @@ export default function Home() {
       navBooking: "حجز موعد",
       langSwitch: "EN",
       branches: {
-        sharjah: "الشارقة: مستشفى دار الكمال",
-        ajman: "عجمان: مركز العلاج الطبي",
+        sharjah: "الشارقة: مستشفى دار الكمال (خيار حجز المستشفى)",
+        ajman: "عجمان: مركز العلاج الطبي (خيار حجز العيادة / المركز الطبي)",
       },
       chapters: [
         {
@@ -186,7 +186,7 @@ export default function Home() {
         nameLabel: "الاسم الكامل",
         namePlaceholder: "أدخل اسمك الكريم",
         phoneLabel: "رقم الهاتف / الواتساب",
-        phonePlaceholder: "مثال: 0501234567",
+        phonePlaceholder: "مثال: 0545650678 أو 971545650678+",
         branchLabel: "اختر مكان الموعد",
         conditionLabel: "ما هي الحالة التي ترغب في استشارة الدكتور بشأنها؟",
         notesLabel: "ملاحظات إضافية أو وقت مفضل (اختياري)",
@@ -236,14 +236,14 @@ export default function Home() {
           {
             name: "مستشفى دار الكمال",
             city: "الشارقة",
-            badge: "عمليات واستشارات",
-            desc: "أجنحة جراحية مجهزة بأعلى معايير التعقيم ومراكز أشعة متقدمة لإجراء العمليات والاستشارات."
+            badge: "خيار حجز المستشفى (عمليات واستشارات)",
+            desc: "أجنحة جراحية مجهزة بأعلى معايير التعقيم ومراكز أشعة متقدمة لإجراء العمليات الجراحية والاستشارات التخصصية."
           },
           {
             name: "مركز العلاج الطبي",
             city: "عجمان",
-            badge: "عيادات واستشارات",
-            desc: "فحص سريري متقدم، تخطيط علاجي مخصص، ووحدات حقن المفاصل الموجه."
+            badge: "خيار حجز العيادة / المركز الطبي",
+            desc: "فحص سريري متقدم، تخطيط علاجي مخصص، واستشارات وحقن المفاصل الموجه."
           }
         ],
         photos: [
@@ -276,8 +276,8 @@ export default function Home() {
       navBooking: "BOOKING",
       langSwitch: "العربية",
       branches: {
-        sharjah: "Sharjah: Dar Al Kamal Hospital",
-        ajman: "Ajman: Medical Treatment Center",
+        sharjah: "Sharjah: Dar Al Kamal Hospital (Hospital Booking Option)",
+        ajman: "Ajman: Medical Treatment Center (Clinic / Medical Centre Booking Option)",
       },
       chapters: [
         {
@@ -352,7 +352,7 @@ export default function Home() {
         nameLabel: "Full Name",
         namePlaceholder: "Enter your full name",
         phoneLabel: "Phone / WhatsApp Number",
-        phonePlaceholder: "e.g. +971 50 123 4567",
+        phonePlaceholder: "e.g. +971 54 565 0678",
         branchLabel: "Select Appointment Location",
         conditionLabel: "What condition do you wish to consult about?",
         notesLabel: "Additional notes or preferred time (optional)",
@@ -402,14 +402,14 @@ export default function Home() {
           {
             name: "Dar Al Kamal Hospital",
             city: "Sharjah",
-            badge: "Surgery & Consultations",
-            desc: "Fully equipped surgical suites with advanced sterilization standards and imaging centers for surgeries and consultations."
+            badge: "Hospital Booking Option",
+            desc: "Fully equipped surgical suites with advanced sterilization standards and imaging centers for surgeries and specialist consultations."
           },
           {
             name: "Medical Treatment Center",
             city: "Ajman",
-            badge: "Clinics & Consultations",
-            desc: "Advanced clinical examination, customized treatment planning, and guided joint injection units."
+            badge: "Clinic / Medical Centre Booking Option",
+            desc: "Advanced clinical examination, customized treatment planning, consultations, and guided joint injection units."
           }
         ],
         photos: [
@@ -454,19 +454,18 @@ export default function Home() {
   };
 
   // WhatsApp click handler with pre-filled message matching Developer Brief exactly:
-  // "مرحباً د. محمد كمال علي. أرغب في حجز موعد استشارة. العيادة المفضلة: [الشارقة أو عجمان]، الحالة: [الحالة]."
   const handleWhatsAppClick = () => {
     const branchName = selectedBranch === 'sharjah' 
-      ? (lang === 'ar' ? 'الشارقة (مستشفى دار الكمال)' : 'Sharjah (Dar Al Kamal Hospital)') 
-      : (lang === 'ar' ? 'عجمان (مركز العلاج الطبي)' : 'Ajman (Medical Treatment Center)');
+      ? (lang === 'ar' ? 'الشارقة — مستشفى دار الكمال (خيار حجز المستشفى)' : 'Sharjah — Dar Al Kamal Hospital (Hospital Booking Option)') 
+      : (lang === 'ar' ? 'عجمان — مركز العلاج الطبي (خيار حجز العيادة / المركز الطبي)' : 'Ajman — Medical Treatment Center (Clinic / Medical Centre Booking Option)');
     const conditionObj = current.conditions.find(c => c.id === selectedCondition);
     const conditionText = conditionObj ? conditionObj.label : (lang === 'ar' ? 'استشارة عظام ومفاصل' : 'Orthopedic Consultation');
     
     const message = lang === 'ar'
-      ? encodeURIComponent(`مرحباً د. محمد كمال علي. أرغب في حجز موعد استشارة.\nالعيادة المفضلة: ${branchName}\nالحالة: ${conditionText}`)
-      : encodeURIComponent(`Hello Dr. Mohamed Kamal Ali. I would like to request a consultation appointment.\nPreferred Clinic: ${branchName}\nCondition: ${conditionText}`);
+      ? encodeURIComponent(`مرحباً د. محمد كمال علي. أرغب في حجز موعد استشارة.\nالمكان: ${branchName}\nالحالة: ${conditionText}`)
+      : encodeURIComponent(`Hello Dr. Mohamed Kamal Ali. I would like to request a consultation appointment.\nLocation: ${branchName}\nCondition: ${conditionText}`);
     
-    window.open(`https://wa.me/971500000000?text=${message}`, '_blank');
+    window.open(`https://wa.me/971545650678?text=${message}`, '_blank');
   };
 
   // Floating Action Menu Buttons tailored to Clinic Experience
@@ -513,7 +512,7 @@ export default function Home() {
     },
     {
       Icon: Phone,
-      href: 'tel:+971500000000',
+      href: 'tel:+971545650678',
       label: lang === 'ar' ? 'اتصال بالعيادة' : 'Call Clinic',
       className: 'hover:border-emerald-400/50 text-emerald-300 hover:bg-emerald-500/10',
     },
@@ -1251,7 +1250,7 @@ export default function Home() {
               </button>
 
               <a
-                href="tel:+971500000000"
+                href="tel:+971545650678"
                 className="shrink-0 p-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-colors flex items-center justify-center cursor-pointer"
                 title={current.doctorModal.ctaCall}
               >
@@ -1400,7 +1399,10 @@ export default function Home() {
                       >
                         <MapPin className="w-3.5 h-3.5 text-[#8ab4f8]" />
                         <span className="font-bold">{lang === 'ar' ? 'الشارقة' : 'Sharjah'}</span>
-                        <span className="text-[9px] opacity-75">{lang === 'ar' ? 'مستشفى دار الكمال' : 'Dar Al Kamal'}</span>
+                        <span className="text-[10px] font-semibold text-white/95">{lang === 'ar' ? 'مستشفى دار الكمال' : 'Dar Al Kamal Hospital'}</span>
+                        <span className="text-[8px] px-1.5 py-0.5 mt-0.5 rounded-full bg-[#1a73e8]/25 text-[#8ab4f8] font-medium border border-[#8ab4f8]/30">
+                          {lang === 'ar' ? 'خيار حجز المستشفى' : 'Hospital Booking Option'}
+                        </span>
                       </button>
 
                       <button
@@ -1410,7 +1412,10 @@ export default function Home() {
                       >
                         <MapPin className="w-3.5 h-3.5 text-[#8ab4f8]" />
                         <span className="font-bold">{lang === 'ar' ? 'عجمان' : 'Ajman'}</span>
-                        <span className="text-[9px] opacity-75">{lang === 'ar' ? 'مركز العلاج الطبي' : 'Medical Center'}</span>
+                        <span className="text-[10px] font-semibold text-white/95">{lang === 'ar' ? 'مركز العلاج الطبي' : 'Medical Treatment Center'}</span>
+                        <span className="text-[8px] px-1.5 py-0.5 mt-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-medium border border-emerald-500/30">
+                          {lang === 'ar' ? 'خيار حجز العيادة / المركز الطبي' : 'Clinic / Medical Centre'}
+                        </span>
                       </button>
                     </div>
                   </div>

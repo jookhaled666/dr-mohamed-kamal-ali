@@ -120,7 +120,7 @@ export default function RootLayout({
       "JointReplacement"
     ],
     "description": "استشاري جراحة العظام والمفاصل وإصابات الملاعب، حاصل على زمالة البورد الأوروبي EBOT. خبرة 25+ عاماً في تطويل العظام وإعادة بناء الأطراف واستبدال المفاصل — الشارقة وعجمان.",
-    "telephone": "+971501234567",
+    "telephone": "+971545650678",
     "url": "https://dr-mohamed-kamal-ali.vercel.app",
     "alumniOf": [
       {
@@ -145,13 +145,13 @@ export default function RootLayout({
     "address": [
       {
         "@type": "PostalAddress",
-        "name": "Dar Al Kamal Hospital",
+        "name": "Dar Al Kamal Hospital (Hospital Booking)",
         "addressLocality": "Sharjah",
         "addressCountry": "AE"
       },
       {
         "@type": "PostalAddress",
-        "name": "Medical Treatment Center",
+        "name": "Medical Treatment Center (Clinic / Medical Centre Booking)",
         "addressLocality": "Ajman",
         "addressCountry": "AE"
       }

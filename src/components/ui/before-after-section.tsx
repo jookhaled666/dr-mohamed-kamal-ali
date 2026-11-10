@@ -90,25 +90,29 @@ const CONDITIONS = [
 const CLINIC_LOCATIONS = [
   {
     id: 'sharjah' as const,
-    ar: 'الشارقة — مستشفى دار الكمال',
-    en: 'Sharjah — Dar Al Kamal Hospital',
+    ar: 'الشارقة — مستشفى دار الكمال (خيار حجز المستشفى)',
+    en: 'Sharjah — Dar Al Kamal Hospital (Hospital Booking Option)',
     cityAr: 'الشارقة',
     cityEn: 'Sharjah',
     facilityAr: 'مستشفى دار الكمال',
     facilityEn: 'Dar Al Kamal Hospital',
-    featuresAr: 'أجنحة جراحية رقمية وعيادات متكاملة',
-    featuresEn: 'Digital surgical suites & specialized clinics',
+    optionBadgeAr: 'خيار حجز المستشفى',
+    optionBadgeEn: 'Hospital Booking Option',
+    featuresAr: 'أجنحة جراحية رقمية وعيادات متكاملة للعمليات والاستشارات',
+    featuresEn: 'Digital surgical suites & specialized clinics for surgeries and consultations',
   },
   {
     id: 'ajman' as const,
-    ar: 'عجمان — مركز العلاج الطبي',
-    en: 'Ajman — Medical Treatment Center',
+    ar: 'عجمان — مركز العلاج الطبي (خيار حجز العيادة / المركز الطبي)',
+    en: 'Ajman — Medical Treatment Center (Clinic / Medical Centre Booking Option)',
     cityAr: 'عجمان',
     cityEn: 'Ajman',
     facilityAr: 'مركز العلاج الطبي',
     facilityEn: 'Medical Treatment Center',
-    featuresAr: 'فحص سريري متقدم وحقن موجه للمفاصل',
-    featuresEn: 'Advanced clinical exam & guided joint injections',
+    optionBadgeAr: 'خيار حجز العيادة / المركز الطبي',
+    optionBadgeEn: 'Clinic / Medical Centre Option',
+    featuresAr: 'فحص سريري متقدم وحقن موجه للمفاصل واستشارات',
+    featuresEn: 'Advanced clinical exam, guided joint injections & consultations',
   },
 ];
 
@@ -402,7 +406,7 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
         ].filter(Boolean);
 
     const fullMessage = messageLines.join('\n');
-    const waUrl = `https://wa.me/971501234567?text=${encodeURIComponent(fullMessage)}`;
+    const waUrl = `https://wa.me/971545650678?text=${encodeURIComponent(fullMessage)}`;
 
     window.open(waUrl, '_blank');
 
@@ -617,7 +621,7 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
                     required
                     value={patientPhone}
                     onChange={(e) => setPatientPhone(e.target.value)}
-                    placeholder={isRtl ? 'مثال: 0501234567 أو +971501234567' : 'e.g. +971 50 123 4567'}
+                    placeholder={isRtl ? 'مثال: 0545650678 أو 971545650678+' : 'e.g. +971 54 565 0678'}
                     className="w-full ps-10 pe-4 py-3 bg-white/[0.05] border border-white/15 rounded-xl text-sm sm:text-base text-white placeholder-gray-500 focus:outline-none focus:border-[#8ab4f8] focus:bg-white/[0.08] transition-all"
                   />
                 </div>
@@ -649,10 +653,19 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
                           }`}
                         />
                         <div className="flex flex-col">
-                          <span className="text-xs sm:text-sm font-bold text-white">
-                            {isRtl ? loc.cityAr : loc.cityEn}
-                          </span>
-                          <span className="text-[11px] text-gray-300">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="text-xs sm:text-sm font-bold text-white">
+                              {isRtl ? loc.cityAr : loc.cityEn}
+                            </span>
+                            <span className={`text-[9px] px-1.5 py-0.5 rounded-full font-semibold ${
+                              loc.id === 'sharjah' 
+                                ? 'bg-[#1a73e8]/25 text-[#8ab4f8] border border-[#8ab4f8]/30' 
+                                : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                            }`}>
+                              {isRtl ? loc.optionBadgeAr : loc.optionBadgeEn}
+                            </span>
+                          </div>
+                          <span className="text-[11px] text-gray-300 font-medium mt-0.5">
                             {isRtl ? loc.facilityAr : loc.facilityEn}
                           </span>
                           <span className="text-[10px] text-gray-400 mt-0.5">
