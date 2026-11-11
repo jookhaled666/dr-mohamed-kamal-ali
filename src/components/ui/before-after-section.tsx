@@ -19,6 +19,7 @@ import {
   Activity,
   Sliders,
   Check,
+  CalendarCheck,
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,12 +30,14 @@ gsap.registerPlugin(ScrollTrigger);
 const CASES = [
   {
     id: 1,
+    caseNumberAr: 'الحالة الأولى',
+    caseNumberEn: 'Case 01',
     labelAr: 'تصحيح تقوس الساقين (Genu Varum)',
-    labelEn: 'Bow Legs Realignment (Genu Varum)',
-    badgeAr: 'استقامة المحور الحركي',
+    labelEn: 'Bow Legs Correction (Genu Varum)',
+    badgeAr: 'استقامة المحور الميكانيكي',
     badgeEn: 'Mechanical Axis Realignment',
-    descAr: 'مريض يعاني من تقوس الساقين (Genu Varum) مع تباعد الركبتين وتوزيع حمل غير متوازن على المفصل. تم إجراء تصحيح محوري دقيق باستخدام تقنيات التقويم العظمي والتثبيت الداخلي لإعادة استقامة المحور الميكانيكي للساق واستعادة المشية الطبيعية وحماية مفصل الركبة من التآكل المبكر.',
-    descEn: 'Patient presenting with bow legs (Genu Varum) causing uneven joint load distribution. Precision axial correction was performed using osteotomy and internal fixation techniques to restore the mechanical axis, normalize gait, and protect the knee joint from premature degeneration.',
+    descAr: 'يؤدي تقوس الساقين إلى انحراف المحور الميكانيكي للطرف السفلي، وقد يتسبب في زيادة الأحمال على الجانب الداخلي لمفصل الركبة. يعتمد التصحيح الجراحي على تحديد موقع التشوه ودرجته، ثم تعديل محور العظم وفق الخطة الجراحية المناسبة.',
+    descEn: 'Bow legs lead to mechanical axis deviation of the lower limb, causing increased load on the medial knee compartment. Surgical correction identifies deformity location and severity to realign bone axes according to a tailored plan.',
     before: '/before-after/before-1.jpg',
     after: '/before-after/after-1.jpg',
     stats: [
@@ -45,12 +48,14 @@ const CASES = [
   },
   {
     id: 2,
-    labelAr: 'تقويم انحراف الساقين الحاد',
+    caseNumberAr: 'الحالة الثانية',
+    caseNumberEn: 'Case 02',
+    labelAr: 'تصحيح الانحراف العظمي الشديد',
     labelEn: 'Severe Limb Deformity Correction',
     badgeAr: 'توازن التحميل الميكانيكي',
-    badgeEn: 'Load Balance Restored',
-    descAr: 'حالة انحراف محوري شديد في الطرفين السفليين أثرت على توازن التحميل الميكانيكي واستقامة القامة. بفضل خطة جراحية مخصصة باستخدام تقنيات تصحيح الزوايا الحديثة والمثبتات الداخلية، تم تصحيح المحور بالكامل واستعادة التناسق الوظيفي والجمالي للساقين مع حماية المفاصل من الخشونة المبكرة.',
-    descEn: 'Severe lower limb axial deviation compromising biomechanical weight-bearing and posture. Through a customized surgical plan using modern angular correction techniques and internal fixators, full anatomical symmetry was achieved with joint protection from early degeneration.',
+    badgeEn: 'Mechanical Load Balance',
+    descAr: 'قد تتطلب التشوهات العظمية الشديدة تخطيطاً جراحياً متعدد المراحل، بحسب درجة الانحراف وموقعه وتأثيره على المفاصل. تُستخدم تقنيات التصحيح التدريجي أو المباشر وفق طبيعة التشوه، بهدف تحسين استقامة الطرف ووظيفته.',
+    descEn: 'Severe bony deformities may require multi-stage surgical planning based on angulation degree, location, and joint impact. Gradual or acute correction techniques are utilized to restore limb alignment and function.',
     before: '/before-after/before-2.jpg',
     after: '/before-after/after-2.jpg',
     stats: [
@@ -61,16 +66,18 @@ const CASES = [
   },
   {
     id: 3,
-    labelAr: 'تصحيح تقوس الركبتين الداخلي (Genu Valgum)',
+    caseNumberAr: 'الحالة الثالثة',
+    caseNumberEn: 'Case 03',
+    labelAr: 'تصحيح تقوس الركبتين للداخل (Genu Valgum)',
     labelEn: 'Knock Knees Correction (Genu Valgum)',
     badgeAr: 'تناسق مفصلي وحركي متكامل',
-    badgeEn: 'Full Articular Symmetry',
-    descAr: 'مريض يعاني من تقارب الركبتين وتباعد الكاحلين (Genu Valgum) مع إجهاد وصعوبة أثناء المشي والوقوف الطويل. تم تصحيح زوايا التحميل بدقة متناهية باستخدام تقنيات التقويم العظمي، وإعادة استقامة الساقين مع نتائج وظيفية وجمالية رفيعة المستوى.',
-    descEn: 'Patient presenting with inward knee alignment (Genu Valgum / knock knees) causing strain during ambulation and prolonged standing. Load-bearing angles were meticulously corrected using osteotomy techniques, achieving remarkable functional and aesthetic symmetry.',
+    badgeEn: 'Articular & Gait Symmetry',
+    descAr: 'يتميز هذا التشوه بانحراف محور الطرف السفلي، بحيث تتقارب الركبتان مع تباعد الكاحلين بدرجات متفاوتة. يُحدَّد التدخل المناسب بعد قياس المحور الميكانيكي وتقييم موقع التشوه ومدى تأثيره على توزيع الأحمال داخل المفصل.',
+    descEn: 'This deformity features lower limb axis deviation where knees converge and ankles diverge. Appropriate intervention is planned after measuring mechanical axes and assessing deformity impact on intra-articular loads.',
     before: '/before-after/before-3.jpg',
     after: '/before-after/after-3.jpg',
     stats: [
-      { num: 'دقيق', labelAr: 'موازنة الزوايا', labelEn: 'Precision Angulation' },
+      { num: 'دقيق', labelAr: 'موازنة الزوايا', labelEn: 'Precision Realignment' },
       { num: '6', labelAr: 'أسابيع للعودة للمشي', labelEn: 'Weeks to Normal Walk' },
       { num: '100%', labelAr: 'رضا المريض', labelEn: 'Patient Satisfaction' },
     ],
@@ -435,25 +442,29 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ══ SECTION HEADER ══ */}
+        {/* ══ SECTION HEADER (PDF PAGE 9) ══ */}
         <div className="baa-reveal-header text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1a73e8]/15 border border-[#8ab4f8]/30 text-[#8ab4f8] text-xs font-bold mb-3 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#8ab4f8]" />
+            <span>{isRtl ? 'الحالات السريرية | قبل وبعد' : 'Clinical Cases | Before & After'}</span>
+          </div>
 
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
             {isRtl ? (
               <>
-                حالات حقيقية... <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8ab4f8] via-[#a8c7fa] to-white">ورحلات تعافٍ ملهمة</span>
+                حالات حقيقية… <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8ab4f8] via-[#a8c7fa] to-white">وتدخلات جراحية مدروسة</span>
               </>
             ) : (
               <>
-                Real Cases... <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8ab4f8] via-[#a8c7fa] to-white">Documented Outcomes</span>
+                Real Cases… <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8ab4f8] via-[#a8c7fa] to-white">Deliberate Surgical Interventions</span>
               </>
             )}
           </h2>
 
           <p className="text-sm sm:text-base text-gray-300 font-light leading-relaxed max-w-2xl mx-auto">
             {isRtl
-              ? 'شاهد دقة تقويم وتصحيح انحراف الأطراف واستعادة التوازن الحركي الطبيعي تحت إشراف د. محمد كمال علي، وفق أحدث المعايير الدولية.'
-              : 'Explore precision limb realignment, deformity correction, and restored functional biomechanics by Dr. Mohamed Kamal Ali.'}
+              ? 'تعرّف على نماذج من حالات تصحيح تشوهات الأطراف، مع صور طبية توضح وضع العظام قبل التدخل الجراحي وبعده.'
+              : 'Explore documented cases of limb deformity correction, with medical imaging illustrating bone alignment before and after surgical intervention.'}
           </p>
         </div>
 
@@ -505,9 +516,9 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
                 </span>
               </div>
 
-              {/* Case Title */}
+              {/* Case Title with Case Number from PDF */}
               <h3 className="text-xl sm:text-2xl font-black text-white mb-3 leading-snug">
-                {isRtl ? currentCase.labelAr : currentCase.labelEn}
+                {isRtl ? `${currentCase.caseNumberAr} | ${currentCase.labelAr}` : `${currentCase.caseNumberEn} | ${currentCase.labelEn}`}
               </h3>
 
               {/* Case Medical Description */}
@@ -549,9 +560,10 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
                     const formEl = document.getElementById('consultation-booking-form');
                     formEl?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-[#1a73e8]/25 hover:bg-[#1a73e8]/35 border border-[#8ab4f8]/40 text-[#8ab4f8] text-xs sm:text-sm font-bold transition-all"
+                  className="inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white text-xs sm:text-sm font-bold transition-all shadow-md active:scale-98"
                 >
-                  <span>{isRtl ? 'احجز لهذه الحالة' : 'Consult for this'}</span>
+                  <CalendarCheck className="w-4 h-4 text-white" />
+                  <span>{isRtl ? 'احجز استشارتك' : 'Book Consultation'}</span>
                 </button>
               </div>
             </div>
@@ -573,19 +585,20 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
             {/* Soft Ambient Inner Glow */}
             <div className="absolute top-0 start-1/2 -translate-x-1/2 w-80 h-32 bg-[#1a73e8]/15 rounded-full blur-2xl pointer-events-none" />
 
-            {/* Header Form Title */}
+            {/* Header Form Title (PDF Page 10) */}
             <div className="text-center mb-7 relative z-10">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1a73e8]/30 to-[#0c4186]/50 border border-[#8ab4f8]/40 mx-auto flex items-center justify-center mb-3.5 shadow-[0_0_30px_rgba(26,115,232,0.35)]">
-                <MessageCircle className="w-7 h-7 text-[#8ab4f8]" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1a73e8]/15 border border-[#8ab4f8]/30 text-[#8ab4f8] text-xs font-bold mb-3 shadow-sm">
+                <CalendarCheck className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                <span>{isRtl ? 'نموذج حجز الاستشارة' : 'Consultation Booking Form'}</span>
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">
                 {isRtl ? 'احجز استشارتك مع الدكتور' : 'Book Your Consultation'}
               </h3>
-              <p className="text-xs sm:text-sm text-gray-300 font-light max-w-md mx-auto">
+              <p className="text-xs sm:text-sm text-gray-300 font-light max-w-lg mx-auto leading-relaxed">
                 {isRtl
-                  ? 'املأ البيانات البسيطة واضغط إرسال، وستُرسل رسالتك منسقة بالكامل عبر واتساب مباشرة للعيادة'
-                  : 'Complete the short form below and your consultation request will be instantly formatted and sent via WhatsApp'}
+                  ? 'يسعدني استقبالكم لتقييم حالتكم الطبية ومناقشة الخيارات العلاجية المناسبة. يرجى تعبئة البيانات التالية، وسيتواصل معكم فريق المواعيد لتنسيق الزيارة.'
+                  : 'We are pleased to welcome you to evaluate your medical condition and discuss suitable treatment options. Please fill out the details below, and our appointment team will contact you to coordinate your visit.'}
               </p>
             </div>
 
@@ -738,7 +751,7 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
                   ) : (
                     <>
                       <MessageCircle className="w-5 h-5 fill-white text-emerald-600" />
-                      <span>{isRtl ? 'إرسال طلب الحجز عبر واتساب مباشرة' : 'Send Booking Request via WhatsApp'}</span>
+                      <span>{isRtl ? 'إرسال طلب الحجز عبر واتساب' : 'Send Booking Request via WhatsApp'}</span>
                       <Send className="w-4 h-4 ms-1 opacity-80" />
                     </>
                   )}
@@ -746,14 +759,29 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
 
                 <p className="text-center text-[11px] text-gray-400 mt-2.5">
                   {isRtl
-                    ? '⚡ سيتم فتح تطبيق واتساب فوراً برسالة جاهزة تحتوي كافة تفاصيل حجزك للتأكيد الفوري مع العيادة.'
-                    : '⚡ WhatsApp will open instantly with your pre-formatted booking details for quick confirmation.'}
+                    ? '⚡ سيتم فتح تطبيق واتساب فوراً برسالة جاهزة تحتوي كافة تفاصيل حجزك للتنسيق الفوري مع فريق المواعيد.'
+                    : '⚡ WhatsApp will open instantly with your pre-formatted booking details for instant confirmation.'}
                 </p>
               </div>
             </form>
 
+            {/* Official Doctor Signature Banner from PDF Page 10 */}
+            <div className="mt-6 pt-5 border-t border-white/10 text-center">
+              <p className="text-xs sm:text-sm font-bold text-white mb-0.5">
+                {isRtl ? 'د. محمد كمال علي' : 'Dr. Mohamed Kamal Ali'}
+              </p>
+              <p className="text-[11px] text-gray-300">
+                {isRtl
+                  ? 'استشاري جراحة العظام والمفاصل وإصابات الملاعب'
+                  : 'Consultant Orthopedic & Joint Surgeon — Sports Injuries'}
+              </p>
+              <p className="text-[11px] font-semibold text-[#8ab4f8] mt-1">
+                {isRtl ? 'الحركة هي الحياة' : 'Movement Is Life'}
+              </p>
+            </div>
+
             {/* Trust Assurances */}
-            <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-center gap-4 text-[11px] text-gray-400">
+            <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap items-center justify-center gap-4 text-[10px] text-gray-400">
               <div className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 <span>{isRtl ? 'سرية طبية تامة' : 'Strict Confidentiality'}</span>

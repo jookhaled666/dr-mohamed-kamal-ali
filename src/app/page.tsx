@@ -92,7 +92,7 @@ export default function Home() {
     }
   }, []);
 
-  // Multi-language data conforming 100% to developer brief copy
+  // Multi-language data conforming 100% to developer brief & official PDF content
   const t = {
     ar: {
       drName: "د. محمد كمال علي",
@@ -109,111 +109,164 @@ export default function Home() {
       },
       chapters: [
         {
-          // Chapter 1: Reception Arrival
+          // Chapter 1: Reception Arrival (PDF Page 2)
           step: "01 / 06",
           badge: "الاستقبال والترحيب",
           title: "الحركة هي الحياة",
-          subtitle: "استشاري جراحة العظام والمفاصل وإصابات الملاعب",
-          desc: "أهلاً بك في عيادتي الرقمية. أنا الدكتور محمد كمال علي، يسعدني أن أصطحبك في جولة تتعرّف خلالها على خبرتي الطبية ومجالات تخصصي، وكيف نصل إلى التشخيص الدقيق ونختار العلاج الأنسب لكل حالة.",
+          subtitle: "د. محمد كمال علي — استشاري جراحة العظام والمفاصل وإصابات الملاعب",
+          desc: "أهلاً بك في عيادتي الرقمية. أنا الدكتور محمد كمال علي، ويسعدني أن أصطحبك في جولة تتعرّف خلالها على خبرتي الطبية، ومجالات تخصصي، وكيف نصل إلى التشخيص الدقيق ونختار العلاج الأنسب لكل حالة.",
+          note: "أؤمن بأن الحفاظ على الحركة يبدأ بفهم المشكلة، وأن القرار العلاجي الصحيح يقوم على المعرفة الطبية والخبرة الجراحية والتقييم الدقيق.",
           primaryAction: "ابدأ الجولة الطبية",
           secondaryAction: "حجز موعد سريع",
           type: "standard"
         },
         {
-          // Chapter 2: Doctor Office
+          // Chapter 2: Doctor Office (PDF Page 3)
           step: "02 / 06",
           badge: "السيرة والنهج الطبي",
           title: "خبرة علمية وجراحية تمتد لأكثر من 25 عاماً",
           subtitle: "حاصل على زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT)",
-          desc: "امتدت مسيرتي المهنية عبر مصر والسعودية وسلطنة عُمان والإمارات، وتولّيت خلالها مسؤوليات طبية وجراحية وقيادية متعددة. هدفي أن يفهم كل مريض حالته والخيارات المتاحة له.",
-          primaryAction: "تعرّف على الدكتور",
+          desc: "أنا الدكتور محمد كمال علي، استشاري جراحة العظام والمفاصل. امتدت مسيرتي عبر مصر والسعودية وسلطنة عُمان والإمارات، وتولّيت خلالها مسؤوليات طبية وجراحية وقيادية بمستشفى خولة، والإدارة الطبية لمستشفى أمينة، والتدريس بكلية الخليج الطبية. هدفي أن يفهم كل مريض حالته والخيارات المتاحة له.",
+          primaryAction: "تعرّف على التخصصات الطبية",
+          secondaryAction: "السيرة والنهج الطبي",
           type: "doctor_intro"
         },
         {
-          // Chapter 3: From Office to Clinical Care
+          // Chapter 3: From Office to Clinical Care (PDF Pages 4 & 5)
           step: "03 / 06",
           badge: "التشخيص واختيار المسار",
           title: "كل حالة لها طبيعتها… ولكل علاج معاييره",
-          subtitle: "تختلف أمراض وإصابات العظام والمفاصل في أسبابها ودرجة تعقيدها، ولذلك لا توجد خطة علاجية واحدة تناسب جميع المرضى",
+          subtitle: "والآن، دعنا نتعرّف على أبرز الحالات التي أتعامل معها. تختلف أمراض وإصابات العظام والمفاصل في أسبابها ودرجة تعقيدها، ولذلك لا توجد خطة علاجية واحدة تناسب جميع المرضى.",
           prompt: "ما الذي تعاني منه؟",
+          primaryAction: "ننتقل الآن إلى مرحلة الفحص والتشخيص",
           type: "condition_selector"
         },
         {
-          // Chapter 4: Diagnostic Facilities
+          // Chapter 4: Diagnostic Facilities (PDF Page 6)
           step: "04 / 06",
-          badge: "الفحص والتشخيص الدقيق",
+          badge: "مرافق الفحص والتشخيص",
           title: "التشخيص الدقيق هو أساس القرار العلاجي",
-          subtitle: "لا يعتمد اختيار العلاج على نتائج الأشعة وحدها، بل على الفحص السريري وطبيعة الأعراض ودرجة الإصابة",
-          desc: "نبدأ بالتقييم السريري الشامل، ثم الفحوصات التكميلية عند الحاجة. الهدف هو الوصول لتشخيص دقيق يحدد المسار العلاجي الصحيح لكل حالة.",
-          tags: ["الرنين المغناطيسي MRI", "الأشعة السينية X-Ray", "التقييم السريري"],
+          subtitle: "بعد التعرّف على الأعراض، ننتقل إلى مرحلة التقييم الطبي السريري.",
+          desc: "أبدأ بمراجعة التاريخ المرضي، وطبيعة الألم أو الإصابة، ومدى تأثيرها على الحركة والأنشطة اليومية، ثم أُجري الفحص السريري لتقييم وظيفة المفصل، واستقامة الطرف، وثبات الأربطة، ومدى الحركة. بعد ذلك، أُحدد الفحوصات التصويرية المناسبة لكل حالة.",
+          diagnosticItems: [
+            {
+              title: "الأشعة السينية (X-Ray)",
+              shortDesc: "تقييم الكسور واستقامة العظام ودرجة تآكل المفاصل، وصور الوقوف لتقييم المحور الميكانيكي وقياس درجة الانحراف بدقة."
+            },
+            {
+              title: "التصوير بالرنين المغناطيسي (MRI)",
+              shortDesc: "يُستخدم لتقييم الأربطة والغضاريف والأنسجة الرخوة، خصوصاً في إصابات الملاعب وحالات عدم ثبات الركبة والكاحل."
+            },
+            {
+              title: "من التشخيص إلى الخطة العلاجية",
+              shortDesc: "مناقشة الخيارات والفوائد والمخاطر؛ فليست كل إصابة بحاجة لجراحة، وتأخير التدخل الجراحي قد يؤثر على وظيفة المفصل."
+            }
+          ],
           primaryAction: "متابعة الجولة",
           type: "diagnostics"
         },
         {
-          // Chapter 5: Expertise and Proof
+          // Chapter 5: Expertise and Proof (PDF Page 7)
           step: "05 / 06",
           badge: "الخبرة والنتائج",
           title: "خبرة جراحية في التعامل مع الحالات المعقدة",
-          subtitle: "أكثر من 500 عملية في مجال إعادة بناء الأطراف وتصحيح التشوهات",
-          desc: "تتركز خبرتي في تطويل العظام وإعادة بناء الأطراف وتصحيح التشوهات، إلى جانب استبدال مفاصل الركبة والورك، ومناظير الركبة والكاحل، وعلاج الإصابات الرياضية والكسور المعقدة.",
-          primaryAction: "شاهد معايير التعافي والخبرة",
+          subtitle: "أكثر من 500 عملية في مجال إعادة بناء الأطراف وتطويل العظام",
+          desc: "على مدار مسيرتي الطبية، أجريت أكثر من 500 عملية شملت تصحيح التشوهات العظمية المعقدة، واختلاف طول الأطراف، وعدم التئام الكسور. لا يقتصر الهدف على الشكل الظاهري، بل تحسين استقامة الطرف ومحوره الميكانيكي ووظيفته.",
+          highlight: "في حالات خشونة الركبة وإصابات المفاصل، أحرص على تقييم الخيارات العلاجية غير الجراحية أولاً، وتحديد التدخل الجراحي عند وجود تلف متقدم بناءً على التشخيص والحالة الوظيفية.",
+          primaryAction: "شاهد الحالات الطبية قبل وبعد",
+          secondaryAction: "أرقام ومعايير الخبرة",
           type: "proof"
         },
         {
-          // Chapter 6: Return to Reception and Booking Close
+          // Chapter 6: Return to Reception and Booking Close (PDF Page 8)
           step: "06 / 06",
           badge: "الاستقبال وحجز الموعد",
           title: "وصلنا إلى نهاية جولتنا… وقد تكون هذه بداية رحلتك العلاجية",
-          subtitle: "إذا كنت تعاني من مشكلة في العظام أو المفاصل، أو ترغب في رأي طبي متخصص",
-          desc: "يمكنك حجز استشارة في أحد فروعنا بالشارقة أو عجمان. يسعدني تقييم حالتك ومساعدتك في اتخاذ القرار العلاجي المناسب.",
+          subtitle: "أتمنى أن تكون هذه الجولة قد منحتك تصوراً أوضح عن طبيعة عملنا، وأهمية التشخيص الدقيق في اختيار العلاج المناسب.",
+          desc: "إذا كنت تعاني من مشكلة في العظام أو المفاصل، أو ترغب في تقييم حالة تحتاج إلى تدخل جراحي متخصص، يسعدني استقبالكم ومناقشة الخيارات العلاجية المتاحة.",
+          languagesNote: "اللغات المتاحة: العربية، الإنجليزية، الألمانية.",
           primaryAction: "احجز موعدك الآن",
           secondaryAction: "واتساب مباشر",
           type: "booking_close"
         }
       ],
       conditions: [
-        { id: 'limb_deformity', label: 'تقوس وتشوهات الأطراف' },
-        { id: 'limb_lengthening', label: 'تطويل العظام واختلاف طول الأطراف' },
-        { id: 'knee_osteoarthritis', label: 'خشونة الركبة واستبدال المفاصل' },
-        { id: 'sports_injuries', label: 'إصابات الملاعب والأربطة' },
-        { id: 'arthroscopy', label: 'مناظير الركبة والكاحل' },
-        { id: 'fractures', label: 'الكسور وإعادة بناء العظام' },
-        { id: 'general_consultation', label: 'استشارة عامة في جراحة العظام' },
+        {
+          id: 'limb_deformity',
+          label: 'تقوس وتشوهات الأطراف',
+          desc: 'أتعامل مع حالات تقوس الساقين، وانحراف المحور الميكانيكي للأطراف، والتشوهات الخلقية أو المكتسبة، باستخدام تقنيات التصحيح العظمي والتثبيت الداخلي والخارجي، بما فيها تقنية إليزاروف والمثبتات الدائرية متعددة المحاور.'
+        },
+        {
+          id: 'limb_lengthening',
+          label: 'تطويل الأطراف وإعادة بناء العظام',
+          desc: 'أُجري جراحات تطويل العظام لعلاج اختلاف طول الأطراف وحالات قصر العظام، إضافة إلى حالات إعادة البناء بعد الإصابات، وعدم التئام الكسور، وفقدان أجزاء من العظام، باستخدام تقنيات التطويل التدريجي ونقل العظام عند الحاجة.'
+        },
+        {
+          id: 'knee_osteoarthritis',
+          label: 'خشونة الركبة واستبدال المفاصل',
+          desc: 'أُقيّم حالات خشونة الركبة وتآكل الغضروف المفصلي، وأحدد مدى ملاءمة العلاجات غير الجراحية أو الحقن داخل المفصل. وفي الحالات المتقدمة التي تستدعي التدخل الجراحي، تشمل خبرتي جراحات استبدال مفصل الركبة والورك.'
+        },
+        {
+          id: 'sports_injuries',
+          label: 'إصابات الملاعب والرباط الصليبي',
+          desc: 'أعالج إصابات الرباط الصليبي، وتمزقات الغضروف الهلالي، وإصابات الأربطة وعدم ثبات المفاصل. ويعتمد قرار إصلاح الأربطة أو إعادة بنائها على طبيعة الإصابة ودرجة عدم الثبات واحتياجات المريض الوظيفية.'
+        },
+        {
+          id: 'arthroscopy',
+          label: 'مناظير الركبة والكاحل',
+          desc: 'أستخدم المناظير الجراحية في علاج الحالات المناسبة من إصابات الغضاريف والأربطة والمشكلات داخل المفصل، عبر فتحات جراحية صغيرة، مع تحديد الإجراء وفق التشخيص ونتائج الفحوصات.'
+        },
+        {
+          id: 'fractures',
+          label: 'الكسور وإعادة بناء العظام',
+          desc: 'علاج الكسور بمختلف أنواعها، والكسور المعقدة وحالات عدم الالتئام وفقدان أجزاء من العظام، مع إعادة البناء الوظيفي للطرف المصاب.'
+        },
+        {
+          id: 'general_consultation',
+          label: 'استشارة عامة في جراحة العظام',
+          desc: 'تشمل خبرتي أيضاً جراحات القدم والكاحل، والكتف، واليد والرسغ، وجراحة أورام العظام والأنسجة الرخوة، بالإضافة إلى تقييم وعلاج هشاشة العظام.'
+        },
       ],
       modal: {
-        title: "طلب حجز استشارة طبية",
-        subtitle: "مع د. محمد كمال علي - استشاري جراحة العظام والمفاصل",
+        badge: "نموذج حجز الاستشارة",
+        title: "احجز استشارتك مع الدكتور",
+        subtitle: "يسعدني استقبالكم لتقييم حالتكم الطبية ومناقشة الخيارات العلاجية المناسبة. يرجى تعبئة البيانات التالية، وسيتواصل معكم فريق المواعيد لتنسيق الزيارة.",
         nameLabel: "الاسم الكامل",
         namePlaceholder: "أدخل اسمك الكريم",
-        phoneLabel: "رقم الهاتف / الواتساب",
+        phoneLabel: "رقم الهاتف / واتساب",
         phonePlaceholder: "مثال: 0545650678 أو 971545650678+",
-        branchLabel: "اختر مكان الموعد",
-        conditionLabel: "ما هي الحالة التي ترغب في استشارة الدكتور بشأنها؟",
+        branchLabel: "اختر العيادة المفضلة",
+        conditionLabel: "الحالة التي ترغب في استشارة الدكتور بشأنها",
         notesLabel: "ملاحظات إضافية أو وقت مفضل (اختياري)",
-        notesPlaceholder: "مثال: أفضل المواعيد المسائية",
+        notesPlaceholder: "مثال: أفضل المواعيد المسائية...",
         preferredContactLabel: "طريقة التواصل المفضلة",
         contactWhatsapp: "رسالة واتساب",
         contactCall: "اتصال هاتفي",
         consentLabel: "أوافق على التواصل معي بخصوص طلب الموعد",
         submitBtn: "إرسال طلب الحجز",
-        whatsAppBtn: "تواصل فوري عبر واتساب",
-        successMsg: "استلمنا طلبك بنجاح. سيتواصل معك فريق المواعيد لتأكيد التفاصيل.",
-        successNote: "ملاحظة: هذا طلب موعد وسيقوم فريق العيادة بتأكيد الموعد النهائي معك.",
+        whatsAppBtn: "إرسال طلب الحجز عبر واتساب",
+        successMsg: "استلمنا طلبك بنجاح. سيتواصل معكم فريق المواعيد لتنسيق الزيارة.",
+        successNote: "ملاحظة: هذا طلب موعد وسيقوم فريق العيادة بتأكيد الموعد النهائي معكم.",
         closeBtn: "إغلاق",
+        doctorSignoff: "د. محمد كمال علي — استشاري جراحة العظام والمفاصل وإصابات الملاعب | الحركة هي الحياة"
       },
       doctorModal: {
-        title: "الملف المهني والاعتمادات السريرية",
+        title: "السيرة والنهج الطبي",
         subtitle: "د. محمد كمال علي",
         role: "استشاري جراحة العظام والمفاصل وإصابات الملاعب",
-        experienceBadge: "أكثر من 25 عاماً من الخبرة الجراحية والعلمية",
-        philosophy: "لا يعتمد اختيار العلاج على نتائج الأشعة وحدها، بل على الفحص السريري، وطبيعة الأعراض، ودرجة الإصابة، وتأثيرها على وظيفة المفصل والحركة. هدفي أن يفهم كل مريض حالته والخيارات المتاحة له، وأن يكون القرار العلاجي مبنياً على أسس طبية واضحة.",
+        experienceBadge: "خبرة علمية وجراحية تمتد لأكثر من 25 عاماً",
+        bio: "أنا الدكتور محمد كمال علي، استشاري جراحة العظام والمفاصل، حاصل على زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT) عام 2012، وأكملت زمالة جراحة العظام في جامعة دوسلدورف بألمانيا، بعد دراستي الطبية والعليا في جامعة عين شمس بالقاهرة. امتدت مسيرتي المهنية عبر مصر والسعودية وسلطنة عُمان والإمارات، وتولّيت خلالها مسؤوليات طبية وجراحية وقيادية، من بينها العمل في مجال إعادة بناء الأطراف وتصحيح التشوهات بمستشفى خولة في عُمان، ومنصب المدير الطبي لمستشفى أمينة بعجمان، والعمل أستاذاً زائراً لجراحة العظام في كلية الخليج الطبية. تتركز خبرتي الجراحية في تطويل العظام وإعادة بناء الأطراف وتصحيح التشوهات، إلى جانب استبدال مفاصل الركبة والورك، ومناظير الركبة والكاحل، وعلاج الإصابات الرياضية والكسور المعقدة.",
+        credentialsTitle: "المؤهلات العلمية",
         credentials: [
-          "زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT) — 2012",
-          "زمالة جراحة العظام — جامعة دوسلدورف، ألمانيا",
-          "دراسات الدكتوراه في جراحة العظام — جامعة عين شمس، مصر",
-          "الماجستير في جراحة العظام — جامعة عين شمس، مصر",
-          "بكالوريوس الطب والجراحة — جامعة عين شمس، مصر"
+          "زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT) – 2012",
+          "زمالة جراحة العظام – جامعة دوسلدورف، ألمانيا",
+          "دراسات الدكتوراه في جراحة العظام (أطروحة دكتوراه) – جامعة عين شمس، مصر",
+          "الماجستير في جراحة العظام – جامعة عين شمس، مصر",
+          "بكالوريوس الطب والجراحة – جامعة عين شمس، مصر"
         ],
+        philosophyTitle: "نهجي في العلاج",
+        philosophy: "لا يعتمد اختيار العلاج على نتائج الأشعة وحدها، بل على الفحص السريري، وطبيعة الأعراض، ودرجة الإصابة، وتأثيرها على وظيفة المفصل والحركة. هدفي أن يفهم كل مريض حالته والخيارات المتاحة له، وأن يكون القرار العلاجي مبنياً على أسس طبية واضحة، سواء كان العلاج تحفظياً أو جراحياً.",
+        subspecialtiesTitle: "مجالات الاختصاص والتميز السريري",
         subspecialties: [
           {
             title: "تطويل العظام وإعادة بناء الأطراف",
@@ -229,7 +282,7 @@ export default function Home() {
           },
           {
             title: "إصابات الملاعب والمناظير الجراحية",
-            desc: "علاج إصابات الرباط الصليبي وتمزقات الغضروف الهلالي وعدم ثبات المفاصل، بالإضافة إلى مناظير الركبة والكاحل عبر فتحات جراحية صغيرة."
+            desc: "علاج إصابات الرباط الصليبي وتمزقات الغضروف الهلالي وعدم ثبات المفاصل، ومناظير الركبة والكاحل عبر فتحات جراحية صغيرة."
           }
         ],
         hospitals: [
@@ -257,13 +310,16 @@ export default function Home() {
       },
       proofModal: {
         title: "خبرة جراحية في التعامل مع الحالات المعقدة",
-        subtitle: "نتائج حقيقية مبنية على خبرة طبية متراكمة",
+        subtitle: "أكثر من 500 عملية في مجال إعادة بناء الأطراف وتطويل العظام",
+        body1: "على مدار مسيرتي الطبية، أجريت أكثر من 500 عملية في مجال إعادة بناء الأطراف وتطويل العظام، شملت تصحيح التشوهات العظمية المعقدة، واختلاف طول الأطراف، وحالات عدم التئام الكسور.",
+        body2: "في هذه الجراحات، لا يقتصر الهدف على تصحيح الشكل الظاهري للعظم، بل يمتد إلى تحسين استقامة الطرف ومحوره الميكانيكي ووظيفته، مع مراعاة حالة المفاصل والأنسجة المحيطة. تعتمد جراحات إعادة البناء على تخطيط دقيق يشمل قياس التشوه، واختيار التقنية الجراحية المناسبة، ومتابعة التئام العظام والتأهيل خلال مراحل العلاج.",
+        body3: "الحفاظ على المفصل متى كان ذلك ممكناً: في حالات خشونة الركبة وإصابات المفاصل، أحرص على تقييم الخيارات العلاجية غير الجراحية أولاً عندما تكون مناسبة للحالة. أما عند وجود تلف مفصلي متقدم أو إصابة تستدعي التدخل الجراحي، فيُحدَّد الإجراء المناسب بناءً على التشخيص والحالة الوظيفية للمريض.",
         stats: [
-          { num: "500+", title: "عملية إعادة بناء", desc: "في مجال تطويل العظام وتصحيح التشوهات" },
-          { num: "+25", title: "عاماً من الخبرة", desc: "في جراحة العظام والمفاصل والإصابات الرياضية" },
-          { num: "100%", title: "تقييم مخصص", desc: "خطة علاجية مفصلة لكل مريض على حدة" },
+          { num: "500+", title: "عملية إعادة بناء", desc: "في تطويل العظام وتصحيح التشوهات" },
+          { num: "+25", title: "عاماً من الخبرة", desc: "في جراحة العظام والمفاصل والملاعب" },
+          { num: "100%", title: "تقييم مخصص", desc: "خطة علاجية مبنية على الفحص السريري" },
         ],
-        cta: "ابدأ استشارتك اليوم"
+        cta: "شاهد الحالات الطبية قبل وبعد"
       }
     },
     en: {
@@ -284,132 +340,185 @@ export default function Home() {
           step: "01 / 06",
           badge: "WELCOME TO THE CLINIC",
           title: "Movement Is Life",
-          subtitle: "Consultant Orthopedic & Joint Surgeon — Sports Injuries",
-          desc: "Welcome to my digital clinic. I'm Dr. Mohamed Kamal Ali. Join me on a tour to learn about my medical expertise, specializations, and how we reach accurate diagnosis to choose the most appropriate treatment for each case.",
+          subtitle: "Dr. Mohamed Kamal Ali — Consultant Orthopedic & Joint Surgeon",
+          desc: "Welcome to my digital clinic. I am Dr. Mohamed Kamal Ali, and I am pleased to take you on a tour to explore my medical expertise, specializations, and how we achieve accurate diagnosis to choose the most appropriate treatment for each case.",
+          note: "I believe that preserving mobility begins with understanding the root cause, and that the right clinical decision is built on medical knowledge, surgical expertise, and thorough evaluation.",
           primaryAction: "Begin Clinic Tour",
           secondaryAction: "Quick Booking",
           type: "standard"
         },
         {
           step: "02 / 06",
-          badge: "CLINICAL BACKGROUND",
+          badge: "CLINICAL BACKGROUND & APPROACH",
           title: "Over 25 Years of Scientific & Surgical Excellence",
-          subtitle: "European Board of Orthopaedics & Traumatology (EBOT) Fellow",
-          desc: "My career spans Egypt, Saudi Arabia, Oman, and the UAE, holding leadership and surgical roles including Medical Director of Amina Hospital, Ajman, and visiting professor at Gulf Medical College.",
-          primaryAction: "Meet the Doctor",
+          subtitle: "Fellow of the European Board of Orthopaedics & Traumatology (EBOT)",
+          desc: "I am Dr. Mohamed Kamal Ali, Consultant Orthopedic & Joint Surgeon. My career spans Egypt, Saudi Arabia, Oman, and the UAE, where I have held clinical, surgical, and leadership roles including reconstructive work at Khoula Hospital in Oman, Medical Director at Amina Hospital in Ajman, and Visiting Professor at Gulf Medical College.",
+          primaryAction: "Explore Medical Specialties",
+          secondaryAction: "Doctor Bio & Approach",
           type: "doctor_intro"
         },
         {
           step: "03 / 06",
           badge: "DIAGNOSIS & PATHWAYS",
           title: "Every Condition Has Its Nature… Every Treatment Has Its Criteria",
-          subtitle: "Bone and joint conditions vary in causes and complexity — there is no one-size-fits-all treatment plan",
-          prompt: "What are you experiencing?",
+          subtitle: "Now, let us explore the key conditions I treat. Bone and joint disorders vary in etiology and complexity; hence, no single treatment plan fits all patients.",
+          prompt: "What condition are you experiencing?",
+          primaryAction: "Proceed to Examination & Diagnosis",
           type: "condition_selector"
         },
         {
           step: "04 / 06",
-          badge: "EXAMINATION & DIAGNOSIS",
+          badge: "DIAGNOSTIC FACILITIES",
           title: "Accurate Diagnosis Is the Foundation of Treatment Decisions",
-          subtitle: "Treatment isn't based on imaging alone — it requires clinical exam, symptom analysis, and functional assessment",
-          desc: "We begin with comprehensive clinical evaluation, followed by complementary investigations when needed. The goal is precise diagnosis that determines the right treatment pathway for each case.",
-          tags: ["MRI Imaging", "Digital X-Ray", "Clinical Assessment"],
+          subtitle: "After reviewing symptoms, we move to clinical and imaging evaluation.",
+          desc: "I begin with a thorough medical history, assessing pain nature and functional mobility impact, followed by clinical examination to assess joint stability, limb alignment, ligament integrity, and range of motion before ordering targeted imaging.",
+          diagnosticItems: [
+            {
+              title: "Digital X-Ray",
+              shortDesc: "Evaluates fractures, bone alignment, joint degeneration, and standing long-leg films for precision mechanical axis measurement."
+            },
+            {
+              title: "High-Resolution MRI",
+              shortDesc: "Employed to evaluate ligaments, cartilage, and soft tissues, particularly in sports injuries and knee or ankle instability."
+            },
+            {
+              title: "From Diagnosis to Treatment Plan",
+              shortDesc: "Discussing options, benefits, and risks with each patient; not all injuries require surgery, yet delaying indicated surgery may impair function."
+            }
+          ],
           primaryAction: "Continue Journey",
           type: "diagnostics"
         },
         {
           step: "05 / 06",
-          badge: "EXPERTISE & RESULTS",
+          badge: "EXPERTISE & PROVEN OUTCOMES",
           title: "Surgical Expertise in Complex Cases",
-          subtitle: "Over 500 procedures in limb reconstruction & deformity correction",
-          desc: "My expertise centers on bone lengthening, limb reconstruction, and deformity correction, alongside knee and hip replacement, knee and ankle arthroscopy, sports injury treatment, and complex fracture management.",
-          primaryAction: "View Credentials & Proof",
+          subtitle: "Over 500 procedures in limb reconstruction & bone lengthening",
+          desc: "Throughout my medical career, I have performed over 500 surgeries in limb reconstruction and bone lengthening, encompassing complex deformities, limb length discrepancies, and nonunion fractures. The objective extends beyond cosmetic appearance to restoring limb alignment, mechanical axis, and function.",
+          highlight: "Joint preservation when possible: In knee osteoarthritis and joint injuries, non-surgical and biologic options are prioritized first whenever appropriate.",
+          primaryAction: "View Before & After Cases",
+          secondaryAction: "Outcomes & Track Record",
           type: "proof"
         },
         {
           step: "06 / 06",
-          badge: "RECEPTION & BOOKING",
-          title: "Our Tour Ends Here… Your Treatment Journey May Begin",
-          subtitle: "If you have a bone or joint condition, or seek an expert medical opinion",
-          desc: "Book a consultation at our Sharjah or Ajman clinic. I look forward to evaluating your condition and helping you make the right treatment decision.",
+          badge: "RECEPTION & CONSULTATION BOOKING",
+          title: "Our Tour Concludes Here… Your Healing Journey May Begin",
+          subtitle: "I hope this tour has provided clearer insight into our clinical philosophy and the pivotal role of precise diagnosis.",
+          desc: "If you are suffering from a bone or joint condition, or wish to seek a specialized surgical assessment, I welcome you at our Sharjah or Ajman facilities to discuss suitable treatment pathways.",
+          languagesNote: "Languages spoken: Arabic, English, German.",
           primaryAction: "Book Consultation Now",
           secondaryAction: "Direct WhatsApp",
           type: "booking_close"
         }
       ],
       conditions: [
-        { id: 'limb_deformity', label: 'Limb Deformity & Alignment' },
-        { id: 'limb_lengthening', label: 'Bone Lengthening & Limb Length Discrepancy' },
-        { id: 'knee_osteoarthritis', label: 'Knee Osteoarthritis & Joint Replacement' },
-        { id: 'sports_injuries', label: 'Sports Injuries & Ligaments' },
-        { id: 'arthroscopy', label: 'Knee & Ankle Arthroscopy' },
-        { id: 'fractures', label: 'Fractures & Bone Reconstruction' },
-        { id: 'general_consultation', label: 'General Orthopedic Consultation' },
+        {
+          id: 'limb_deformity',
+          label: 'Limb Deformity Correction',
+          desc: 'Treatment of bow legs (genu varum), knock knees (genu valgum), mechanical axis deviations, and congenital or acquired deformities using osteotomy and internal/external fixation, including Ilizarov multiaxial circular frames.'
+        },
+        {
+          id: 'limb_lengthening',
+          label: 'Bone Lengthening & Reconstruction',
+          desc: 'Bone lengthening procedures for limb length discrepancy and short stature, post-trauma reconstruction, nonunion fractures, and segmental bone defects using gradual distraction osteogenesis and bone transport.'
+        },
+        {
+          id: 'knee_osteoarthritis',
+          label: 'Knee Osteoarthritis & Joint Replacement',
+          desc: 'Evaluation of knee wear and cartilage degeneration, determining suitability for conservative biologics or targeted injections, and advanced knee and hip arthroplasty when surgical replacement is indicated.'
+        },
+        {
+          id: 'sports_injuries',
+          label: 'Sports Injuries & ACL Ligaments',
+          desc: 'Management of anterior cruciate ligament (ACL) injuries, meniscus tears, multi-ligament instability, and individualized reconstruction tailored to athletic demands.'
+        },
+        {
+          id: 'arthroscopy',
+          label: 'Knee & Ankle Arthroscopy',
+          desc: 'Minimally invasive keyhole arthroscopy for intra-articular cartilage, ligament, and loose body conditions with expedited recovery.'
+        },
+        {
+          id: 'fractures',
+          label: 'Complex Fractures & Reconstruction',
+          desc: 'Management of acute and complex fractures, delayed union, nonunion, and post-traumatic structural bone reconstruction.'
+        },
+        {
+          id: 'general_consultation',
+          label: 'General Orthopedic Consultation',
+          desc: 'Comprehensive clinical assessment and expert opinion for foot and ankle, shoulder, hand, bone tumors, and osteoporosis.'
+        },
       ],
       modal: {
-        title: "Request a Consultation",
-        subtitle: "With Dr. Mohamed Kamal Ali — Consultant Orthopedic & Joint Surgeon",
+        badge: "Consultation Booking Form",
+        title: "Book Your Consultation with the Doctor",
+        subtitle: "We look forward to receiving you to evaluate your condition and discuss suitable treatment plans. Please complete the form below, and our coordination team will reach out to confirm your visit.",
         nameLabel: "Full Name",
         namePlaceholder: "Enter your full name",
         phoneLabel: "Phone / WhatsApp Number",
         phonePlaceholder: "e.g. +971 54 565 0678",
-        branchLabel: "Select Appointment Location",
-        conditionLabel: "What condition do you wish to consult about?",
+        branchLabel: "Select Preferred Facility",
+        conditionLabel: "Condition you wish to consult about",
         notesLabel: "Additional notes or preferred time (optional)",
-        notesPlaceholder: "e.g. I prefer evening appointments",
+        notesPlaceholder: "e.g. Afternoon appointment preferred...",
         preferredContactLabel: "Preferred Contact Method",
         contactWhatsapp: "WhatsApp Message",
         contactCall: "Phone Call",
         consentLabel: "I agree to be contacted regarding this appointment request",
         submitBtn: "Submit Booking Request",
-        whatsAppBtn: "Instant WhatsApp Concierge",
-        successMsg: "Your request was received successfully. Our appointment team will contact you to confirm the time.",
-        successNote: "Note: This is an appointment request. The clinic team will contact you to confirm the final slot.",
+        whatsAppBtn: "Send Booking Request via WhatsApp",
+        successMsg: "Your request has been received. Our appointments team will contact you to coordinate your visit.",
+        successNote: "Note: This is an initial appointment request; final scheduling will be confirmed by the clinic team.",
         closeBtn: "Close",
+        doctorSignoff: "Dr. Mohamed Kamal Ali — Consultant Orthopedic & Joint Surgeon | Movement Is Life"
       },
       doctorModal: {
-        title: "Professional Profile & Clinical Credentials",
+        title: "Clinical Background & Medical Approach",
         subtitle: "Dr. Mohamed Kamal Ali",
         role: "Consultant Orthopedic & Joint Surgeon — Sports Injuries",
         experienceBadge: "Over 25 Years of Scientific & Surgical Excellence",
-        philosophy: "Treatment decisions are not based on imaging alone, but on clinical examination, symptom nature, injury severity, and impact on joint function and mobility. My goal is that every patient understands their condition and available options, with treatment decisions built on clear medical foundations.",
+        bio: "I am Dr. Mohamed Kamal Ali, Consultant Orthopedic Surgeon, Fellow of the European Board of Orthopaedics & Traumatology (EBOT 2012) and Orthopedic Surgery Fellow from the University of Düsseldorf, Germany, following medical and postgraduate degrees at Ain Shams University in Cairo. My career spans Egypt, Saudi Arabia, Oman, and the UAE, including deformity correction and limb reconstruction at Khoula Hospital in Oman, Medical Director at Amina Hospital in Ajman, and Visiting Professor at Gulf Medical College. My surgical focus centers on bone lengthening, limb reconstruction, deformity correction, knee and hip arthroplasty, and arthroscopic management of sports injuries.",
+        credentialsTitle: "Academic Qualifications & Fellowships",
         credentials: [
-          "European Board of Orthopaedics & Traumatology (EBOT) — 2012",
-          "Orthopedic Surgery Fellowship — University of Düsseldorf, Germany",
-          "Doctoral Studies in Orthopedic Surgery — Ain Shams University, Egypt",
-          "Master's in Orthopedic Surgery — Ain Shams University, Egypt",
-          "MBBCh (Bachelor of Medicine & Surgery) — Ain Shams University, Egypt"
+          "Fellow of the European Board of Orthopaedics & Traumatology (EBOT) – 2012",
+          "Fellowship in Orthopedic Surgery – University of Düsseldorf, Germany",
+          "Doctorate Studies in Orthopedic Surgery (Thesis) – Ain Shams University, Egypt",
+          "Master of Science (M.Sc.) in Orthopedic Surgery – Ain Shams University, Egypt",
+          "MBBCh (Bachelor of Medicine & Surgery) – Ain Shams University, Egypt"
         ],
+        philosophyTitle: "Clinical Treatment Philosophy",
+        philosophy: "Treatment decisions are not made on imaging reports alone, but on comprehensive clinical examination, symptom characteristics, functional impairment, and joint biomechanics. My objective is for each patient to fully understand their pathology and therapeutic choices, ensuring clinical decisions are grounded in sound medical principles—whether conservative or surgical.",
+        subspecialtiesTitle: "Clinical Subspecialties & Focus",
         subspecialties: [
           {
             title: "Bone Lengthening & Limb Reconstruction",
-            desc: "Bone lengthening surgery for limb length discrepancy and short stature, post-trauma reconstruction, nonunion fractures, and bone loss using gradual distraction techniques."
+            desc: "Limb length discrepancy correction, congenital and post-traumatic shortening, and nonunion repair using gradual distraction osteogenesis."
           },
           {
             title: "Limb Deformity & Alignment Correction",
-            desc: "Bow legs, mechanical axis deviation, and congenital or acquired deformities using Ilizarov technique and multiaxial circular fixators."
+            desc: "Bow legs, knock knees, and angular deformities using osteotomies and Ilizarov multiaxial circular fixation."
           },
           {
-            title: "Knee Osteoarthritis & Joint Replacement",
-            desc: "Assessment of knee osteoarthritis and cartilage degeneration, non-surgical treatments and intra-articular injections, and knee and hip replacement surgery."
+            title: "Knee Osteoarthritis & Joint Arthroplasty",
+            desc: "Cartilage assessment, intra-articular biologics, and precision total knee and hip replacement surgery."
           },
           {
-            title: "Sports Injuries & Surgical Arthroscopy",
-            desc: "ACL injuries, meniscal tears, joint instability, and knee and ankle arthroscopy through minimally invasive approaches."
+            title: "Sports Medicine & Keyhole Arthroscopy",
+            desc: "ACL reconstruction, meniscus suturing, joint stabilization, and minimally invasive knee and ankle arthroscopy."
           }
         ],
         hospitals: [
           {
             name: "Dar Al Kamal Hospital",
             city: "Sharjah",
-            badge: "Hospital Booking Option",
-            desc: "Fully equipped surgical suites with advanced sterilization standards and imaging centers for surgeries and specialist consultations."
+            badge: "Hospital Booking Option (Surgeries & Consultations)",
+            desc: "Advanced digital operating suites and comprehensive imaging facilities for surgical procedures and specialist consultations."
           },
           {
             name: "Medical Treatment Center",
             city: "Ajman",
             badge: "Clinic / Medical Centre Booking Option",
-            desc: "Advanced clinical examination, customized treatment planning, consultations, and guided joint injection units."
+            desc: "Specialized clinical examination, customized conservative protocols, and guided joint injection units."
           }
         ],
         photos: [
@@ -423,18 +532,22 @@ export default function Home() {
       },
       proofModal: {
         title: "Surgical Expertise in Complex Cases",
-        subtitle: "Real Results Built on Accumulated Medical Experience",
+        subtitle: "Over 500 procedures in limb reconstruction & bone lengthening",
+        body1: "Throughout my medical career, I have performed over 500 surgeries in limb reconstruction and bone lengthening, encompassing complex deformities, limb length discrepancies, and nonunion fractures.",
+        body2: "In these procedures, the goal extends beyond cosmetic realignment to restoring mechanical axes, weight-bearing distribution, and joint protection, backed by meticulous pre-operative planning and structured rehabilitation.",
+        body3: "Joint preservation when possible: Non-surgical modalities are evaluated first whenever indicated, proceeding to surgical intervention only when advanced cartilage loss or instability necessitates it.",
         stats: [
-          { num: "500+", title: "Reconstruction Surgeries", desc: "In bone lengthening & deformity correction" },
-          { num: "+25", title: "Years Experience", desc: "In orthopedic surgery, joints & sports injuries" },
-          { num: "100%", title: "Tailored Assessment", desc: "Individualized treatment plan for each patient" },
+          { num: "500+", title: "Reconstructive Surgeries", desc: "In bone lengthening & deformity correction" },
+          { num: "+25", title: "Years of Experience", desc: "In orthopedic surgery, joints & sports injuries" },
+          { num: "100%", title: "Tailored Assessment", desc: "Individualized plan based on clinical exam" },
         ],
-        cta: "Start Your Consultation Today"
+        cta: "View Before & After Cases"
       }
     }
   };
 
   const current = t[lang];
+  const selectedConditionObj = current.conditions.find(c => c.id === selectedCondition) || current.conditions[0];
 
   // Scroll to chapter in timeline with direction trigger
   const scrollToChapter = (chapterIndex: number) => {
@@ -842,23 +955,25 @@ export default function Home() {
 
               {/* Specific Content Type Handler */}
               {ch.type === "condition_selector" ? (
-                /* Chapter 3 Interactive Condition Selector */
-                <div className="my-2.5">
-                  <p className="text-[11px] text-gray-200 font-semibold mb-2 flex items-center gap-1.5">
+                /* Chapter 3 Interactive Condition Selector with PDF Pages 4 & 5 medical content */
+                <div className="my-2">
+                  <p className="text-[11px] text-gray-200 font-semibold mb-1.5 flex items-center gap-1.5">
                     <HeartPulse className="w-3.5 h-3.5 text-[#8ab4f8]" />
                     <span>{ch.prompt}</span>
                   </p>
-                  <div className="flex flex-wrap gap-1.5 touch-pan-y">
+                  <div className="flex flex-wrap gap-1.5 touch-pan-y mb-2 max-h-24 overflow-y-auto">
                     {current.conditions.map((cond) => {
                       const isSelected = selectedCondition === cond.id;
                       return (
                         <button
                           key={cond.id}
-                          onClick={() => {
-                            setSelectedCondition(cond.id);
-                            setIsBookingOpen(true);
-                          }}
-                          className={`text-[10px] md:text-[11px] px-2.5 py-1.5 rounded-xl border transition-all flex items-center gap-1.5 text-start ${isSelected ? 'border-[#8ab4f8] bg-[#1a73e8]/25 text-white font-bold shadow-[0_0_15px_rgba(138,180,248,0.25)]' : 'border-white/10 bg-white/5 hover:bg-white/10 text-gray-300'}`}
+                          type="button"
+                          onClick={() => setSelectedCondition(cond.id)}
+                          className={`text-[10px] md:text-[11px] px-2.5 py-1 rounded-xl border transition-all flex items-center gap-1.5 text-start cursor-pointer active:scale-98 ${
+                            isSelected 
+                              ? 'border-[#8ab4f8] bg-[#1a73e8]/30 text-white font-bold shadow-[0_0_15px_rgba(138,180,248,0.25)]' 
+                              : 'border-white/10 bg-white/5 hover:bg-white/10 text-gray-300'
+                          }`}
                         >
                           <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-[#8ab4f8]' : 'bg-gray-500'}`} />
                           <span>{cond.label}</span>
@@ -866,68 +981,128 @@ export default function Home() {
                       );
                     })}
                   </div>
+
+                  {/* Selected condition clinical description card from PDF Pages 4 & 5 */}
+                  {selectedConditionObj && (
+                    <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 mb-2 transition-all">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[10px] font-bold text-[#8ab4f8]">
+                          {selectedConditionObj.label}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setIsBookingOpen(true)}
+                          className="text-[9px] text-emerald-400 hover:text-emerald-300 underline font-semibold cursor-pointer"
+                        >
+                          {lang === 'ar' ? 'طلب استشارة للحالة ←' : 'Consult for this condition →'}
+                        </button>
+                      </div>
+                      <p className="text-[10px] text-gray-300 leading-relaxed font-light">
+                        {selectedConditionObj.desc}
+                      </p>
+                    </div>
+                  )}
                 </div>
-              ) : ch.type === "diagnostics" && ch.tags ? (
-                /* Chapter 4 Diagnostics Tags */
-                <div className="mb-3">
-                  <p className="text-[10px] md:text-[11px] text-gray-300 font-light leading-relaxed mb-2">
+              ) : ch.type === "diagnostics" && (ch as any).diagnosticItems ? (
+                /* Chapter 4 Diagnostics from PDF Page 6 */
+                <div className="mb-2.5 space-y-2">
+                  <p className="text-[10px] md:text-[11px] text-gray-300 font-light leading-relaxed">
                     {ch.desc}
                   </p>
-                  <div className="flex items-center gap-2">
-                    {ch.tags.map((tag, tIdx) => (
-                      <span key={tIdx} className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] text-gray-200 font-medium">
-                        {tag}
-                      </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5">
+                    {((ch as any).diagnosticItems as Array<{ title: string; shortDesc: string }>).map((item, dIdx) => (
+                      <div key={dIdx} className="p-2 rounded-xl bg-white/[0.04] border border-white/10">
+                        <span className="text-[10px] font-bold text-[#8ab4f8] block mb-0.5">
+                          {item.title}
+                        </span>
+                        <p className="text-[9px] text-gray-300 leading-snug font-light">
+                          {item.shortDesc}
+                        </p>
+                      </div>
                     ))}
                   </div>
                 </div>
               ) : (
-                /* Standard Description */
-                <p className="text-[10px] md:text-[11px] text-gray-300 font-light leading-relaxed mb-3">
-                  {ch.desc}
-                </p>
+                /* Standard Description & Optional Highlight */
+                <div className="mb-2.5 space-y-1.5">
+                  <p className="text-[10px] md:text-[11px] text-gray-300 font-light leading-relaxed">
+                    {ch.desc}
+                  </p>
+                  {(ch as any).note && (
+                    <p className="text-[10px] md:text-[11px] text-[#8ab4f8]/95 italic border-s-2 border-[#8ab4f8]/50 ps-2 leading-relaxed">
+                      &ldquo;{(ch as any).note}&rdquo;
+                    </p>
+                  )}
+                  {(ch as any).highlight && (
+                    <div className="p-2 rounded-xl bg-white/[0.04] border border-white/10 text-[9px] md:text-[10px] text-gray-300 leading-snug">
+                      <span className="font-bold text-[#8ab4f8]">{lang === 'ar' ? 'الحفاظ على المفصل: ' : 'Joint Preservation: '}</span>
+                      <span>{(ch as any).highlight}</span>
+                    </div>
+                  )}
+                </div>
               )}
 
               {/* Action Buttons Row */}
-              <div className="flex items-center gap-2 pt-1 border-t border-white/5">
+              <div className="flex items-center gap-2 pt-1 border-t border-white/5 flex-wrap">
                 {ch.type === "doctor_intro" ? (
-                  <button 
-                    onClick={() => setIsDoctorBioOpen(true)}
-                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-bold px-4 py-1.5 rounded-xl text-[11px] md:text-xs shadow-[0_4px_16px_rgba(26,115,232,0.35)] transition-all transform hover:scale-102"
-                  >
-                    <User className="w-3.5 h-3.5" />
-                    <span>{ch.primaryAction}</span>
-                  </button>
+                  <>
+                    <button 
+                      onClick={() => scrollToChapter(2)}
+                      className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-bold px-3.5 py-1.5 rounded-xl text-[11px] md:text-xs shadow-[0_4px_16px_rgba(26,115,232,0.35)] transition-all transform hover:scale-102 cursor-pointer active:scale-98"
+                    >
+                      <span>{ch.primaryAction}</span>
+                      {isRtl ? <ChevronLeft className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
+                    </button>
+                    <button 
+                      onClick={() => setIsDoctorBioOpen(true)}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-gray-200 text-[10px] md:text-[11px] font-semibold transition-all cursor-pointer"
+                    >
+                      <User className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                      <span>{(ch as any).secondaryAction}</span>
+                    </button>
+                  </>
                 ) : ch.type === "proof" ? (
-                  <button 
-                    onClick={() => setIsProofOpen(true)}
-                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-bold px-4 py-1.5 rounded-xl text-[11px] md:text-xs shadow-[0_4px_16px_rgba(26,115,232,0.35)] transition-all transform hover:scale-102"
-                  >
-                    <Award className="w-3.5 h-3.5" />
-                    <span>{ch.primaryAction}</span>
-                  </button>
+                  <>
+                    <button 
+                      onClick={() => {
+                        const el = document.getElementById('before-after-cases');
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-bold px-3.5 py-1.5 rounded-xl text-[11px] md:text-xs shadow-[0_4px_16px_rgba(26,115,232,0.35)] transition-all transform hover:scale-102 cursor-pointer active:scale-98"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                      <span>{ch.primaryAction}</span>
+                    </button>
+                    <button 
+                      onClick={() => setIsProofOpen(true)}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-gray-200 text-[10px] md:text-[11px] font-semibold transition-all cursor-pointer"
+                    >
+                      <Award className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                      <span>{(ch as any).secondaryAction}</span>
+                    </button>
+                  </>
                 ) : ch.type === "booking_close" ? (
                   <button 
                     onClick={() => setIsBookingOpen(true)}
-                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-extrabold px-5 py-2 rounded-xl text-xs shadow-[0_4px_20px_rgba(26,115,232,0.5)] transition-all transform hover:scale-102 animate-pulse"
+                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-extrabold px-5 py-2 rounded-xl text-xs shadow-[0_4px_20px_rgba(26,115,232,0.5)] transition-all transform hover:scale-102 animate-pulse cursor-pointer active:scale-98"
                   >
                     <CalendarCheck className="w-3.5 h-3.5" />
                     <span>{ch.primaryAction}</span>
                   </button>
-                ) : idx < 5 ? (
+                ) : (
                   <button 
                     onClick={() => scrollToChapter(idx + 1)}
-                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-bold px-4 py-1.5 rounded-xl text-[11px] md:text-xs shadow-[0_4px_16px_rgba(26,115,232,0.35)] transition-all transform hover:scale-102"
+                    className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-bold px-4 py-1.5 rounded-xl text-[11px] md:text-xs shadow-[0_4px_16px_rgba(26,115,232,0.35)] transition-all transform hover:scale-102 cursor-pointer active:scale-98"
                   >
                     <span>{ch.primaryAction}</span>
                     {isRtl ? <ChevronLeft className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
                   </button>
-                ) : null}
+                )}
 
                 {/* Instant WhatsApp Quick Button */}
                 <button
                   onClick={handleWhatsAppClick}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-emerald-500/35 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-[10px] md:text-[11px] font-semibold transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-500/35 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 text-[10px] md:text-[11px] font-semibold transition-all cursor-pointer"
                   title="WhatsApp"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
@@ -943,20 +1118,26 @@ export default function Home() {
                       const el = document.getElementById('before-after-cases');
                       if (el) el.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-xl bg-white/[0.08] hover:bg-white/[0.15] border border-white/20 text-[#8ab4f8] hover:text-white text-[10px] md:text-[11px] font-bold transition-all shadow-sm group"
+                    className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-xl bg-white/[0.08] hover:bg-white/[0.15] border border-white/20 text-[#8ab4f8] hover:text-white text-[10px] md:text-[11px] font-bold transition-all shadow-sm group cursor-pointer"
                   >
                     <Sparkles className="w-3.5 h-3.5 text-[#8ab4f8] group-hover:scale-110 transition-transform" />
                     <span>{isRtl ? 'شاهد نتائج الحالات السريرية (قبل وبعد) ↓' : 'View Clinical Case Results (Before & After) ↓'}</span>
                   </button>
-                  <div className="flex flex-wrap gap-2 text-[9px] md:text-[10px] text-gray-400">
+                  <div className="flex flex-col gap-1 text-[9px] md:text-[10px] text-gray-300">
                     <div className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-[#8ab4f8]" />
+                      <MapPin className="w-3 h-3 text-[#8ab4f8] shrink-0" />
                       <span>{current.branches.sharjah}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-[#8ab4f8]" />
+                      <MapPin className="w-3 h-3 text-[#8ab4f8] shrink-0" />
                       <span>{current.branches.ajman}</span>
                     </div>
+                    {(ch as any).languagesNote && (
+                      <div className="flex items-center gap-1 text-[#8ab4f8] font-medium pt-0.5">
+                        <Globe className="w-3 h-3 text-[#8ab4f8] shrink-0" />
+                        <span>{(ch as any).languagesNote}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -1149,14 +1330,13 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Medical Philosophy Quote Card */}
-              <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#1a73e8]/15 to-transparent border border-[#8ab4f8]/30 relative">
-                <Quote className="w-5 h-5 text-[#8ab4f8]/40 absolute top-3 end-3" />
+              {/* Doctor Medical Bio Narrative from PDF Page 3 */}
+              <div className="p-3.5 rounded-2xl bg-white/[0.04] border border-white/10">
                 <span className="text-[10px] font-bold text-[#8ab4f8] uppercase tracking-wider block mb-1">
-                  {lang === 'ar' ? 'النهج الطبي والفلسفة السريرية' : 'Clinical Philosophy'}
+                  {lang === 'ar' ? 'نبذة عن المسيرة الطبية والجراحية' : 'Medical & Surgical Background'}
                 </span>
-                <p className="text-xs text-gray-200 leading-relaxed font-light italic">
-                  &ldquo;{current.doctorModal.philosophy}&rdquo;
+                <p className="text-xs text-gray-200 leading-relaxed font-light">
+                  {current.doctorModal.bio}
                 </p>
               </div>
 
@@ -1164,7 +1344,7 @@ export default function Home() {
               <div className="space-y-1.5">
                 <h4 className="text-[11px] font-bold text-gray-300 flex items-center gap-1.5 px-1">
                   <Award className="w-3.5 h-3.5 text-[#8ab4f8]" />
-                  <span>{lang === 'ar' ? 'الاعتمادات والمؤهلات الدولية' : 'Credentials & Fellowships'}</span>
+                  <span>{current.doctorModal.credentialsTitle || (lang === 'ar' ? 'المؤهلات العلمية' : 'Academic Credentials')}</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {current.doctorModal.credentials.map((cred, cIdx) => (
@@ -1176,11 +1356,22 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Medical Philosophy Quote Card */}
+              <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#1a73e8]/15 to-transparent border border-[#8ab4f8]/30 relative">
+                <Quote className="w-5 h-5 text-[#8ab4f8]/40 absolute top-3 end-3" />
+                <span className="text-[10px] font-bold text-[#8ab4f8] uppercase tracking-wider block mb-1">
+                  {current.doctorModal.philosophyTitle || (lang === 'ar' ? 'نهجي في العلاج' : 'Clinical Philosophy')}
+                </span>
+                <p className="text-xs text-gray-200 leading-relaxed font-light italic">
+                  &ldquo;{current.doctorModal.philosophy}&rdquo;
+                </p>
+              </div>
+
               {/* Core Subspecialties */}
               <div className="space-y-1.5">
                 <h4 className="text-[11px] font-bold text-gray-300 flex items-center gap-1.5 px-1">
                   <Stethoscope className="w-3.5 h-3.5 text-[#8ab4f8]" />
-                  <span>{lang === 'ar' ? 'مجالات الاختصاص والتميز السريري' : 'Clinical Subspecialties'}</span>
+                  <span>{current.doctorModal.subspecialtiesTitle || (lang === 'ar' ? 'مجالات الاختصاص والتميز السريري' : 'Clinical Subspecialties')}</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {current.doctorModal.subspecialties.map((sub, sIdx) => (
@@ -1213,6 +1404,11 @@ export default function Home() {
                           {hosp.city}
                         </span>
                       </div>
+                      {(hosp as any).badge && (
+                        <span className="inline-block text-[8px] px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-medium border border-emerald-500/30 mb-1">
+                          {(hosp as any).badge}
+                        </span>
+                      )}
                       <p className="text-[9px] text-gray-400 leading-snug">
                         {hosp.desc}
                       </p>
@@ -1303,22 +1499,54 @@ export default function Home() {
               ))}
             </div>
 
-            <p className="text-[11px] text-gray-300 leading-relaxed mb-4 p-3 rounded-xl bg-white/5 border border-white/5">
-              {lang === 'ar' 
-                ? 'تتركز خبرتي في تطويل العظام وإعادة بناء الأطراف وتصحيح التشوهات، باستخدام تقنيات إليزاروف والمثبتات الدائرية متعددة المحاور. القرار العلاجي يكون مبنياً على الفحص السريري والتقييم الدقيق لكل حالة.' 
-                : 'My expertise centers on bone lengthening, limb reconstruction, and deformity correction using Ilizarov technique and multiaxial circular fixators. Treatment decisions are built on clinical examination and thorough assessment of each case.'}
-            </p>
+            {/* Detailed Clinical Narrative from PDF Page 7 */}
+            <div className="space-y-2 mb-4">
+              {current.proofModal.body1 && (
+                <p className="text-[11px] text-gray-200 leading-relaxed p-2.5 rounded-xl bg-white/5 border border-white/5">
+                  {current.proofModal.body1}
+                </p>
+              )}
+              {current.proofModal.body2 && (
+                <p className="text-[11px] text-gray-300 leading-relaxed p-2.5 rounded-xl bg-white/5 border border-white/5">
+                  {current.proofModal.body2}
+                </p>
+              )}
+              {current.proofModal.body3 && (
+                <div className="p-2.5 rounded-xl bg-gradient-to-br from-[#1a73e8]/15 to-transparent border border-[#8ab4f8]/30">
+                  <span className="text-[10px] font-bold text-[#8ab4f8] block mb-0.5">
+                    {lang === 'ar' ? 'الحفاظ على المفصل متى كان ذلك ممكناً' : 'Joint Preservation Philosophy'}
+                  </span>
+                  <p className="text-[10px] text-gray-200 leading-relaxed">
+                    {current.proofModal.body3}
+                  </p>
+                </div>
+              )}
+            </div>
 
-            <button
-              onClick={() => {
-                setIsProofOpen(false);
-                setIsBookingOpen(true);
-              }}
-              className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2"
-            >
-              <CalendarCheck className="w-4 h-4 text-white" />
-              <span>{current.proofModal.cta}</span>
-            </button>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setIsProofOpen(false);
+                  const el = document.getElementById('before-after-cases');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#1a73e8] via-[#155fc3] to-[#0c4186] hover:from-[#1b66ca] hover:to-[#0c4186] text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Sparkles className="w-4 h-4 text-white" />
+                <span>{current.proofModal.cta}</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsProofOpen(false);
+                  setIsBookingOpen(true);
+                }}
+                className="w-full py-2 rounded-xl border border-white/10 hover:border-white/20 bg-white/5 text-gray-300 hover:text-white font-semibold text-[11px] transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <CalendarCheck className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                <span>{current.modal.title}</span>
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -1367,7 +1595,11 @@ export default function Home() {
               </div>
             ) : (
               <div>
-                <div className="flex items-center gap-1.5 text-[#8ab4f8] text-[10px] font-semibold mb-1">
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#1a73e8]/20 border border-[#8ab4f8]/30 text-[#8ab4f8] text-[10px] font-semibold mb-2">
+                  <CalendarCheck className="w-3 h-3 text-[#8ab4f8]" />
+                  <span>{current.modal.badge}</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[#8ab4f8] text-[10px] font-semibold mb-0.5">
                   <Stethoscope className="w-3.5 h-3.5 text-[#8ab4f8]" />
                   <span>{current.drName}</span>
                 </div>
@@ -1539,6 +1771,13 @@ export default function Home() {
                       <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
                       <span>{current.modal.whatsAppBtn}</span>
                     </button>
+                  </div>
+
+                  {/* Official Doctor Signature Footer from PDF Page 10 */}
+                  <div className="pt-2.5 text-center border-t border-white/10 mt-2">
+                    <p className="text-[9px] text-[#8ab4f8]/90 font-medium leading-relaxed">
+                      {current.modal.doctorSignoff}
+                    </p>
                   </div>
                 </form>
               </div>
