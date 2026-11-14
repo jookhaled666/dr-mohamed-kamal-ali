@@ -41,8 +41,8 @@ const CASES = [
     before: '/before-after/before-1.jpg',
     after: '/before-after/after-1.jpg',
     stats: [
-      { num: '100%', labelAr: 'استقامة المحور', labelEn: 'Axis Realignment' },
-      { num: '6-8', labelAr: 'أسابيع للتعافي', labelEn: 'Weeks Recovery' },
+      { num: 'مستقيم', labelAr: 'المحور الميكانيكي', labelEn: 'Mechanical Axis' },
+      { num: 'متوازن', labelAr: 'توزيع الأحمال', labelEn: 'Load Distribution' },
       { num: 'طبيعي', labelAr: 'المجال الحركي', labelEn: 'Full Mobility' },
     ],
   },
@@ -59,8 +59,8 @@ const CASES = [
     before: '/before-after/before-2.jpg',
     after: '/before-after/after-2.jpg',
     stats: [
-      { num: 'كامل', labelAr: 'تصحيح الانحراف', labelEn: 'Full Correction' },
-      { num: '8-10', labelAr: 'أسابيع للتعافي', labelEn: 'Weeks Recovery' },
+      { num: 'محاذاة', labelAr: 'تصحيح الانحراف', labelEn: 'Axial Realignment' },
+      { num: 'فردية', labelAr: 'خطة استشفاء مخصصة', labelEn: 'Customized Rehab' },
       { num: 'حماية', labelAr: 'من الخشونة المبكرة', labelEn: 'Joint Protection' },
     ],
   },
@@ -78,20 +78,29 @@ const CASES = [
     after: '/before-after/after-3.jpg',
     stats: [
       { num: 'دقيق', labelAr: 'موازنة الزوايا', labelEn: 'Precision Realignment' },
-      { num: '6', labelAr: 'أسابيع للعودة للمشي', labelEn: 'Weeks to Normal Walk' },
-      { num: '100%', labelAr: 'رضا المريض', labelEn: 'Patient Satisfaction' },
+      { num: 'متناسق', labelAr: 'نمط وتوازن المشي', labelEn: 'Gait Symmetry' },
+      { num: 'مستقر', labelAr: 'ثبات المفصل', labelEn: 'Joint Stability' },
     ],
   },
 ];
 
 const CONDITIONS = [
-  { id: 'limb_deformity', ar: 'تقوس وتشوهات الأطراف', en: 'Limb Deformity Correction' },
-  { id: 'limb_lengthening', ar: 'تطويل العظام واختلاف طول الأطراف', en: 'Bone Lengthening & Limb Length Discrepancy' },
-  { id: 'knee_osteoarthritis', ar: 'خشونة الركبة واستبدال المفاصل', en: 'Knee Osteoarthritis & Joint Replacement' },
-  { id: 'sports_injuries', ar: 'إصابات الملاعب والأربطة', en: 'Sports Injuries & Ligaments' },
-  { id: 'arthroscopy', ar: 'مناظير الركبة والكاحل', en: 'Knee & Ankle Arthroscopy' },
-  { id: 'fractures', ar: 'الكسور وإعادة بناء العظام', en: 'Fractures & Bone Reconstruction' },
-  { id: 'general_consultation', ar: 'استشارة عامة في جراحة العظام', en: 'General Orthopedic Consultation' },
+  { id: 'external_fixators_reconstruction', ar: 'إعادة بناء الأطراف باستخدام المثبتات الخارجية', en: 'Limb Reconstruction with External Fixators' },
+  { id: 'hexapod_circular_frames', ar: 'تصحيح التشوهات بالإطارات الدائرية سداسية المحاور', en: 'Hexapod Circular Frame Deformity Correction' },
+  { id: 'bone_deformity_correction', ar: 'تصحيح التشوهات العظمية', en: 'Bone Deformity Correction' },
+  { id: 'cosmetic_limb_lengthening', ar: 'إطالة الأطراف التجميلية', en: 'Cosmetic Limb Lengthening' },
+  { id: 'nonunion_fractures', ar: 'علاج الكسور غير الملتئمة', en: 'Nonunion Fractures Treatment' },
+  { id: 'knee_arthroplasty', ar: 'استبدال مفصل الركبة', en: 'Total Knee Arthroplasty' },
+  { id: 'hip_arthroplasty', ar: 'استبدال مفصل الورك', en: 'Total Hip Arthroplasty' },
+  { id: 'ligament_reconstruction', ar: 'إعادة بناء الأربطة', en: 'Ligament Reconstruction' },
+  { id: 'arthroscopic_surgery', ar: 'جراحات المناظير', en: 'Arthroscopic Surgery' },
+  { id: 'sports_injuries', ar: 'علاج الإصابات الرياضية', en: 'Sports Injuries Management' },
+  { id: 'fracture_management', ar: 'علاج الكسور', en: 'Fracture Management' },
+  { id: 'orthopedic_tumors', ar: 'جراحة أورام العظام والأنسجة الرخوة', en: 'Bone & Soft Tissue Tumors Surgery' },
+  { id: 'foot_ankle_surgery', ar: 'جراحات القدم والكاحل', en: 'Foot & Ankle Surgery' },
+  { id: 'shoulder_surgery', ar: 'جراحات الكتف', en: 'Shoulder Surgery' },
+  { id: 'hand_wrist_surgery', ar: 'جراحات اليد والرسغ', en: 'Hand & Wrist Surgery' },
+  { id: 'osteoporosis_management', ar: 'علاج هشاشة العظام', en: 'Osteoporosis Management' },
 ];
 
 const CLINIC_LOCATIONS = [
@@ -593,12 +602,12 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
               </div>
 
               <h3 className="text-2xl sm:text-3xl font-black text-white mb-2">
-                {isRtl ? 'احجز استشارتك مع الدكتور' : 'Book Your Consultation'}
+                {isRtl ? 'احجز استشارتك' : 'Book Your Consultation'}
               </h3>
               <p className="text-xs sm:text-sm text-gray-300 font-light max-w-lg mx-auto leading-relaxed">
                 {isRtl
-                  ? 'يسعدني استقبالكم لتقييم حالتكم الطبية ومناقشة الخيارات العلاجية المناسبة. يرجى تعبئة البيانات التالية، وسيتواصل معكم فريق المواعيد لتنسيق الزيارة.'
-                  : 'We are pleased to welcome you to evaluate your medical condition and discuss suitable treatment options. Please fill out the details below, and our appointment team will contact you to coordinate your visit.'}
+                  ? 'يسعدني استقبالكم لتقييم حالتكم ومراجعة الفحوص الطبية ومناقشة الخيارات العلاجية المناسبة.'
+                  : 'I am pleased to welcome you to evaluate your condition, review your medical tests, and discuss suitable treatment options.'}
               </p>
             </div>
 
@@ -746,7 +755,7 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
                   {submittedSuccess ? (
                     <>
                       <CheckCircle2 className="w-5 h-5 text-white animate-bounce" />
-                      <span>{isRtl ? 'جاري فتح واتساب مع الرسالة المنسقة ✓' : 'Opening WhatsApp with Your Details ✓'}</span>
+                      <span>{isRtl ? 'تم استلام طلب موعدك بنجاح. سيتواصل معك فريق المواعيد لتأكيد التفاصيل.' : 'Your appointment request has been received. Our team will contact you.'}</span>
                     </>
                   ) : (
                     <>
@@ -772,8 +781,8 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
               </p>
               <p className="text-[11px] text-gray-300">
                 {isRtl
-                  ? 'استشاري جراحة العظام والمفاصل وإصابات الملاعب'
-                  : 'Consultant Orthopedic & Joint Surgeon — Sports Injuries'}
+                  ? 'استشاري جراحة العظام والإصابات والطب الرياضي'
+                  : 'Consultant Orthopedic, Trauma & Sports Medicine Surgeon'}
               </p>
               <p className="text-[11px] font-semibold text-[#8ab4f8] mt-1">
                 {isRtl ? 'الحركة هي الحياة' : 'Movement Is Life'}

@@ -28,7 +28,9 @@ import {
   CheckCircle,
   ExternalLink,
   Globe,
-  ChevronDown
+  ChevronDown,
+  Briefcase,
+  GraduationCap
 } from 'lucide-react';
 import Image from 'next/image';
 import { AnimatedSocialIcons, ActionIcon } from '@/components/ui/floating-action-button';
@@ -69,7 +71,8 @@ export default function Home() {
   
   // Booking Form State (matching Developer Brief exactly)
   const [selectedBranch, setSelectedBranch] = useState<'sharjah' | 'ajman'>('sharjah');
-  const [selectedCondition, setSelectedCondition] = useState('knee_osteoarthritis');
+  const [selectedCondition, setSelectedCondition] = useState('external_fixators_reconstruction');
+  const [specialtyCategory, setSpecialtyCategory] = useState<'all' | 'limb' | 'joints' | 'trauma' | 'extremities'>('all');
   const [preferredContact, setPreferredContact] = useState<'whatsapp' | 'call'>('whatsapp');
   const [consentChecked, setConsentChecked] = useState(true);
   const [patientName, setPatientName] = useState('');
@@ -92,11 +95,11 @@ export default function Home() {
     }
   }, []);
 
-  // Multi-language data conforming 100% to developer brief & official PDF content
+  // Multi-language data conforming 100% to developer brief & official medical content
   const t = {
     ar: {
       drName: "د. محمد كمال علي",
-      drTitle: "استشاري جراحة العظام والمفاصل وإصابات الملاعب",
+      drTitle: "استشاري جراحة العظام والإصابات والطب الرياضي",
       bookConsultation: "احجز استشارتك",
       navHome: "الرئيسية",
       navDoctor: "الدكتور",
@@ -107,196 +110,275 @@ export default function Home() {
         sharjah: "الشارقة: مستشفى دار الكمال (خيار حجز المستشفى)",
         ajman: "عجمان: مركز العلاج الطبي (خيار حجز العيادة / المركز الطبي)",
       },
+      specialtyCategories: {
+        all: "جميع التخصصات (16)",
+        limb: "إعادة بناء الأطراف والتشوهات والإطالة",
+        joints: "المفاصل والمناظير",
+        trauma: "الإصابات والكسور والأورام",
+        extremities: "جراحات الأطراف وهشاشة العظام"
+      },
       chapters: [
         {
-          // Chapter 1: Reception Arrival (PDF Page 2)
+          // Chapter 1: Reception Arrival (Homepage)
           step: "01 / 06",
           badge: "الاستقبال والترحيب",
           title: "الحركة هي الحياة",
-          subtitle: "د. محمد كمال علي — استشاري جراحة العظام والمفاصل وإصابات الملاعب",
-          desc: "أهلاً بك في عيادتي الرقمية. أنا الدكتور محمد كمال علي، ويسعدني أن أصطحبك في جولة تتعرّف خلالها على خبرتي الطبية، ومجالات تخصصي، وكيف نصل إلى التشخيص الدقيق ونختار العلاج الأنسب لكل حالة.",
-          note: "أؤمن بأن الحفاظ على الحركة يبدأ بفهم المشكلة، وأن القرار العلاجي الصحيح يقوم على المعرفة الطبية والخبرة الجراحية والتقييم الدقيق.",
+          subtitle: "د. محمد كمال علي — استشاري جراحة العظام والإصابات والطب الرياضي",
+          desc: "على مدار أكثر من 25 عاماً في جراحة العظام والإصابات، تخصصت في علاج الحالات المعقدة التي تؤثر في استقامة الأطراف ووظيفة المفاصل، مع اهتمام خاص بإعادة بناء الأطراف وتصحيح التشوهات وإطالة العظام.",
+          note: "أؤمن أن الوصول إلى العلاج المناسب يبدأ بالتشخيص الدقيق والفهم المتكامل لحالة المريض.",
           primaryAction: "ابدأ الجولة الطبية",
-          secondaryAction: "حجز موعد سريع",
+          secondaryAction: "احجز استشارتك",
           type: "standard"
         },
         {
-          // Chapter 2: Doctor Office (PDF Page 3)
+          // Chapter 2: About Doctor
           step: "02 / 06",
-          badge: "السيرة والنهج الطبي",
-          title: "خبرة علمية وجراحية تمتد لأكثر من 25 عاماً",
-          subtitle: "حاصل على زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT)",
-          desc: "أنا الدكتور محمد كمال علي، استشاري جراحة العظام والمفاصل. امتدت مسيرتي عبر مصر والسعودية وسلطنة عُمان والإمارات، وتولّيت خلالها مسؤوليات طبية وجراحية وقيادية بمستشفى خولة، والإدارة الطبية لمستشفى أمينة، والتدريس بكلية الخليج الطبية. هدفي أن يفهم كل مريض حالته والخيارات المتاحة له.",
+          badge: "التعريف بالدكتور",
+          title: "د. محمد كمال علي — استشاري جراحة العظام والإصابات",
+          subtitle: "حاصل على زمالة المجلس الأوروبي لجراحة العظام والإصابات (EBOT)",
+          desc: "أنا الدكتور محمد كمال علي، استشاري جراحة العظام والإصابات، وحاصل على زمالة المجلس الأوروبي لجراحة العظام والإصابات (EBOT). تمتد خبرتي المهنية لأكثر من 25 عاماً، عملت خلالها في مؤسسات طبية في مصر وألمانيا والسعودية وسلطنة عُمان ودولة الإمارات. أختص في إعادة بناء الأطراف، وتصحيح التشوهات العظمية، وإطالة الأطراف، وعلاج الكسور المعقدة وغير الملتئمة، إلى جانب جراحات المفاصل والإصابات الرياضية. وقد أجريت خلال مسيرتي أكثر من 500 عملية ناجحة في إعادة بناء الأطراف وحالات الإطالة، وفقاً لسجلي المهني.",
           primaryAction: "تعرّف على التخصصات الطبية",
-          secondaryAction: "السيرة والنهج الطبي",
+          secondaryAction: "المؤهلات والمسيرة المهنية",
           type: "doctor_intro"
         },
         {
-          // Chapter 3: From Office to Clinical Care (PDF Pages 4 & 5)
+          // Chapter 3: Medical Specialties (All 16)
           step: "03 / 06",
-          badge: "التشخيص واختيار المسار",
-          title: "كل حالة لها طبيعتها… ولكل علاج معاييره",
-          subtitle: "والآن، دعنا نتعرّف على أبرز الحالات التي أتعامل معها. تختلف أمراض وإصابات العظام والمفاصل في أسبابها ودرجة تعقيدها، ولذلك لا توجد خطة علاجية واحدة تناسب جميع المرضى.",
-          prompt: "ما الذي تعاني منه؟",
+          badge: "التخصصات الطبية",
+          title: "مجالات الاختصاص والتميز السريري",
+          subtitle: "16 تخصصاً دقيقاً في جراحة العظام وإعادة بناء الأطراف والإصابات الرياضية",
+          prompt: "اختر الحالة الطبية للاطلاع على التفاصيل وخطة العلاج وحجز الاستشارة:",
           primaryAction: "ننتقل الآن إلى مرحلة الفحص والتشخيص",
           type: "condition_selector"
         },
         {
-          // Chapter 4: Diagnostic Facilities (PDF Page 6)
+          // Chapter 4: Diagnosis
           step: "04 / 06",
-          badge: "مرافق الفحص والتشخيص",
-          title: "التشخيص الدقيق هو أساس القرار العلاجي",
-          subtitle: "بعد التعرّف على الأعراض، ننتقل إلى مرحلة التقييم الطبي السريري.",
-          desc: "أبدأ بمراجعة التاريخ المرضي، وطبيعة الألم أو الإصابة، ومدى تأثيرها على الحركة والأنشطة اليومية، ثم أُجري الفحص السريري لتقييم وظيفة المفصل، واستقامة الطرف، وثبات الأربطة، ومدى الحركة. بعد ذلك، أُحدد الفحوصات التصويرية المناسبة لكل حالة.",
+          badge: "الأشعة والتشخيص",
+          title: "التشخيص الدقيق أساس القرار العلاجي",
+          subtitle: "تقييم شامل يدمج الفحص الإكلينيكي والتحليل الإشعاعي المتقدم",
+          desc: "أبدأ بتقييم التاريخ المرضي والفحص الإكلينيكي، ثم أستعين بالفحوص التصويرية المناسبة عند الحاجة. وفي حالات تشوهات الأطراف، أركز على تحليل المحور الميكانيكي للعظام، وتحديد موقع التشوه ودرجته، وقياس اختلاف أطوال الأطراف. أما في إصابات المفاصل، فأقيّم سلامة الأربطة والغضاريف وثبات المفصل ووظيفته. يساعدني هذا التقييم على وضع خطة علاجية تستند إلى طبيعة الحالة ونتائج الفحوص.",
           diagnosticItems: [
             {
-              title: "الأشعة السينية (X-Ray)",
-              shortDesc: "تقييم الكسور واستقامة العظام ودرجة تآكل المفاصل، وصور الوقوف لتقييم المحور الميكانيكي وقياس درجة الانحراف بدقة."
+              title: "تحليل المحور الميكانيكي والتشوهات",
+              shortDesc: "تحليل المحور الميكانيكي للعظام، وتحديد موقع التشوه ودرجته، وقياس اختلاف أطوال الأطراف للتخطيط الجراحي الدقيق."
             },
             {
-              title: "التصوير بالرنين المغناطيسي (MRI)",
-              shortDesc: "يُستخدم لتقييم الأربطة والغضاريف والأنسجة الرخوة، خصوصاً في إصابات الملاعب وحالات عدم ثبات الركبة والكاحل."
+              title: "تقييم الأربطة والمفاصل بالرنين المغناطيسي",
+              shortDesc: "تقييم سلامة الأربطة والغضاريف والأنسجة الرخوة وثبات المفصل ووظيفته في إصابات الملاعب والخشونة."
             },
             {
-              title: "من التشخيص إلى الخطة العلاجية",
-              shortDesc: "مناقشة الخيارات والفوائد والمخاطر؛ فليست كل إصابة بحاجة لجراحة، وتأخير التدخل الجراحي قد يؤثر على وظيفة المفصل."
+              title: "تخصيص الخطة العلاجية",
+              shortDesc: "وضع خطة علاجية فردية تستند إلى طبيعة الحالة ونتائج الفحوص، سواء كانت تحفظية أو تدخلات جراحية دقيقة."
             }
           ],
-          primaryAction: "متابعة الجولة",
+          primaryAction: "اكتشف مسار العلاج والنتائج",
           type: "diagnostics"
         },
         {
-          // Chapter 5: Expertise and Proof (PDF Page 7)
+          // Chapter 5: Experience & Clinical Cases
           step: "05 / 06",
           badge: "الخبرة والنتائج",
-          title: "خبرة جراحية في التعامل مع الحالات المعقدة",
-          subtitle: "أكثر من 500 عملية في مجال إعادة بناء الأطراف وتطويل العظام",
-          desc: "على مدار مسيرتي الطبية، أجريت أكثر من 500 عملية شملت تصحيح التشوهات العظمية المعقدة، واختلاف طول الأطراف، وعدم التئام الكسور. لا يقتصر الهدف على الشكل الظاهري، بل تحسين استقامة الطرف ومحوره الميكانيكي ووظيفته.",
+          title: "خبرة متخصصة في إعادة بناء الأطراف",
+          subtitle: "أكثر من 500 عملية ناجحة في إعادة بناء الأطراف وحالات الإطالة",
+          desc: "يُعد ترميم وإعادة بناء الأطراف من مجالات تخصصي الرئيسية، وتشمل خبرتي استخدام تقنيات إليزاروف، والمثبتات الداخلية والخارجية، والإطارات الدائرية سداسية المحاور. أستخدم هذه التقنيات في الحالات المناسبة لتصحيح التشوهات، وإطالة العظام، والتعامل مع الكسور غير الملتئمة ومشكلات فقدان العظم. ويعتمد اختيار التقنية على طبيعة الحالة، ودرجة التشوه، وحالة العظم والأنسجة المحيطة.",
           highlight: "في حالات خشونة الركبة وإصابات المفاصل، أحرص على تقييم الخيارات العلاجية غير الجراحية أولاً، وتحديد التدخل الجراحي عند وجود تلف متقدم بناءً على التشخيص والحالة الوظيفية.",
           primaryAction: "شاهد الحالات الطبية قبل وبعد",
-          secondaryAction: "أرقام ومعايير الخبرة",
+          secondaryAction: "تفاصيل التقنيات والخبرة",
           type: "proof"
         },
         {
-          // Chapter 6: Return to Reception and Booking Close (PDF Page 8)
+          // Chapter 6: Return to Reception and Booking Close
           step: "06 / 06",
-          badge: "الاستقبال وحجز الموعد",
-          title: "وصلنا إلى نهاية جولتنا… وقد تكون هذه بداية رحلتك العلاجية",
-          subtitle: "أتمنى أن تكون هذه الجولة قد منحتك تصوراً أوضح عن طبيعة عملنا، وأهمية التشخيص الدقيق في اختيار العلاج المناسب.",
-          desc: "إذا كنت تعاني من مشكلة في العظام أو المفاصل، أو ترغب في تقييم حالة تحتاج إلى تدخل جراحي متخصص، يسعدني استقبالكم ومناقشة الخيارات العلاجية المتاحة.",
+          badge: "الحجز والتواصل",
+          title: "احجز استشارتك",
+          subtitle: "يسعدني استقبالكم لتقييم حالتكم ومراجعة الفحوص الطبية ومناقشة الخيارات العلاجية المناسبة.",
+          desc: "مواقع الاستشارة المعتمدة: مستشفى دار الكمال بالشارقة (خيار حجز المستشفى)، ومركز العلاج الطبي (Elaj Medical Center) بعجمان (خيار حجز العيادة / المركز الطبي).",
           languagesNote: "اللغات المتاحة: العربية، الإنجليزية، الألمانية.",
-          primaryAction: "احجز موعدك الآن",
+          primaryAction: "احجز استشارتك الآن",
           secondaryAction: "واتساب مباشر",
           type: "booking_close"
         }
       ],
       conditions: [
         {
-          id: 'limb_deformity',
-          label: 'تقوس وتشوهات الأطراف',
-          desc: 'أتعامل مع حالات تقوس الساقين، وانحراف المحور الميكانيكي للأطراف، والتشوهات الخلقية أو المكتسبة، باستخدام تقنيات التصحيح العظمي والتثبيت الداخلي والخارجي، بما فيها تقنية إليزاروف والمثبتات الدائرية متعددة المحاور.'
+          id: 'external_fixators_reconstruction',
+          category: 'limb',
+          label: 'إعادة بناء الأطراف بالمثبتات الخارجية',
+          fullTitle: 'إعادة بناء الأطراف باستخدام المثبتات الخارجية',
+          desc: 'أستخدم تقنيات التثبيت الخارجي المتقدمة لإعادة بناء الأطراف المتضررة من الإصابات الشديدة والتشوهات المعقدة، والتحكم الدقيق في استقامة العظام ومحاذاة المفاصل أثناء مراحل الالتئام.'
         },
         {
-          id: 'limb_lengthening',
-          label: 'تطويل الأطراف وإعادة بناء العظام',
-          desc: 'أُجري جراحات تطويل العظام لعلاج اختلاف طول الأطراف وحالات قصر العظام، إضافة إلى حالات إعادة البناء بعد الإصابات، وعدم التئام الكسور، وفقدان أجزاء من العظام، باستخدام تقنيات التطويل التدريجي ونقل العظام عند الحاجة.'
+          id: 'hexapod_circular_frames',
+          category: 'limb',
+          label: 'تصحيح التشوهات بالإطارات سداسية المحاور',
+          fullTitle: 'تصحيح التشوهات بالإطارات الدائرية سداسية المحاور',
+          desc: 'أعتمد الإطارات الدائرية سداسية المحاور (Hexapod Circular Frames) والتخطيط الحاسوبي لتصحيح أدق درجات الانحراف العظمي متعدد المستويات والزوايا في آن واحد وبأعلى أمان.'
         },
         {
-          id: 'knee_osteoarthritis',
-          label: 'خشونة الركبة واستبدال المفاصل',
-          desc: 'أُقيّم حالات خشونة الركبة وتآكل الغضروف المفصلي، وأحدد مدى ملاءمة العلاجات غير الجراحية أو الحقن داخل المفصل. وفي الحالات المتقدمة التي تستدعي التدخل الجراحي، تشمل خبرتي جراحات استبدال مفصل الركبة والورك.'
+          id: 'bone_deformity_correction',
+          category: 'limb',
+          label: 'تصحيح التشوهات العظمية',
+          fullTitle: 'تصحيح التشوهات العظمية وتقوس الساقين',
+          desc: 'أتعامل مع تقوس الساقين وانحراف المحور الميكانيكي والتشوهات الخلقية والمكتسبة، بهدف استعادة استقامة الأطراف وحماية مفاصل الركبة والكاحل من التآكل المبكر.'
+        },
+        {
+          id: 'cosmetic_limb_lengthening',
+          category: 'limb',
+          label: 'إطالة الأطراف التجميلية',
+          fullTitle: 'إطالة الأطراف التجميلية والتصحيحية',
+          desc: 'أُجري جراحات إطالة الأطراف التجميلية والتصحيحية لحالات قصر القامة وتفاوت طول الساقين، باستخدام تقنيات الإطالة التدريجية المتطورة وفق متابعة وتأهيل سريري منتظم.'
+        },
+        {
+          id: 'nonunion_fractures',
+          category: 'limb',
+          label: 'علاج الكسور غير الملتئمة',
+          fullTitle: 'علاج الكسور غير الملتئمة وفقدان العظام',
+          desc: 'أعالج حالات تأخر وعدم التئام الكسور وفقدان الأجزاء العظمية، بالاعتماد على التطعيم العظمي وإعادة التثبيت الداخلي والخارجي وتقنيات نقل وتجديد العظام.'
+        },
+        {
+          id: 'knee_arthroplasty',
+          category: 'joints',
+          label: 'استبدال مفصل الركبة',
+          fullTitle: 'استبدال مفصل الركبة الكلي والجزئي',
+          desc: 'أُجري جراحات استبدال مفصل الركبة لحالات الخشونة وتآكل الغضروف المفصلي المتقدمة، لمساعدة المريض على استعادة الحركة السلسة وتخفيف الألم.'
+        },
+        {
+          id: 'hip_arthroplasty',
+          category: 'joints',
+          label: 'استبدال مفصل الورك',
+          fullTitle: 'استبدال مفصل الورك التخصصي',
+          desc: 'أُجري جراحات استبدال مفصل الورك باستخدام أحدث المفاصل المصممة تشريحياً، لعلاج الخشونة المتقدمة وتلف المفصل وإعادة التوازن الطبيعي للمشي.'
+        },
+        {
+          id: 'ligament_reconstruction',
+          category: 'joints',
+          label: 'إعادة بناء الأربطة',
+          fullTitle: 'إعادة بناء أربطة الركبة والرباط الصليبي',
+          desc: 'أُعالج تمزقات الرباط الصليبي والأربطة الجانبية وإصابات عدم ثبات المفاصل، عبر إعادة بناء الأربطة تشريحياً بما يتناسب مع النشاط اليومي والرياضي للمريض.'
+        },
+        {
+          id: 'arthroscopic_surgery',
+          category: 'joints',
+          label: 'جراحات المناظير',
+          fullTitle: 'جراحات مناظير الركبة والكاحل الدقيقة',
+          desc: 'أستخدم المناظير الجراحية الدقيقة للركبة والكاحل لعلاج إصابات الغضاريف والمشكلات داخل المفصل عبر فتحات جراحية صغيرة تقلل آلام ما بعد الجراحة وتسرع التعافي.'
         },
         {
           id: 'sports_injuries',
-          label: 'إصابات الملاعب والرباط الصليبي',
-          desc: 'أعالج إصابات الرباط الصليبي، وتمزقات الغضروف الهلالي، وإصابات الأربطة وعدم ثبات المفاصل. ويعتمد قرار إصلاح الأربطة أو إعادة بنائها على طبيعة الإصابة ودرجة عدم الثبات واحتياجات المريض الوظيفية.'
+          category: 'trauma',
+          label: 'علاج الإصابات الرياضية',
+          fullTitle: 'علاج إصابات الملاعب والرياضيين',
+          desc: 'أتعامل مع إصابات الملاعب الحادة والمزمنة للرياضيين، كتمزقات الغضروف الهلالي وإصابات الأوتار، واضعاً خطة علاجية مخصصة للعودة الآمنة والمستدامة للمنافسة.'
         },
         {
-          id: 'arthroscopy',
-          label: 'مناظير الركبة والكاحل',
-          desc: 'أستخدم المناظير الجراحية في علاج الحالات المناسبة من إصابات الغضاريف والأربطة والمشكلات داخل المفصل، عبر فتحات جراحية صغيرة، مع تحديد الإجراء وفق التشخيص ونتائج الفحوصات.'
+          id: 'fracture_management',
+          category: 'trauma',
+          label: 'علاج الكسور',
+          fullTitle: 'علاج الكسور الحادة والمعقدة',
+          desc: 'أعالج الكسور بمختلف أنواعها، بما فيها الكسور المعقدة وكسور المفاصل، باستخدام أحدث تقنيات التثبيت الداخلي بالشرائح والمسامير الحديثة لضمان الالتئام السليم.'
         },
         {
-          id: 'fractures',
-          label: 'الكسور وإعادة بناء العظام',
-          desc: 'علاج الكسور بمختلف أنواعها، والكسور المعقدة وحالات عدم الالتئام وفقدان أجزاء من العظام، مع إعادة البناء الوظيفي للطرف المصاب.'
+          id: 'orthopedic_tumors',
+          category: 'trauma',
+          label: 'أورام العظام والأنسجة الرخوة',
+          fullTitle: 'جراحة أورام العظام والأنسجة الرخوة',
+          desc: 'أقوم بالاستئصال الجراحي التخصصي لأورام العظام والأنسجة الرخوة، مع الحفاظ على سلامة الطرف وإعادة بناء الدعامة العظمية ووظائف الحركة.'
         },
         {
-          id: 'general_consultation',
-          label: 'استشارة عامة في جراحة العظام',
-          desc: 'تشمل خبرتي أيضاً جراحات القدم والكاحل، والكتف، واليد والرسغ، وجراحة أورام العظام والأنسجة الرخوة، بالإضافة إلى تقييم وعلاج هشاشة العظام.'
+          id: 'foot_ankle_surgery',
+          category: 'extremities',
+          label: 'جراحات القدم والكاحل',
+          fullTitle: 'جراحات وتشوهات القدم والكاحل',
+          desc: 'أتعامل مع تشوهات القدم وإصابات أوتار الكاحل وخشونة المفاصل والكسور المعقدة، بهدف تخفيف الألم واستعادة توازن واستقرار المشي.'
         },
+        {
+          id: 'shoulder_surgery',
+          category: 'extremities',
+          label: 'جراحات الكتف',
+          fullTitle: 'جراحات ومناظير مفصل الكتف',
+          desc: 'أُعالج مشكلات أوتار الكفة المدورة، والخلع المتكرر وعدم ثبات مفصل الكتف، وخشونة المفصل، بالمنظار والتدخل الجراحي التخصصي لاستعادة مدى الحركة الطبيعي.'
+        },
+        {
+          id: 'hand_wrist_surgery',
+          category: 'extremities',
+          label: 'جراحات اليد والرسغ',
+          fullTitle: 'جراحات اليد والرسغ والأوتار الدقيقة',
+          desc: 'أُعالج متلازمة النفق الرسغي، والإصابات الوترية، وكسور عظام اليد والرسغ، مع عناية جراحية فائقة للحفاظ على دقة وظيفة اليد والأصابع.'
+        },
+        {
+          id: 'osteoporosis_management',
+          category: 'extremities',
+          label: 'علاج هشاشة العظام',
+          fullTitle: 'تقييم وعلاج هشاشة وضعف العظام',
+          desc: 'أُجري التقييم الشامل لكثافة العظام ووضع بروتوكولات وقائية وعلاجية متطورة لمنع الكسور الهشة وتعزيز صلابة الهيكل العظمي للمرضى.'
+        }
       ],
       modal: {
         badge: "نموذج حجز الاستشارة",
-        title: "احجز استشارتك مع الدكتور",
-        subtitle: "يسعدني استقبالكم لتقييم حالتكم الطبية ومناقشة الخيارات العلاجية المناسبة. يرجى تعبئة البيانات التالية، وسيتواصل معكم فريق المواعيد لتنسيق الزيارة.",
+        title: "احجز استشارتك",
+        subtitle: "يسعدني استقبالكم لتقييم حالتكم ومراجعة الفحوص الطبية ومناقشة الخيارات العلاجية المناسبة.",
         nameLabel: "الاسم الكامل",
         namePlaceholder: "أدخل اسمك الكريم",
         phoneLabel: "رقم الهاتف / واتساب",
         phonePlaceholder: "مثال: 0545650678 أو 971545650678+",
-        branchLabel: "اختر العيادة المفضلة",
-        conditionLabel: "الحالة التي ترغب في استشارة الدكتور بشأنها",
+        branchLabel: "موقع الاستشارة",
+        conditionLabel: "الحالة الطبية المطلوب استشارة الدكتور بشأنها",
         notesLabel: "ملاحظات إضافية أو وقت مفضل (اختياري)",
-        notesPlaceholder: "مثال: أفضل المواعيد المسائية...",
+        notesPlaceholder: "مثال: أعاني من ألم بالركبة، وأفضل موعد مسائي...",
         preferredContactLabel: "طريقة التواصل المفضلة",
         contactWhatsapp: "رسالة واتساب",
         contactCall: "اتصال هاتفي",
         consentLabel: "أوافق على التواصل معي بخصوص طلب الموعد",
         submitBtn: "إرسال طلب الحجز",
         whatsAppBtn: "إرسال طلب الحجز عبر واتساب",
-        successMsg: "استلمنا طلبك بنجاح. سيتواصل معكم فريق المواعيد لتنسيق الزيارة.",
+        successMsg: "تم استلام طلب موعدك بنجاح. سيتواصل معك فريق المواعيد لتأكيد التفاصيل.",
         successNote: "ملاحظة: هذا طلب موعد وسيقوم فريق العيادة بتأكيد الموعد النهائي معكم.",
         closeBtn: "إغلاق",
-        doctorSignoff: "د. محمد كمال علي — استشاري جراحة العظام والمفاصل وإصابات الملاعب | الحركة هي الحياة"
+        doctorSignoff: "د. محمد كمال علي — استشاري جراحة العظام والإصابات والطب الرياضي | الحركة هي الحياة"
       },
       doctorModal: {
-        title: "السيرة والنهج الطبي",
+        title: "التعريف بالدكتور",
         subtitle: "د. محمد كمال علي",
-        role: "استشاري جراحة العظام والمفاصل وإصابات الملاعب",
-        experienceBadge: "خبرة علمية وجراحية تمتد لأكثر من 25 عاماً",
-        bio: "أنا الدكتور محمد كمال علي، استشاري جراحة العظام والمفاصل، حاصل على زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT) عام 2012، وأكملت زمالة جراحة العظام في جامعة دوسلدورف بألمانيا، بعد دراستي الطبية والعليا في جامعة عين شمس بالقاهرة. امتدت مسيرتي المهنية عبر مصر والسعودية وسلطنة عُمان والإمارات، وتولّيت خلالها مسؤوليات طبية وجراحية وقيادية، من بينها العمل في مجال إعادة بناء الأطراف وتصحيح التشوهات بمستشفى خولة في عُمان، ومنصب المدير الطبي لمستشفى أمينة بعجمان، والعمل أستاذاً زائراً لجراحة العظام في كلية الخليج الطبية. تتركز خبرتي الجراحية في تطويل العظام وإعادة بناء الأطراف وتصحيح التشوهات، إلى جانب استبدال مفاصل الركبة والورك، ومناظير الركبة والكاحل، وعلاج الإصابات الرياضية والكسور المعقدة.",
-        credentialsTitle: "المؤهلات العلمية",
+        role: "استشاري جراحة العظام والإصابات والطب الرياضي",
+        experienceBadge: "أكثر من 25 عاماً من الخبرة الجراحية والعلمية",
+        bio: "أنا الدكتور محمد كمال علي، استشاري جراحة العظام والإصابات، وحاصل على زمالة المجلس الأوروبي لجراحة العظام والإصابات (EBOT). تمتد خبرتي المهنية لأكثر من 25 عاماً، عملت خلالها في مؤسسات طبية في مصر وألمانيا والسعودية وسلطنة عُمان ودولة الإمارات. أختص في إعادة بناء الأطراف، وتصحيح التشوهات العظمية، وإطالة الأطراف، وعلاج الكسور المعقدة وغير الملتئمة، إلى جانب جراحات المفاصل والإصابات الرياضية. وقد أجريت خلال مسيرتي أكثر من 500 عملية ناجحة في إعادة بناء الأطراف وحالات الإطالة، وفقاً لسجلي المهني.",
+        credentialsTitle: "المؤهلات العلمية والزمالات",
         credentials: [
-          "زمالة البورد الأوروبي لجراحة العظام والكسور (EBOT) – 2012",
-          "زمالة جراحة العظام – جامعة دوسلدورف، ألمانيا",
-          "دراسات الدكتوراه في جراحة العظام (أطروحة دكتوراه) – جامعة عين شمس، مصر",
-          "الماجستير في جراحة العظام – جامعة عين شمس، مصر",
-          "بكالوريوس الطب والجراحة – جامعة عين شمس، مصر"
+          "بكالوريوس الطب والجراحة — جامعة عين شمس، مصر",
+          "ماجستير جراحة العظام — جامعة عين شمس، مصر",
+          "أطروحة الدكتوراه في جراحة العظام — جامعة عين شمس، مصر",
+          "زمالة جراحة العظام — جامعة دوسلدورف، ألمانيا",
+          "الزمالة الأوروبية في جراحة العظام والإصابات (EBOT)، عام 2012",
+          "الكلية الملكية للجراحين في أيرلندا (RCSI)"
+        ],
+        careerTitle: "المسيرة المهنية والخبرات القيادية",
+        careerTimeline: [
+          { period: "2022 – حتى الآن", role: "استشاري جراحة العظام", place: "مركز العلاج الطبي (Elaj Medical Center)، عجمان" },
+          { period: "2019–2022", role: "المدير الطبي", place: "مستشفى أمينة، عجمان" },
+          { period: "2018–2022", role: "استشاري جراحة العظام", place: "مستشفى أمينة، عجمان" },
+          { period: "2016–2017", role: "أستاذ زائر لجراحة العظام", place: "كلية الخليج الطبية" },
+          { period: "2015–2017", role: "أخصائي جراحة العظام", place: "المستشفى الدولي الحديث، دبي" },
+          { period: "2012–2015", role: "استشاري بالإنابة لإعادة بناء الأطراف وتصحيح التشوهات", place: "مستشفى خولة، سلطنة عُمان" },
+          { period: "2005–2012", role: "أخصائي جراحة العظام", place: "مستشفى خولة، سلطنة عُمان" },
+          { period: "1996–2005", role: "أخصائي جراحة العظام", place: "مستشفى القاهرة الطبي، مصر" },
+          { period: "1996–1999", role: "أخصائي زائر لجراحة العظام", place: "مستشفيات الموسى، المملكة العربية السعودية" }
         ],
         philosophyTitle: "نهجي في العلاج",
         philosophy: "لا يعتمد اختيار العلاج على نتائج الأشعة وحدها، بل على الفحص السريري، وطبيعة الأعراض، ودرجة الإصابة، وتأثيرها على وظيفة المفصل والحركة. هدفي أن يفهم كل مريض حالته والخيارات المتاحة له، وأن يكون القرار العلاجي مبنياً على أسس طبية واضحة، سواء كان العلاج تحفظياً أو جراحياً.",
-        subspecialtiesTitle: "مجالات الاختصاص والتميز السريري",
-        subspecialties: [
-          {
-            title: "تطويل العظام وإعادة بناء الأطراف",
-            desc: "جراحات تطويل العظام لعلاج اختلاف طول الأطراف وحالات قصر العظام، وإعادة البناء بعد الإصابات وعدم التئام الكسور وفقدان أجزاء من العظام."
-          },
-          {
-            title: "تقوس وتشوهات الأطراف",
-            desc: "تقوس الساقين وانحراف المحور الميكانيكي للأطراف والتشوهات الخلقية أو المكتسبة، باستخدام تقنية إليزاروف والمثبتات الدائرية متعددة المحاور."
-          },
-          {
-            title: "خشونة الركبة واستبدال المفاصل",
-            desc: "تقييم حالات خشونة الركبة وتآكل الغضروف المفصلي، والعلاجات غير الجراحية والحقن داخل المفصل، وجراحات استبدال مفصل الركبة والورك."
-          },
-          {
-            title: "إصابات الملاعب والمناظير الجراحية",
-            desc: "علاج إصابات الرباط الصليبي وتمزقات الغضروف الهلالي وعدم ثبات المفاصل، ومناظير الركبة والكاحل عبر فتحات جراحية صغيرة."
-          }
-        ],
+        hospitalsTitle: "مواقع الاستشارة والعمليات المعتمدة",
         hospitals: [
           {
             name: "مستشفى دار الكمال",
             city: "الشارقة",
             badge: "خيار حجز المستشفى (عمليات واستشارات)",
-            desc: "أجنحة جراحية مجهزة بأعلى معايير التعقيم ومراكز أشعة متقدمة لإجراء العمليات الجراحية والاستشارات التخصصية."
+            desc: "أجنحة جراحية رقمية مجهزة بأعلى معايير التعقيم العالمية ومراكز تصوير متقدمة للعمليات والاستشارات."
           },
           {
-            name: "مركز العلاج الطبي",
+            name: "مركز العلاج الطبي (Elaj)",
             city: "عجمان",
             badge: "خيار حجز العيادة / المركز الطبي",
-            desc: "فحص سريري متقدم، تخطيط علاجي مخصص، واستشارات وحقن المفاصل الموجه."
+            desc: "فحص سريري متقدم، تخطيط علاجي مخصص، واستشارات تخصصية وحقن المفاصل الموجه."
           }
         ],
         photos: [
@@ -304,27 +386,27 @@ export default function Home() {
           { id: 'suit', label: 'الاستشارة الرسمية', src: '/doctor/dr-suit.png' },
           { id: 'clinic', label: 'فحص العيادة', src: '/doctor/dr-clinic.png' }
         ],
-        ctaBooking: "احجز استشارة مع الدكتور",
+        ctaBooking: "احجز استشارتك مع الدكتور",
         ctaWhatsapp: "محادثة فورية مع العيادة",
         ctaCall: "اتصال هاتفي"
       },
       proofModal: {
-        title: "خبرة جراحية في التعامل مع الحالات المعقدة",
-        subtitle: "أكثر من 500 عملية في مجال إعادة بناء الأطراف وتطويل العظام",
-        body1: "على مدار مسيرتي الطبية، أجريت أكثر من 500 عملية في مجال إعادة بناء الأطراف وتطويل العظام، شملت تصحيح التشوهات العظمية المعقدة، واختلاف طول الأطراف، وحالات عدم التئام الكسور.",
-        body2: "في هذه الجراحات، لا يقتصر الهدف على تصحيح الشكل الظاهري للعظم، بل يمتد إلى تحسين استقامة الطرف ومحوره الميكانيكي ووظيفته، مع مراعاة حالة المفاصل والأنسجة المحيطة. تعتمد جراحات إعادة البناء على تخطيط دقيق يشمل قياس التشوه، واختيار التقنية الجراحية المناسبة، ومتابعة التئام العظام والتأهيل خلال مراحل العلاج.",
-        body3: "الحفاظ على المفصل متى كان ذلك ممكناً: في حالات خشونة الركبة وإصابات المفاصل، أحرص على تقييم الخيارات العلاجية غير الجراحية أولاً عندما تكون مناسبة للحالة. أما عند وجود تلف مفصلي متقدم أو إصابة تستدعي التدخل الجراحي، فيُحدَّد الإجراء المناسب بناءً على التشخيص والحالة الوظيفية للمريض.",
+        title: "خبرة متخصصة في إعادة بناء الأطراف",
+        subtitle: "أكثر من 500 عملية ناجحة في إعادة بناء الأطراف وحالات الإطالة",
+        body1: "يُعد ترميم وإعادة بناء الأطراف من مجالات تخصصي الرئيسية، وتشمل خبرتي استخدام تقنيات إليزاروف، والمثبتات الداخلية والخارجية، والإطارات الدائرية سداسية المحاور.",
+        body2: "أستخدم هذه التقنيات في الحالات المناسبة لتصحيح التشوهات، وإطالة العظام، والتعامل مع الكسور غير الملتئمة ومشكلات فقدان العظم.",
+        body3: "ويعتمد اختيار التقنية على طبيعة الحالة، ودرجة التشوه، وحالة العظم والأنسجة المحيطة.",
         stats: [
-          { num: "500+", title: "عملية إعادة بناء", desc: "في تطويل العظام وتصحيح التشوهات" },
-          { num: "+25", title: "عاماً من الخبرة", desc: "في جراحة العظام والمفاصل والملاعب" },
-          { num: "100%", title: "تقييم مخصص", desc: "خطة علاجية مبنية على الفحص السريري" },
+          { num: "+500", title: "عملية ناجحة", desc: "في إعادة بناء الأطراف وحالات الإطالة" },
+          { num: "+25", title: "عاماً من الخبرة", desc: "في جراحة العظام والإصابات والطب الرياضي" },
+          { num: "تخطيط دقيق", title: "محاذاة المحور الميكانيكي", desc: "تقييم سريري وإشعاعي مخصص لكل حالة" }
         ],
         cta: "شاهد الحالات الطبية قبل وبعد"
       }
     },
     en: {
       drName: "Dr. Mohamed Kamal Ali",
-      drTitle: "Consultant Orthopedic & Joint Surgeon — Sports Injuries",
+      drTitle: "Consultant Orthopedic, Trauma & Sports Medicine Surgeon",
       bookConsultation: "Book Appointment",
       navHome: "HOME",
       navDoctor: "DOCTOR",
@@ -335,129 +417,213 @@ export default function Home() {
         sharjah: "Sharjah: Dar Al Kamal Hospital (Hospital Booking Option)",
         ajman: "Ajman: Medical Treatment Center (Clinic / Medical Centre Booking Option)",
       },
+      specialtyCategories: {
+        all: "All Specialties (16)",
+        limb: "Limb Reconstruction & Lengthening",
+        joints: "Joints & Arthroscopy",
+        trauma: "Trauma, Fractures & Tumors",
+        extremities: "Extremities & Bone Health"
+      },
       chapters: [
         {
           step: "01 / 06",
-          badge: "WELCOME TO THE CLINIC",
+          badge: "WELCOME & INTRODUCTION",
           title: "Movement Is Life",
-          subtitle: "Dr. Mohamed Kamal Ali — Consultant Orthopedic & Joint Surgeon",
-          desc: "Welcome to my digital clinic. I am Dr. Mohamed Kamal Ali, and I am pleased to take you on a tour to explore my medical expertise, specializations, and how we achieve accurate diagnosis to choose the most appropriate treatment for each case.",
-          note: "I believe that preserving mobility begins with understanding the root cause, and that the right clinical decision is built on medical knowledge, surgical expertise, and thorough evaluation.",
+          subtitle: "Dr. Mohamed Kamal Ali — Consultant Orthopedic, Trauma & Sports Medicine Surgeon",
+          desc: "Over more than 25 years in orthopedic and trauma surgery, I have specialized in treating complex conditions that affect limb alignment and joint function, with a dedicated focus on limb reconstruction, deformity correction, and bone lengthening.",
+          note: "I believe that achieving the right treatment begins with accurate diagnosis and an integrated understanding of the patient's condition.",
           primaryAction: "Begin Clinic Tour",
-          secondaryAction: "Quick Booking",
+          secondaryAction: "Book Consultation",
           type: "standard"
         },
         {
           step: "02 / 06",
-          badge: "CLINICAL BACKGROUND & APPROACH",
-          title: "Over 25 Years of Scientific & Surgical Excellence",
+          badge: "ABOUT THE DOCTOR",
+          title: "Dr. Mohamed Kamal Ali — Consultant Orthopedic & Trauma Surgeon",
           subtitle: "Fellow of the European Board of Orthopaedics & Traumatology (EBOT)",
-          desc: "I am Dr. Mohamed Kamal Ali, Consultant Orthopedic & Joint Surgeon. My career spans Egypt, Saudi Arabia, Oman, and the UAE, where I have held clinical, surgical, and leadership roles including reconstructive work at Khoula Hospital in Oman, Medical Director at Amina Hospital in Ajman, and Visiting Professor at Gulf Medical College.",
+          desc: "I am Dr. Mohamed Kamal Ali, Consultant Orthopedic and Trauma Surgeon, and Fellow of the European Board of Orthopaedics and Traumatology (EBOT). My professional career spans over 25 years across medical institutions in Egypt, Germany, Saudi Arabia, Oman, and the UAE. I specialize in limb reconstruction, bone deformity correction, limb lengthening, and complex and nonunion fractures, alongside joint arthroplasty and sports injuries. Throughout my surgical career, I have performed over 500 successful limb reconstruction and lengthening procedures according to my clinical record.",
           primaryAction: "Explore Medical Specialties",
-          secondaryAction: "Doctor Bio & Approach",
+          secondaryAction: "Qualifications & Career Timeline",
           type: "doctor_intro"
         },
         {
           step: "03 / 06",
-          badge: "DIAGNOSIS & PATHWAYS",
-          title: "Every Condition Has Its Nature… Every Treatment Has Its Criteria",
-          subtitle: "Now, let us explore the key conditions I treat. Bone and joint disorders vary in etiology and complexity; hence, no single treatment plan fits all patients.",
-          prompt: "What condition are you experiencing?",
+          badge: "MEDICAL SPECIALTIES",
+          title: "Clinical Subspecialties & Surgical Excellence",
+          subtitle: "16 dedicated subspecialties in limb reconstruction, deformity correction, and sports medicine",
+          prompt: "Select a condition to explore clinical treatment details and book consultation:",
           primaryAction: "Proceed to Examination & Diagnosis",
           type: "condition_selector"
         },
         {
           step: "04 / 06",
-          badge: "DIAGNOSTIC FACILITIES",
+          badge: "RADIOLOGY & DIAGNOSIS",
           title: "Accurate Diagnosis Is the Foundation of Treatment Decisions",
-          subtitle: "After reviewing symptoms, we move to clinical and imaging evaluation.",
-          desc: "I begin with a thorough medical history, assessing pain nature and functional mobility impact, followed by clinical examination to assess joint stability, limb alignment, ligament integrity, and range of motion before ordering targeted imaging.",
+          subtitle: "Comprehensive assessment combining clinical exam and advanced imaging",
+          desc: "I begin with a thorough medical history and clinical examination, utilizing appropriate diagnostic imaging as needed. In limb deformity cases, I focus on analyzing the mechanical axis of the bones, identifying the location and magnitude of the deformity, and measuring limb length discrepancies. In joint injuries, I evaluate ligament integrity, cartilage health, joint stability, and function. This integrated assessment allows me to formulate a treatment plan tailored to the pathology and imaging findings.",
           diagnosticItems: [
             {
-              title: "Digital X-Ray",
-              shortDesc: "Evaluates fractures, bone alignment, joint degeneration, and standing long-leg films for precision mechanical axis measurement."
+              title: "Mechanical Axis Analysis",
+              shortDesc: "Analyzing mechanical bone axes, apex of deformity, and limb length discrepancy for precision preoperative planning."
             },
             {
-              title: "High-Resolution MRI",
-              shortDesc: "Employed to evaluate ligaments, cartilage, and soft tissues, particularly in sports injuries and knee or ankle instability."
+              title: "MRI Ligament & Joint Assessment",
+              shortDesc: "Evaluating cartilage, meniscus integrity, ligament stability, and soft tissue pathologies in sports and degenerative injuries."
             },
             {
-              title: "From Diagnosis to Treatment Plan",
-              shortDesc: "Discussing options, benefits, and risks with each patient; not all injuries require surgery, yet delaying indicated surgery may impair function."
+              title: "Personalized Treatment Pathways",
+              shortDesc: "Formulating individualized conservative or surgical pathways tailored to anatomical and functional patient needs."
             }
           ],
-          primaryAction: "Continue Journey",
+          primaryAction: "Discover Surgical Outcomes",
           type: "diagnostics"
         },
         {
           step: "05 / 06",
-          badge: "EXPERTISE & PROVEN OUTCOMES",
-          title: "Surgical Expertise in Complex Cases",
-          subtitle: "Over 500 procedures in limb reconstruction & bone lengthening",
-          desc: "Throughout my medical career, I have performed over 500 surgeries in limb reconstruction and bone lengthening, encompassing complex deformities, limb length discrepancies, and nonunion fractures. The objective extends beyond cosmetic appearance to restoring limb alignment, mechanical axis, and function.",
-          highlight: "Joint preservation when possible: In knee osteoarthritis and joint injuries, non-surgical and biologic options are prioritized first whenever appropriate.",
+          badge: "EXPERTISE & CLINICAL CASES",
+          title: "Specialized Expertise in Limb Reconstruction",
+          subtitle: "Over 500 successful procedures in limb reconstruction and bone lengthening",
+          desc: "Limb reconstruction and deformity correction are among my primary specialties. My surgical expertise encompasses Ilizarov techniques, internal and external fixators, and hexapod circular frames. I utilize these modalities in indicated cases to correct deformities, lengthen bone, and manage nonunion fractures and bone loss. Technique selection depends on pathology, deformity magnitude, bone quality, and surrounding soft tissues.",
+          highlight: "Joint preservation when possible: Conservative and biologic interventions are thoroughly explored first before indicating joint replacement.",
           primaryAction: "View Before & After Cases",
-          secondaryAction: "Outcomes & Track Record",
+          secondaryAction: "Techniques & Proof",
           type: "proof"
         },
         {
           step: "06 / 06",
-          badge: "RECEPTION & CONSULTATION BOOKING",
-          title: "Our Tour Concludes Here… Your Healing Journey May Begin",
-          subtitle: "I hope this tour has provided clearer insight into our clinical philosophy and the pivotal role of precise diagnosis.",
-          desc: "If you are suffering from a bone or joint condition, or wish to seek a specialized surgical assessment, I welcome you at our Sharjah or Ajman facilities to discuss suitable treatment pathways.",
+          badge: "BOOKING & APPOINTMENTS",
+          title: "Book Your Consultation",
+          subtitle: "I am pleased to welcome you to evaluate your condition, review your medical imaging, and discuss appropriate treatment pathways.",
+          desc: "Approved practice locations: Dar Al Kamal Hospital in Sharjah (Hospital Booking Option), and Medical Treatment Center (Elaj) in Ajman (Clinic / Medical Centre Booking Option). Languages spoken: Arabic, English, German.",
           languagesNote: "Languages spoken: Arabic, English, German.",
-          primaryAction: "Book Consultation Now",
+          primaryAction: "Book Your Consultation",
           secondaryAction: "Direct WhatsApp",
           type: "booking_close"
         }
       ],
       conditions: [
         {
-          id: 'limb_deformity',
-          label: 'Limb Deformity Correction',
-          desc: 'Treatment of bow legs (genu varum), knock knees (genu valgum), mechanical axis deviations, and congenital or acquired deformities using osteotomy and internal/external fixation, including Ilizarov multiaxial circular frames.'
+          id: 'external_fixators_reconstruction',
+          category: 'limb',
+          label: 'Limb Reconstruction with External Fixators',
+          fullTitle: 'Limb Reconstruction Using Advanced External Fixators',
+          desc: 'I utilize advanced external fixation systems to reconstruct limbs affected by high-energy trauma and complex deformities, ensuring precise control over mechanical alignment and bone healing.'
         },
         {
-          id: 'limb_lengthening',
-          label: 'Bone Lengthening & Reconstruction',
-          desc: 'Bone lengthening procedures for limb length discrepancy and short stature, post-trauma reconstruction, nonunion fractures, and segmental bone defects using gradual distraction osteogenesis and bone transport.'
+          id: 'hexapod_circular_frames',
+          category: 'limb',
+          label: 'Hexapod Circular Frame Correction',
+          fullTitle: 'Deformity Correction with Hexapod Circular Frames',
+          desc: 'I employ computer-navigated hexapod circular frames for simultaneous multiplanar and multiaxial correction of complex bone angular and rotational deformities.'
         },
         {
-          id: 'knee_osteoarthritis',
-          label: 'Knee Osteoarthritis & Joint Replacement',
-          desc: 'Evaluation of knee wear and cartilage degeneration, determining suitability for conservative biologics or targeted injections, and advanced knee and hip arthroplasty when surgical replacement is indicated.'
+          id: 'bone_deformity_correction',
+          category: 'limb',
+          label: 'Bone Deformity & Alignment Correction',
+          fullTitle: 'Correction of Bow Legs, Knock Knees & Bony Deformities',
+          desc: 'I treat bow legs (genu varum), knock knees (genu valgum), and mechanical axis deviations, restoring physiological alignment and safeguarding joint longevity.'
+        },
+        {
+          id: 'cosmetic_limb_lengthening',
+          category: 'limb',
+          label: 'Cosmetic & Structural Bone Lengthening',
+          fullTitle: 'Cosmetic and Corrective Limb Lengthening',
+          desc: 'I perform gradual distraction osteogenesis for limb length discrepancy and cosmetic height enhancement under rigorous safety and rehabilitation protocols.'
+        },
+        {
+          id: 'nonunion_fractures',
+          category: 'limb',
+          label: 'Nonunion Fractures & Bone Loss',
+          fullTitle: 'Treatment of Nonunion Fractures & Segmental Bone Defects',
+          desc: 'I manage recalcitrant nonunions and segmental bone loss using specialized autografting, biological augmentation, and bone transport techniques.'
+        },
+        {
+          id: 'knee_arthroplasty',
+          category: 'joints',
+          label: 'Total & Partial Knee Replacement',
+          fullTitle: 'Total Knee Arthroplasty & Joint Resurfacing',
+          desc: 'I perform precision primary and complex knee arthroplasty for advanced osteoarthritis, delivering pain relief, natural joint stability, and restored mobility.'
+        },
+        {
+          id: 'hip_arthroplasty',
+          category: 'joints',
+          label: 'Total Hip Replacement',
+          fullTitle: 'Total Hip Arthroplasty',
+          desc: 'I execute anatomical hip joint replacement for severe degeneration and avascular necrosis to reestablish pain-free walking mechanics and joint stability.'
+        },
+        {
+          id: 'ligament_reconstruction',
+          category: 'joints',
+          label: 'Ligament Reconstruction (ACL/PCL)',
+          fullTitle: 'Anatomical Ligament Reconstruction & Joint Stabilization',
+          desc: 'I perform anatomical ACL, PCL, and multi-ligament reconstructions tailored to athletic and high-demand functional mobility requirements.'
+        },
+        {
+          id: 'arthroscopic_surgery',
+          category: 'joints',
+          label: 'Minimally Invasive Arthroscopy',
+          fullTitle: 'Knee & Ankle Keyhole Arthroscopic Surgery',
+          desc: 'I use high-definition arthroscopy to treat intra-articular cartilage lesions, meniscus tears, and impingement through micro-incisions with expedited recovery.'
         },
         {
           id: 'sports_injuries',
-          label: 'Sports Injuries & ACL Ligaments',
-          desc: 'Management of anterior cruciate ligament (ACL) injuries, meniscus tears, multi-ligament instability, and individualized reconstruction tailored to athletic demands.'
+          category: 'trauma',
+          label: 'Sports Injuries & Rehabilitation',
+          fullTitle: 'Management of Acute & Chronic Sports Injuries',
+          desc: 'I treat meniscus tears, tendon injuries, and joint instability with tailored clinical protocols for safe and sustained return to competition.'
         },
         {
-          id: 'arthroscopy',
-          label: 'Knee & Ankle Arthroscopy',
-          desc: 'Minimally invasive keyhole arthroscopy for intra-articular cartilage, ligament, and loose body conditions with expedited recovery.'
+          id: 'fracture_management',
+          category: 'trauma',
+          label: 'Complex Fracture Management',
+          fullTitle: 'Acute and Complex Fracture Fixation',
+          desc: 'I manage acute articular and complex periarticular fractures using anatomical locking plates and intramedullary nailing for optimal anatomical union.'
         },
         {
-          id: 'fractures',
-          label: 'Complex Fractures & Reconstruction',
-          desc: 'Management of acute and complex fractures, delayed union, nonunion, and post-traumatic structural bone reconstruction.'
+          id: 'orthopedic_tumors',
+          category: 'trauma',
+          label: 'Bone & Soft Tissue Tumors',
+          fullTitle: 'Surgical Resection of Bone and Soft Tissue Tumors',
+          desc: 'I perform specialized limb-sparing excision of benign and localized bone and soft tissue tumors with reconstructive bone preservation.'
         },
         {
-          id: 'general_consultation',
-          label: 'General Orthopedic Consultation',
-          desc: 'Comprehensive clinical assessment and expert opinion for foot and ankle, shoulder, hand, bone tumors, and osteoporosis.'
+          id: 'foot_ankle_surgery',
+          category: 'extremities',
+          label: 'Foot & Ankle Surgery',
+          fullTitle: 'Deformity Correction and Foot & Ankle Surgery',
+          desc: 'I address foot deformities, Achilles tendon injuries, joint arthrosis, and post-traumatic conditions to restore painless, balanced gait.'
         },
+        {
+          id: 'shoulder_surgery',
+          category: 'extremities',
+          label: 'Shoulder Surgery & Arthroscopy',
+          fullTitle: 'Shoulder Arthroscopy & Rotator Cuff Repair',
+          desc: 'I treat rotator cuff tears, recurrent shoulder dislocations, and labral pathology via arthroscopic techniques to restore full pain-free motion.'
+        },
+        {
+          id: 'hand_wrist_surgery',
+          category: 'extremities',
+          label: 'Hand & Wrist Surgery',
+          fullTitle: 'Micro-Surgical Hand and Wrist Procedures',
+          desc: 'I treat carpal tunnel syndrome, tendon injuries, and intricate metacarpal fractures with surgical precision that preserves manual dexterity.'
+        },
+        {
+          id: 'osteoporosis_management',
+          category: 'extremities',
+          label: 'Osteoporosis & Bone Health',
+          fullTitle: 'Comprehensive Evaluation & Osteoporosis Protocols',
+          desc: 'I perform clinical bone density assessments and formulate advanced therapeutic protocols to prevent fragility fractures and strengthen skeletal integrity.'
+        }
       ],
       modal: {
         badge: "Consultation Booking Form",
-        title: "Book Your Consultation with the Doctor",
-        subtitle: "We look forward to receiving you to evaluate your condition and discuss suitable treatment plans. Please complete the form below, and our coordination team will reach out to confirm your visit.",
+        title: "Book Your Consultation",
+        subtitle: "I am pleased to welcome you to evaluate your condition, review your medical tests, and discuss suitable treatment options.",
         nameLabel: "Full Name",
         namePlaceholder: "Enter your full name",
         phoneLabel: "Phone / WhatsApp Number",
         phonePlaceholder: "e.g. +971 54 565 0678",
-        branchLabel: "Select Preferred Facility",
+        branchLabel: "Consultation Location",
         conditionLabel: "Condition you wish to consult about",
         notesLabel: "Additional notes or preferred time (optional)",
         notesPlaceholder: "e.g. Afternoon appointment preferred...",
@@ -467,46 +633,41 @@ export default function Home() {
         consentLabel: "I agree to be contacted regarding this appointment request",
         submitBtn: "Submit Booking Request",
         whatsAppBtn: "Send Booking Request via WhatsApp",
-        successMsg: "Your request has been received. Our appointments team will contact you to coordinate your visit.",
+        successMsg: "Your appointment request has been successfully received. The appointments team will contact you to confirm details.",
         successNote: "Note: This is an initial appointment request; final scheduling will be confirmed by the clinic team.",
         closeBtn: "Close",
-        doctorSignoff: "Dr. Mohamed Kamal Ali — Consultant Orthopedic & Joint Surgeon | Movement Is Life"
+        doctorSignoff: "Dr. Mohamed Kamal Ali — Consultant Orthopedic, Trauma & Sports Medicine Surgeon | Movement Is Life"
       },
       doctorModal: {
-        title: "Clinical Background & Medical Approach",
+        title: "About the Doctor",
         subtitle: "Dr. Mohamed Kamal Ali",
-        role: "Consultant Orthopedic & Joint Surgeon — Sports Injuries",
+        role: "Consultant Orthopedic, Trauma & Sports Medicine Surgeon",
         experienceBadge: "Over 25 Years of Scientific & Surgical Excellence",
-        bio: "I am Dr. Mohamed Kamal Ali, Consultant Orthopedic Surgeon, Fellow of the European Board of Orthopaedics & Traumatology (EBOT 2012) and Orthopedic Surgery Fellow from the University of Düsseldorf, Germany, following medical and postgraduate degrees at Ain Shams University in Cairo. My career spans Egypt, Saudi Arabia, Oman, and the UAE, including deformity correction and limb reconstruction at Khoula Hospital in Oman, Medical Director at Amina Hospital in Ajman, and Visiting Professor at Gulf Medical College. My surgical focus centers on bone lengthening, limb reconstruction, deformity correction, knee and hip arthroplasty, and arthroscopic management of sports injuries.",
+        bio: "I am Dr. Mohamed Kamal Ali, Consultant Orthopedic and Trauma Surgeon, and Fellow of the European Board of Orthopaedics and Traumatology (EBOT). My professional career spans over 25 years across medical institutions in Egypt, Germany, Saudi Arabia, Oman, and the UAE. I specialize in limb reconstruction, bone deformity correction, limb lengthening, and complex and nonunion fractures, alongside joint arthroplasty and sports injuries. Throughout my surgical career, I have performed over 500 successful limb reconstruction and lengthening procedures according to my clinical record.",
         credentialsTitle: "Academic Qualifications & Fellowships",
         credentials: [
-          "Fellow of the European Board of Orthopaedics & Traumatology (EBOT) – 2012",
-          "Fellowship in Orthopedic Surgery – University of Düsseldorf, Germany",
-          "Doctorate Studies in Orthopedic Surgery (Thesis) – Ain Shams University, Egypt",
-          "Master of Science (M.Sc.) in Orthopedic Surgery – Ain Shams University, Egypt",
-          "MBBCh (Bachelor of Medicine & Surgery) – Ain Shams University, Egypt"
+          "Bachelor of Medicine & Surgery (MBBCh) — Ain Shams University, Egypt",
+          "Master of Science (M.Sc.) in Orthopedic Surgery — Ain Shams University, Egypt",
+          "Doctoral Thesis in Orthopedic Surgery — Ain Shams University, Egypt",
+          "Fellowship in Orthopedic Surgery — University of Düsseldorf, Germany",
+          "Fellow of the European Board of Orthopaedics & Traumatology (EBOT), 2012",
+          "Royal College of Surgeons in Ireland (RCSI)"
+        ],
+        careerTitle: "Professional Career Timeline & Leadership Roles",
+        careerTimeline: [
+          { period: "2022 – Present", role: "Consultant Orthopedic Surgeon", place: "Medical Treatment Center (Elaj), Ajman" },
+          { period: "2019–2022", role: "Medical Director", place: "Amina Hospital, Ajman" },
+          { period: "2018–2022", role: "Consultant Orthopedic Surgeon", place: "Amina Hospital, Ajman" },
+          { period: "2016–2017", role: "Visiting Professor of Orthopedic Surgery", place: "Gulf Medical College" },
+          { period: "2015–2017", role: "Orthopedic Surgery Specialist", place: "International Modern Hospital, Dubai" },
+          { period: "2012–2015", role: "Acting Consultant in Limb Reconstruction & Deformity Correction", place: "Khoula Hospital, Oman" },
+          { period: "2005–2012", role: "Orthopedic Surgery Specialist", place: "Khoula Hospital, Oman" },
+          { period: "1996–2005", role: "Orthopedic Surgery Specialist", place: "Cairo Medical Hospital, Egypt" },
+          { period: "1996–1999", role: "Visiting Orthopedic Specialist", place: "Al-Mousa Hospitals, Saudi Arabia" }
         ],
         philosophyTitle: "Clinical Treatment Philosophy",
         philosophy: "Treatment decisions are not made on imaging reports alone, but on comprehensive clinical examination, symptom characteristics, functional impairment, and joint biomechanics. My objective is for each patient to fully understand their pathology and therapeutic choices, ensuring clinical decisions are grounded in sound medical principles—whether conservative or surgical.",
-        subspecialtiesTitle: "Clinical Subspecialties & Focus",
-        subspecialties: [
-          {
-            title: "Bone Lengthening & Limb Reconstruction",
-            desc: "Limb length discrepancy correction, congenital and post-traumatic shortening, and nonunion repair using gradual distraction osteogenesis."
-          },
-          {
-            title: "Limb Deformity & Alignment Correction",
-            desc: "Bow legs, knock knees, and angular deformities using osteotomies and Ilizarov multiaxial circular fixation."
-          },
-          {
-            title: "Knee Osteoarthritis & Joint Arthroplasty",
-            desc: "Cartilage assessment, intra-articular biologics, and precision total knee and hip replacement surgery."
-          },
-          {
-            title: "Sports Medicine & Keyhole Arthroscopy",
-            desc: "ACL reconstruction, meniscus suturing, joint stabilization, and minimally invasive knee and ankle arthroscopy."
-          }
-        ],
+        hospitalsTitle: "Approved Practice Locations",
         hospitals: [
           {
             name: "Dar Al Kamal Hospital",
@@ -515,7 +676,7 @@ export default function Home() {
             desc: "Advanced digital operating suites and comprehensive imaging facilities for surgical procedures and specialist consultations."
           },
           {
-            name: "Medical Treatment Center",
+            name: "Medical Treatment Center (Elaj)",
             city: "Ajman",
             badge: "Clinic / Medical Centre Booking Option",
             desc: "Specialized clinical examination, customized conservative protocols, and guided joint injection units."
@@ -531,15 +692,15 @@ export default function Home() {
         ctaCall: "Call Practice"
       },
       proofModal: {
-        title: "Surgical Expertise in Complex Cases",
-        subtitle: "Over 500 procedures in limb reconstruction & bone lengthening",
-        body1: "Throughout my medical career, I have performed over 500 surgeries in limb reconstruction and bone lengthening, encompassing complex deformities, limb length discrepancies, and nonunion fractures.",
-        body2: "In these procedures, the goal extends beyond cosmetic realignment to restoring mechanical axes, weight-bearing distribution, and joint protection, backed by meticulous pre-operative planning and structured rehabilitation.",
-        body3: "Joint preservation when possible: Non-surgical modalities are evaluated first whenever indicated, proceeding to surgical intervention only when advanced cartilage loss or instability necessitates it.",
+        title: "Specialized Expertise in Limb Reconstruction",
+        subtitle: "Over 500 successful procedures in limb reconstruction and bone lengthening",
+        body1: "Limb reconstruction and deformity correction are among my primary specialties. My surgical expertise encompasses Ilizarov techniques, internal and external fixators, and hexapod circular frames.",
+        body2: "I utilize these modalities in indicated cases to correct deformities, lengthen bone, and manage nonunion fractures and bone loss.",
+        body3: "Technique selection depends on pathology, deformity magnitude, bone quality, and surrounding soft tissues.",
         stats: [
-          { num: "500+", title: "Reconstructive Surgeries", desc: "In bone lengthening & deformity correction" },
-          { num: "+25", title: "Years of Experience", desc: "In orthopedic surgery, joints & sports injuries" },
-          { num: "100%", title: "Tailored Assessment", desc: "Individualized plan based on clinical exam" },
+          { num: "+500", title: "Successful Surgeries", desc: "In limb reconstruction & bone lengthening" },
+          { num: "+25", title: "Years of Experience", desc: "In orthopedic, trauma & sports injuries" },
+          { num: "Precision", title: "Mechanical Axis Realignment", desc: "Individualized surgical planning for each patient" }
         ],
         cta: "View Before & After Cases"
       }
@@ -955,49 +1116,80 @@ export default function Home() {
 
               {/* Specific Content Type Handler */}
               {ch.type === "condition_selector" ? (
-                /* Chapter 3 Interactive Condition Selector with PDF Pages 4 & 5 medical content */
+                /* Chapter 3 Interactive Condition Selector with 16 Medical Specialties */
                 <div className="my-2">
-                  <p className="text-[11px] text-gray-200 font-semibold mb-1.5 flex items-center gap-1.5">
-                    <HeartPulse className="w-3.5 h-3.5 text-[#8ab4f8]" />
-                    <span>{ch.prompt}</span>
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 touch-pan-y mb-2 max-h-24 overflow-y-auto">
-                    {current.conditions.map((cond) => {
-                      const isSelected = selectedCondition === cond.id;
+                  <div className="flex items-center justify-between gap-1 mb-1.5 flex-wrap">
+                    <p className="text-[11px] text-gray-200 font-semibold flex items-center gap-1.5">
+                      <HeartPulse className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                      <span>{ch.prompt}</span>
+                    </p>
+                    <span className="text-[9px] font-bold text-[#8ab4f8] bg-[#1a73e8]/15 px-2 py-0.5 rounded-full border border-[#8ab4f8]/30">
+                      16 {lang === 'ar' ? 'تخصصاً دقيقاً' : 'Specialties'}
+                    </span>
+                  </div>
+
+                  {/* Category Filter Tabs */}
+                  <div className="flex items-center gap-1 overflow-x-auto pb-1 mb-1.5 touch-pan-x no-scrollbar">
+                    {(['all', 'limb', 'joints', 'trauma', 'extremities'] as const).map((catKey) => {
+                      const isActive = specialtyCategory === catKey;
+                      const label = (current as any).specialtyCategories?.[catKey] || catKey;
                       return (
                         <button
-                          key={cond.id}
+                          key={catKey}
                           type="button"
-                          onClick={() => setSelectedCondition(cond.id)}
-                          className={`text-[10px] md:text-[11px] px-2.5 py-1 rounded-xl border transition-all flex items-center gap-1.5 text-start cursor-pointer active:scale-98 ${
-                            isSelected 
-                              ? 'border-[#8ab4f8] bg-[#1a73e8]/30 text-white font-bold shadow-[0_0_15px_rgba(138,180,248,0.25)]' 
-                              : 'border-white/10 bg-white/5 hover:bg-white/10 text-gray-300'
+                          onClick={() => setSpecialtyCategory(catKey)}
+                          className={`text-[9px] px-2 py-0.5 rounded-lg border whitespace-nowrap transition-all cursor-pointer font-medium ${
+                            isActive
+                              ? 'bg-[#1a73e8] text-white border-[#8ab4f8] font-bold shadow-sm'
+                              : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:bg-white/10'
                           }`}
                         >
-                          <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-[#8ab4f8]' : 'bg-gray-500'}`} />
-                          <span>{cond.label}</span>
+                          {label}
                         </button>
                       );
                     })}
                   </div>
 
-                  {/* Selected condition clinical description card from PDF Pages 4 & 5 */}
+                  {/* Interactive Condition Pills Grid */}
+                  <div className="flex flex-wrap gap-1.5 touch-pan-y mb-2 max-h-24 sm:max-h-28 overflow-y-auto pe-1">
+                    {current.conditions
+                      .filter(cond => specialtyCategory === 'all' || (cond as any).category === specialtyCategory)
+                      .map((cond) => {
+                        const isSelected = selectedCondition === cond.id;
+                        return (
+                          <button
+                            key={cond.id}
+                            type="button"
+                            onClick={() => setSelectedCondition(cond.id)}
+                            className={`text-[10px] md:text-[11px] px-2.5 py-1 rounded-xl border transition-all flex items-center gap-1.5 text-start cursor-pointer active:scale-98 ${
+                              isSelected 
+                                ? 'border-[#8ab4f8] bg-[#1a73e8]/30 text-white font-bold shadow-[0_0_15px_rgba(138,180,248,0.25)]' 
+                                : 'border-white/10 bg-white/5 hover:bg-white/10 text-gray-300'
+                            }`}
+                          >
+                            <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-[#8ab4f8]' : 'bg-gray-500'}`} />
+                            <span>{cond.label}</span>
+                          </button>
+                        );
+                      })}
+                  </div>
+
+                  {/* Selected condition clinical description card in doctor's voice */}
                   {selectedConditionObj && (
                     <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 mb-2 transition-all">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-[10px] font-bold text-[#8ab4f8]">
-                          {selectedConditionObj.label}
+                          {(selectedConditionObj as any).fullTitle || selectedConditionObj.label}
                         </span>
                         <button
                           type="button"
                           onClick={() => setIsBookingOpen(true)}
                           className="text-[9px] text-emerald-400 hover:text-emerald-300 underline font-semibold cursor-pointer"
                         >
-                          {lang === 'ar' ? 'طلب استشارة للحالة ←' : 'Consult for this condition →'}
+                          {lang === 'ar' ? 'طلب استشارة لهذه الحالة ←' : 'Consult for this condition →'}
                         </button>
                       </div>
-                      <p className="text-[10px] text-gray-300 leading-relaxed font-light">
+                      <p className="text-[10px] text-gray-200 leading-relaxed font-light">
                         {selectedConditionObj.desc}
                       </p>
                     </div>
@@ -1343,14 +1535,46 @@ export default function Home() {
               {/* Accreditations & Credentials */}
               <div className="space-y-1.5">
                 <h4 className="text-[11px] font-bold text-gray-300 flex items-center gap-1.5 px-1">
-                  <Award className="w-3.5 h-3.5 text-[#8ab4f8]" />
-                  <span>{current.doctorModal.credentialsTitle || (lang === 'ar' ? 'المؤهلات العلمية' : 'Academic Credentials')}</span>
+                  <GraduationCap className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                  <span>{current.doctorModal.credentialsTitle || (lang === 'ar' ? 'المؤهلات العلمية والزمالات' : 'Academic Credentials')}</span>
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {current.doctorModal.credentials.map((cred, cIdx) => (
                     <div key={cIdx} className="p-2.5 rounded-xl bg-white/5 border border-white/5 flex items-start gap-2 text-[10px] text-gray-300 leading-snug">
                       <CheckCircle className="w-3.5 h-3.5 text-[#8ab4f8] shrink-0 mt-0.5" />
                       <span>{cred}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Career Timeline Section (التسلسل المهني الكامل 1996 - 2026) */}
+              <div className="space-y-2 p-3.5 rounded-2xl bg-white/[0.04] border border-white/10">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-[11px] font-bold text-gray-200 flex items-center gap-1.5">
+                    <Briefcase className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                    <span>{current.doctorModal.careerTitle || (lang === 'ar' ? 'المسيرة المهنية والخبرات القيادية' : 'Professional Career Timeline')}</span>
+                  </h4>
+                  <span className="text-[9px] font-bold text-[#8ab4f8] bg-[#1a73e8]/20 px-2 py-0.5 rounded-full border border-[#8ab4f8]/30">
+                    1996 – 2026
+                  </span>
+                </div>
+                
+                <div className="relative border-s border-[#8ab4f8]/30 ms-2 ps-3.5 py-1 space-y-2 mt-2">
+                  {current.doctorModal.careerTimeline.map((item, cIdx) => (
+                    <div key={cIdx} className="relative group">
+                      <div className="absolute -start-[19px] top-1.5 w-2 h-2 rounded-full bg-[#8ab4f8] ring-2 ring-[#0c1527] group-hover:scale-125 transition-transform" />
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-0.5">
+                        <span className="text-[10px] font-bold text-white">
+                          {item.role}
+                        </span>
+                        <span className="text-[8px] font-mono text-[#8ab4f8] font-bold bg-[#1a73e8]/15 px-1.5 py-0.5 rounded self-start sm:self-auto">
+                          {item.period}
+                        </span>
+                      </div>
+                      <span className="text-[9px] text-gray-300 block font-light">
+                        {item.place}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -1367,19 +1591,22 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Core Subspecialties */}
+              {/* Core Subspecialties (The 16 Medical Areas from Doctor File) */}
               <div className="space-y-1.5">
-                <h4 className="text-[11px] font-bold text-gray-300 flex items-center gap-1.5 px-1">
-                  <Stethoscope className="w-3.5 h-3.5 text-[#8ab4f8]" />
-                  <span>{current.doctorModal.subspecialtiesTitle || (lang === 'ar' ? 'مجالات الاختصاص والتميز السريري' : 'Clinical Subspecialties')}</span>
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {current.doctorModal.subspecialties.map((sub, sIdx) => (
+                <div className="flex items-center justify-between px-1">
+                  <h4 className="text-[11px] font-bold text-gray-300 flex items-center gap-1.5">
+                    <Stethoscope className="w-3.5 h-3.5 text-[#8ab4f8]" />
+                    <span>{lang === 'ar' ? 'مجالات الاختصاص والتميز السريري (16 تخصصاً)' : 'Clinical Subspecialties (16 Areas)'}</span>
+                  </h4>
+                  <span className="text-[9px] text-[#8ab4f8] font-bold">16 {lang === 'ar' ? 'تخصصاً' : 'Specialties'}</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pe-1">
+                  {current.conditions.map((sub, sIdx) => (
                     <div key={sIdx} className="p-2.5 rounded-xl bg-white/5 border border-white/5 hover:border-white/15 transition-colors">
                       <span className="text-[10px] font-bold text-[#8ab4f8] block mb-0.5">
-                        {sub.title}
+                        {(sub as any).fullTitle || sub.label}
                       </span>
-                      <p className="text-[9px] text-gray-400 leading-relaxed">
+                      <p className="text-[9px] text-gray-300 leading-relaxed font-light">
                         {sub.desc}
                       </p>
                     </div>
