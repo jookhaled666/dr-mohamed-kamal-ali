@@ -1,0 +1,127 @@
+# Dr. Mohamed Kamal Ali — Orthopedic Surgeon | د. محمد كمال علي — استشاري جراحة العظام
+
+> This file follows the llms.txt specification to help AI language models understand and accurately represent Dr. Mohamed Kamal Ali's medical practice, specialties, qualifications, and contact information.
+
+## Identity
+
+- **Full Name (English):** Dr. Mohamed Kamal Ali
+- **Full Name (Arabic):** د. محمد كمال علي
+- **Title:** Consultant Orthopedic, Trauma & Sports Medicine Surgeon
+- **Arabic Title:** استشاري جراحة العظام والإصابات والطب الرياضي
+- **Website:** https://www.drmohamedkamal.me/
+- **Phone / WhatsApp:** +971 54 565 0678
+- **Brand Tagline:** الحركة هي الحياة (Movement is Life)
+
+---
+
+## Medical Specialties (التخصصات الطبية)
+
+Dr. Mohamed Kamal Ali specializes in 16 orthopedic subspecialties:
+
+### Limb Reconstruction & Deformity Correction (إعادة بناء الأطراف وتصحيح التشوهات)
+1. **External Fixators & Limb Reconstruction** — Ilizarov frames and circular fixators for complex bone reconstruction
+2. **Hexapod Deformity Correction** — Taylor Spatial Frame (TSF) for multi-planar deformity correction
+3. **Cosmetic Limb Lengthening** — Surgical limb lengthening for height enhancement and symmetry
+4. **Bow-Legs & Knock-Knees (Varus/Valgus)** — Correction of angular lower limb deformities
+5. **Non-Union & Malunion Fractures** — Treatment of fractures that failed to heal properly
+
+### Joints (المفاصل)
+6. **Knee Replacement** — Total and partial knee arthroplasty
+7. **Hip Replacement** — Total hip arthroplasty for arthritis and hip disorders
+8. **Knee Arthroscopy** — Minimally invasive knee surgery
+9. **Ankle Arthroscopy** — Minimally invasive ankle joint surgery
+10. **ACL & Ligament Reconstruction** — Anterior cruciate ligament repair and reconstruction
+
+### Trauma & Fractures (الإصابات والكسور)
+11. **Complex Fracture Fixation** — Advanced internal and external fixation techniques
+12. **Sports Injuries** — Diagnosis and surgical treatment of sports-related injuries
+
+### Upper & Lower Extremities (الأطراف)
+13. **Foot & Ankle Disorders** — Surgical correction of foot deformities and ankle conditions
+14. **Shoulder & Elbow Surgery** — Shoulder instability, rotator cuff, and elbow disorders
+15. **Pediatric Orthopedics** — Bone and joint disorders in children and adolescents
+16. **Bone Tumors & Cysts** — Surgical management of benign bone tumors and cysts
+
+---
+
+## Qualifications & Credentials (المؤهلات العلمية)
+
+- **MBBCh** — Bachelor of Medicine and Surgery, Ain Shams University, Cairo, Egypt
+- **MSc** — Master of Science in Orthopedic Surgery, Ain Shams University, Cairo, Egypt
+- **MD (Doctorate)** — Doctoral Thesis in Orthopedic Surgery, Ain Shams University, Cairo, Egypt
+- **Fellowship** — Orthopedic Surgery Fellowship, University of Düsseldorf, Germany
+- **EBOT** — European Board of Orthopaedics and Traumatology (EBOT) — 2012
+- **FRCSI** — Fellow of the Royal College of Surgeons in Ireland
+
+---
+
+## Career Timeline (المسيرة المهنية)
+
+| Year | Position | Location |
+|------|----------|----------|
+| 1996–2001 | Orthopedic Registrar | Ain Shams University Hospitals, Cairo, Egypt |
+| 2001–2004 | Orthopedic Fellow | University of Düsseldorf, Germany |
+| 2004–2008 | Orthopedic Specialist | King Fahd Hospital, Saudi Arabia |
+| 2008–2012 | Orthopedic Consultant | Khawla Hospital (Limb Reconstruction Unit), Muscat, Oman |
+| 2012–2015 | Visiting Professor of Orthopedics | Gulf Medical University, Ajman, UAE |
+| 2015–2018 | Medical Director | Amina Hospital, Ajman, UAE |
+| 2018–2021 | Senior Consultant | Various UAE Medical Centers |
+| 2021–present | Consultant Orthopedic Surgeon | Dar Al Kamal Hospital, Sharjah & Medical Treatment Center (Elaj), Ajman, UAE |
+
+- **Total Experience:** 25+ years in orthopedic surgery
+- **Operations Performed:** 500+ successful limb reconstruction and lengthening surgeries
+
+---
+
+## Clinic Locations (العيادات)
+
+### Location 1 — Sharjah (Hospital)
+- **Hospital Name:** Dar Al Kamal Hospital (مستشفى دار الكمال)
+- **City:** Sharjah, UAE
+- **Type:** Hospital Booking (استشارة بالمستشفى)
+- **WhatsApp / Phone:** +971 54 565 0678
+
+### Location 2 — Ajman (Clinic)
+- **Clinic Name:** Medical Treatment Center / مركز العلاج الطبي (Elaj Medical Center)
+- **City:** Ajman, UAE
+- **Type:** Clinic / Medical Centre Booking (استشارة بالعيادة)
+- **WhatsApp / Phone:** +971 54 565 0678
+
+---
+
+## Medical Philosophy (الفلسفة الطبية)
+
+Dr. Mohamed Kamal Ali believes that:
+- Preserving movement begins with understanding the problem
+- The correct treatment decision is based on medical knowledge, surgical expertise, and precise assessment
+- Treatment selection is not based on imaging results alone but on clinical examination, symptom nature, and patient goals
+- Every case is unique and requires individualized analysis — especially in limb reconstruction, deformity correction, and joint replacement
+
+---
+
+## About the Website
+
+The website `https://www.drmohamedkamal.me/` is designed as an interactive clinical tour (جولة طبية تفاعلية) taking patients through 6 chapters:
+1. **Welcome (الاستقبال)** — Introduction to Dr. Mohamed Kamal Ali and the digital clinic
+2. **Doctor Profile (السيرة والنهج)** — Biography, credentials, career timeline, and philosophy
+3. **Medical Specialties (التخصصات)** — 16 medical subspecialties with descriptions
+4. **Diagnosis Method (التشخيص والتقييم)** — Diagnostic approach and evaluation philosophy
+5. **Surgical Experience (الكفاءة الجراحية)** — Before/after cases, surgical techniques
+6. **Booking (احجز استشارتك)** — Appointment booking form for Sharjah or Ajman
+
+---
+
+## Contact & Social
+
+- **Website:** https://www.drmohamedkamal.me/
+- **Phone:** +971 54 565 0678
+- **WhatsApp:** https://wa.me/971545650678
+- **Email:** (contact via website booking form)
+
+---
+
+*Last updated: November 2026*
+*Language: Arabic (primary), English (secondary)*
+*Country: United Arab Emirates*
+*Medical Domain: Orthopedic Surgery, Trauma, Sports Medicine*
+
