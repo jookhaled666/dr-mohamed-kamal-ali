@@ -7,7 +7,7 @@ import {
   Stethoscope, 
   Search, 
   X,
-  Sparkles
+  ShieldCheck
 } from 'lucide-react';
 
 export interface DropdownConditionItem {
@@ -250,8 +250,8 @@ export function LuxuryConditionDropdown({
 
           {/* Footer inside dropdown */}
           <div className="px-3 py-2 border-t border-white/10 bg-white/[0.02] flex items-center justify-between text-[10px] text-gray-400">
-            <span className="flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-[#8ab4f8]" />
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#8ab4f8]" />
               <span>{isRtl ? 'جميع التخصصات يشرف عليها د. محمد كمال شخصياً' : 'All surgeries led by Dr. Mohamed Kamal personally'}</span>
             </span>
           </div>
@@ -260,3 +260,4 @@ export function LuxuryConditionDropdown({
     </div>
   );
 }
+
