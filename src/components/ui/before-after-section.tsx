@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { LuxuryConditionDropdown } from './luxury-condition-dropdown';
 import {
   ChevronLeft,
   ChevronRight,
@@ -307,6 +308,13 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
   const [notes, setNotes] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedSuccess, setSubmittedSuccess] = useState(false);
+
+  const dropdownConditions = useMemo(() => {
+    return CONDITIONS.map((c) => ({
+      id: c.id,
+      label: isRtl ? c.ar : c.en,
+    }));
+  }, [isRtl]);
 
   const currentCase = CASES[activeCase];
 
@@ -700,31 +708,16 @@ export function BeforeAfterSection({ lang }: { lang: 'ar' | 'en' }) {
                 </div>
               </div>
 
-              {/* Medical Condition Selection Pills */}
+              {/* Medical Condition Selection Luxury Dropdown */}
               <div>
-                <label className="block text-xs font-semibold text-gray-300 mb-1.5">
-                  {isRtl ? 'الحالة التي ترغب في استشارة الدكتور بشأنها' : 'Condition for Consultation'}
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {CONDITIONS.map((cond) => {
-                    const isSelected = selectedCondition === cond.id;
-                    return (
-                      <button
-                        key={cond.id}
-                        type="button"
-                        onClick={() => setSelectedCondition(cond.id)}
-                        className={`px-3 py-2 rounded-xl border text-start text-xs font-medium transition-all flex items-center justify-between ${
-                          isSelected
-                            ? 'bg-[#1a73e8]/25 border-[#8ab4f8] text-white shadow-sm'
-                            : 'bg-white/[0.03] border-white/10 text-gray-300 hover:border-white/25 hover:text-white'
-                        }`}
-                      >
-                        <span>{isRtl ? cond.ar : cond.en}</span>
-                        {isSelected && <Check className="w-3.5 h-3.5 text-[#8ab4f8] shrink-0" />}
-                      </button>
-                    );
-                  })}
-                </div>
+                <LuxuryConditionDropdown
+                  items={dropdownConditions}
+                  selectedId={selectedCondition}
+                  onSelect={(id) => setSelectedCondition(id)}
+                  lang={lang}
+                  label={isRtl ? 'الحالة التي ترغب في استشارة الدكتور بشأنها' : 'Condition for Consultation'}
+                  placeholder={isRtl ? 'اختر الحالة أو التخصص الطبي' : 'Select Condition / Specialty'}
+                />
               </div>
 
               {/* Optional Notes */}
