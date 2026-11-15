@@ -99,8 +99,12 @@ export const metadata: Metadata = {
     icon: "/doctor-emblem.png",
     apple: "/doctor-emblem.png",
   },
+  verification: {
+    google: "nMn0klvRAmOdlI4zEFLAqSYnnVez0ZXDrGeykfxw52E",
+  },
   other: {
     "darkreader-lock": "",
+    "google-site-verification": "nMn0klvRAmOdlI4zEFLAqSYnnVez0ZXDrGeykfxw52E",
   },
 };
 
@@ -290,6 +294,8 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
         <meta name="darkreader-lock" content="" />
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="nMn0klvRAmOdlI4zEFLAqSYnnVez0ZXDrGeykfxw52E" />
         {/* Canonical URL */}
         <link rel="canonical" href="https://www.drmohamedkamal.me/" />
         {/* DNS Prefetch & Preconnect */}
