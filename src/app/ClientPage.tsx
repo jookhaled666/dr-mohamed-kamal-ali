@@ -116,8 +116,6 @@ export default function Home() {
 
   const [showScrollHint, setShowScrollHint] = useState(false);
 
-  const [videoBlobUrl, setVideoBlobUrl] = useState<string | null>(null);
-
   
 
   // Interactive Glassy Navigation Arrows (Glow with scroll direction)
@@ -1772,45 +1770,55 @@ export default function Home() {
 
 
 
-      // High-performance RAF-decoupled hardware video seeking engine
+      // Ultra-smooth non-blocking video seek manager
+
+      // Prevents mobile browser from stalling the main thread during rapid touch scrolls
 
       let targetTime = 0;
 
-      let rafSeekId: number | null = null;
+      let isSeeking = false;
 
-      let lastReportedChapter = -1;
-
-      let lastReportedDirection = 0;
+      let seekTimeout: ReturnType<typeof setTimeout> | null = null;
 
 
 
       const performSeek = () => {
 
-        rafSeekId = null;
-
         if (!video) return;
 
-        if (video.seeking) return; // Prevent hardware decoder choke
+        isSeeking = true;
+
+        
+
+        // Safety fallback so isSeeking never stays true indefinitely
+
+        if (seekTimeout) clearTimeout(seekTimeout);
+
+        seekTimeout = setTimeout(() => {
+
+          isSeeking = false;
+
+        }, 120);
 
 
 
-        const diff = Math.abs(video.currentTime - targetTime);
+        try {
 
-        if (diff > 0.02) {
+          // If browser supports fastSeek (Safari iOS), use it for zero-lag hardware seeking
 
-          try {
+          if ('fastSeek' in video && typeof (video as any).fastSeek === 'function') {
 
-            if ('fastSeek' in video && typeof (video as any).fastSeek === 'function') {
+            (video as any).fastSeek(targetTime);
 
-              (video as any).fastSeek(targetTime);
+          } else {
 
-            } else {
+            video.currentTime = targetTime;
 
-              video.currentTime = targetTime;
+          }
 
-            }
+        } catch {
 
-          } catch {}
+          isSeeking = false;
 
         }
 
@@ -1818,21 +1826,17 @@ export default function Home() {
 
 
 
-      const requestSeek = () => {
-
-        if (rafSeekId !== null) return;
-
-        rafSeekId = requestAnimationFrame(performSeek);
-
-      };
-
-
-
       const handleSeeked = () => {
 
-        if (Math.abs(video.currentTime - targetTime) > 0.02) {
+        isSeeking = false;
 
-          requestSeek();
+        if (seekTimeout) clearTimeout(seekTimeout);
+
+        // If the user continued scrolling while the previous frame decoded, catch up immediately
+
+        if (Math.abs(video.currentTime - targetTime) > 0.04) {
+
+          performSeek();
 
         }
 
@@ -1858,7 +1862,7 @@ export default function Home() {
 
           pin: true,
 
-          scrub: scrubSpeed,
+          scrub: scrubSpeed, // Perfectly tuned: never lags or locks
 
           anticipatePin: 1,
 
@@ -1868,37 +1872,27 @@ export default function Home() {
 
             targetTime = self.progress * vidDuration;
 
-            requestSeek();
+            if (!isSeeking) {
 
-
-
-            // Decouple & throttle React state updates (only re-render on actual chapter/direction change)
-
-            const idx = Math.min(Math.floor(self.progress * 6), 5);
-
-            if (idx !== lastReportedChapter) {
-
-              lastReportedChapter = idx;
-
-              setCurrentChapter(idx);
+              performSeek();
 
             }
 
+            const idx = Math.min(Math.floor(self.progress * 6), 5);
+
+            setCurrentChapter(idx);
 
 
-            if (self.direction !== lastReportedDirection) {
 
-              lastReportedDirection = self.direction;
+            // Light up left arrow on scroll down, right arrow on scroll up
 
-              if (self.direction === 1) {
+            if (self.direction === 1) {
 
-                setScrollDir('down');
+              setScrollDir('down');
 
-              } else if (self.direction === -1) {
+            } else if (self.direction === -1) {
 
-                setScrollDir('up');
-
-              }
+              setScrollDir('up');
 
             }
 
@@ -1998,7 +1992,7 @@ export default function Home() {
 
     };
 
-  }, [lang, videoBlobUrl]);
+  }, [lang]);
 
 
 
@@ -2022,8 +2016,6 @@ export default function Home() {
 
         lang={lang} 
 
-        onVideoBlobReady={(url) => setVideoBlobUrl(url)}
-
         onComplete={() => setPreloaderDone(true)} 
 
       />
@@ -2038,13 +2030,13 @@ export default function Home() {
 
           ref={videoRef}
 
-          src={videoBlobUrl || "/videos/dr.mohamed kamal ali video.mp4"}
+          src="/videos/dr.mohamed kamal ali video.mp4"
 
           muted
 
           playsInline
 
-          autoPlay={false}
+          autoPlay
 
           preload="auto"
 
