@@ -7,10 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface PreloaderProps {
   videoRef?: React.RefObject<HTMLVideoElement | null>;
   onComplete?: () => void;
+  onVideoBlobReady?: (blobUrl: string) => void;
   lang?: 'ar' | 'en';
 }
 
-export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps) {
+export function Preloader({ videoRef, onComplete, onVideoBlobReady, lang = 'ar' }: PreloaderProps) {
   const [progress, setProgress] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -24,6 +25,39 @@ export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps)
 
     const minDuration = 1800; // Fast, lightweight, and ultra-smooth for mobile-first experience
     let isVideoReady = false;
+    let downloadProgress = 0;
+    const abortCtrl = new AbortController();
+
+    // ── High-Performance In-Memory Video Preloading ──────────────────────────
+    // Fetches video directly into browser RAM as a Blob.
+    // Result: Zero network buffering during scrubbing across all 6 chapters!
+    fetch('/videos/dr.mohamed kamal ali video.mp4', { signal: abortCtrl.signal })
+      .then(async (res) => {
+        if (!res.ok || !res.body) return;
+        const total = +(res.headers.get('Content-Length') || '16343462');
+        const reader = res.body.getReader();
+        let received = 0;
+        const chunks: BlobPart[] = [];
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          if (value) chunks.push(value as unknown as BlobPart);
+          received += (value?.length || 0);
+          downloadProgress = Math.min(100, Math.round((received / total) * 100));
+        }
+
+        const blob = new Blob(chunks, { type: 'video/mp4' });
+        const blobUrl = URL.createObjectURL(blob);
+        isVideoReady = true;
+        if (onVideoBlobReady) {
+          onVideoBlobReady(blobUrl);
+        }
+      })
+      .catch(() => {
+        // Fallback: normal HTML5 video range requests continue seamlessly
+        isVideoReady = true;
+      });
 
     const checkVideo = () => {
       if (videoRef?.current && videoRef.current.readyState >= 2) {
@@ -48,14 +82,20 @@ export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps)
       const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       let calculatedProgress = Math.min(100, Math.round(eased * 100));
 
-      // If video is still pending when reaching 94%, gently pause until ready or 3.5s max
-      if (!isVideoReady && calculatedProgress > 94 && elapsed < 3500) {
-        calculatedProgress = 94;
+      // Blend with real download progress if available
+      if (downloadProgress > 0) {
+        calculatedProgress = Math.max(calculatedProgress, Math.round(downloadProgress * 0.95));
+      }
+
+      // If video is still pending when reaching 95%, gently pause until ready or 3.2s max
+      if (!isVideoReady && calculatedProgress > 95 && elapsed < 3200) {
+        calculatedProgress = 95;
       }
 
       setProgress(calculatedProgress);
 
-      if (calculatedProgress >= 100) {
+      if (calculatedProgress >= 100 || elapsed >= 3400) {
+        setProgress(100);
         setTimeout(() => {
           setIsFinished(true);
           document.body.style.overflow = '';
@@ -73,13 +113,14 @@ export function Preloader({ videoRef, onComplete, lang = 'ar' }: PreloaderProps)
 
     return () => {
       document.body.style.overflow = '';
+      abortCtrl.abort();
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
       if (video) {
         video.removeEventListener('loadeddata', checkVideo);
         video.removeEventListener('canplay', checkVideo);
       }
     };
-  }, [videoRef, onComplete]);
+  }, [videoRef, onComplete, onVideoBlobReady]);
 
   if (!isVisible) return null;
 
