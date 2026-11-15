@@ -296,8 +296,6 @@ export default function RootLayout({
         <meta name="darkreader-lock" content="" />
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="nMn0klvRAmOdlI4zEFLAqSYnnVez0ZXDrGeykfxw52E" />
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://www.drmohamedkamal.me/" />
         {/* DNS Prefetch & Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />

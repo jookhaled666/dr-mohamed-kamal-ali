@@ -9,7 +9,7 @@ export default function Page() {
         Ensures Googlebot, Bingbot, GPTBot, ClaudeBot, PerplexityBot, and Gemini
         can immediately parse full medical content without running JavaScript.
       */}
-      <div className="sr-only" aria-hidden="true">
+      <div className="sr-only">
         <header>
           <h1>د. محمد كمال علي | Dr. Mohamed Kamal Ali</h1>
           <p>استشاري جراحة العظام والإصابات والطب الرياضي | Consultant Orthopedic, Trauma &amp; Sports Medicine Surgeon</p>
@@ -179,8 +179,7 @@ export default function Page() {
               يسعدني استقبالكم لتقييم حالتكم ومراجعة الفحوص والتقارير الطبية بدقة لتحديد الخطة العلاجية الأنسب لحالتكم.
             </p>
             <p>
-              للحجز المباشر عبر الهاتف أو الواتساب: <a href="tel:+971545650678">+971 54 565 0678</a> | 
-              <a href="https://wa.me/971545650678">واتساب د. محمد كمال علي</a>
+              للحجز المباشر عبر الهاتف أو الواتساب: <a href="tel:+971545650678" target="_self" rel="noopener noreferrer">+971 54 565 0678</a> | <a href="https://wa.me/971545650678" target="_blank" rel="noopener noreferrer">واتساب د. محمد كمال علي</a>
             </p>
           </section>
         </main>
